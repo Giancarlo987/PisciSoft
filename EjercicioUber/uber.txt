@@ -8,7 +8,7 @@
 	Reseñas y calificaciones
 	
 • ¿Se contará con varias aplicaciones?
-	Moviles(Android IOs)
+	Moviles(Android, IOs, Windows Phone)
 	Web
 	
 • ¿Con qué sistemas externos tendremos que interactuar?

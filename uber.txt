@@ -1,0 +1,18 @@
+• ¿Con qué módulos contará la aplicación? 
+	Registro de Usuario (Conductor y pasajero)
+	Tracking
+	Vehiculos
+	Visualizador de rutas
+	Generador de precios(Cotización)
+	Generador de pagos
+	Reseñas y calificaciones
+	
+• ¿Se contará con varias aplicaciones?
+	Moviles(Android IOs)
+	Web
+	
+• ¿Con qué sistemas externos tendremos que interactuar?
+	Proveedores de mapas
+	Pasarelas de pagos(bancos)
+	
+	

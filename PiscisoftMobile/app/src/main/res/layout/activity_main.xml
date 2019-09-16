@@ -27,7 +27,7 @@
             android:id="@+id/btn_actualizar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#E91E63"
+            android:background="#A2E91E"
             android:text="ACTUALIZAR"
             android:textColor="#FAF7F7"
             android:textStyle="bold" />
@@ -40,6 +40,28 @@
             android:textSize="18sp"
             android:layout_marginTop="30dp"
             />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="#F70202"
+            android:text="Historia de usuario: Login" />
+
+        <Button
+            android:id="@+id/btn_iniciar_sesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Iniciar sesión" />
+
+        <Button
+            android:id="@+id/btn_registrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Regístrate" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

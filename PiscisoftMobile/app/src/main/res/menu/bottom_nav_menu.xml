@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_perfil"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/title_perfil" />
+
+    <item
+        android:id="@+id/navigation_reservar"
+        android:icon="@drawable/ic_pool_black_24dp"
+        android:title="@string/title_reservar" />
+
+    <item
+        android:id="@+id/navigation_historial"
+        android:icon="@drawable/ic_event_note_black_24dp"
+
+        android:title="@string/title_historial" />
+
+</menu>

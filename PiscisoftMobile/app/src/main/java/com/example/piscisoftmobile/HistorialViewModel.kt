@@ -1,4 +1,4 @@
-package com.example.piscisoftmobile.ui.historial
+package com.example.piscisoftmobile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

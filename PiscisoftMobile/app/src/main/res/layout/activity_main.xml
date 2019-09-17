@@ -14,34 +14,6 @@
         tools:layout_editor_absoluteY="232dp">
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ingrese nuevo texto"
-            android:inputType="textPersonName"
-            android:layout_marginTop="80dp"
-            />
-
-        <Button
-            android:id="@+id/btn_actualizar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#A2E91E"
-            android:text="ACTUALIZAR"
-            android:textColor="#FAF7F7"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Texto de la nube"
-            android:textSize="18sp"
-            android:layout_marginTop="30dp"
-            />
-
-        <EditText
             android:id="@+id/et_codigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

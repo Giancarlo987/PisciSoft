@@ -17,11 +17,16 @@ class RegistroActivity : AppCompatActivity() {
     private fun registrar(){
         //Extraer todos los inputs del usuario
         //Verificar
-        //Decirle estás registrado
-        //Volver al login
+        //Agregar nuevo usuario a Firebase
 
-        //Iniciar RegistroActivity
-        val intent : Intent = Intent()
+
+
+        //Volver al login
+        regresar()
+    }
+
+    private fun regresar(){
+        val intent = Intent()
         intent.setClass(this, MainActivity::class.java)
         startActivityForResult(intent,1)
     }

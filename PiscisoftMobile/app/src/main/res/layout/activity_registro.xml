@@ -13,16 +13,6 @@
         tools:layout_editor_absoluteX="178dp"
         tools:layout_editor_absoluteY="348dp">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Aqui va el formulario de registro"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:textColor="#F70202"
-            />
-
         <Button
             android:id="@+id/btn_registrarse"
             android:layout_width="match_parent"

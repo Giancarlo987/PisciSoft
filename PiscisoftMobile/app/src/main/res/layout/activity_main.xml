@@ -41,15 +41,21 @@
             android:layout_marginTop="30dp"
             />
 
-        <TextView
-            android:id="@+id/textView2"
+        <EditText
+            android:id="@+id/et_codigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:textColor="#F70202"
-            android:text="Historia de usuario: Login" />
+            android:ems="10"
+            android:hint="Código UL"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Constraseña"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btn_iniciar_sesion"

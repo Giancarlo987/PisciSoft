@@ -7,7 +7,7 @@ import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
-
+import android.util.Log
 
 
 class Texto ( val textox: String = "" )
@@ -47,6 +47,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -86,19 +88,50 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun iniciarSesion(){ //Verificar credenciales -> Ir al perfil
-        Toast.makeText(this, "Le diste click a iniciar sesión xd", Toast.LENGTH_SHORT).show()
-        //to-do
-        //Verificar credenciales
-        //...
-        //Ir al perfil
-        irPerfil() //Colocar de argumento el codigo de usuario
+    private fun verificar(codigo:String,password:String)  {
+
+            val db = FirebaseFirestore.getInstance()
+            val ref = db.collection("usuario")
+            val query = ref.whereEqualTo("codigo",codigo).whereEqualTo("password",password)
+
+            query.get()
+                .addOnSuccessListener { documents ->
+                    if ( ! documents.isEmpty ) {
+                        Toast.makeText(this, "Inicio exitoso", Toast.LENGTH_SHORT).show()
+                        irPerfil(codigo)
+                    } else {
+                        Toast.makeText(this, "Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener{
+                        Toast.makeText(this, "Error en Firebase", Toast.LENGTH_SHORT).show()
+                }
+
 
     }
 
-    private fun irPerfil(){
+    private fun iniciarSesion(){ //Verificar credenciales -> Ir al perfil
+
+        //Verificamos que estén llenos los campos
+        val codigo = et_codigo.text.toString()
+        val password = et_password.text.toString()
+
+        if (codigo != "" && password != ""){
+            //Toast.makeText(this, "Completó los campos", Toast.LENGTH_SHORT).show()
+            verificar(codigo,password)
+
+        } else {
+            Toast.makeText(this, "Por favor, complete los campos", Toast.LENGTH_SHORT).show()
+
+        }
+
+
+    }
+
+    private fun irPerfil(codigo:String){
         //to-do
         val intent : Intent = Intent()
+        intent.putExtra("codigo",codigo)
         intent.setClass(this, SesionActivity::class.java)
         startActivityForResult(intent,1)
 

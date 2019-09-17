@@ -1,6 +1,8 @@
 package com.example.piscisoftmobile
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,11 @@ class ReservarFragment : Fragment() {
 
         //val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
 
+        val codigo = savedInstanceState?.get("codigo")
+        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",
+            Context.MODE_PRIVATE)
+        var userID = sharedPreferences.getString("userID","")
+        Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.

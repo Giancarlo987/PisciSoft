@@ -11,6 +11,9 @@ class ModificarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modificar)
         actionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
     }
 
 }

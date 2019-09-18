@@ -27,8 +27,8 @@ class RegistroActivity : AppCompatActivity() {
                 "Juana",
                 "111",
                 "1234",
-                "fdgf",
                 3,
+                "kkm",
                 "fef",
                 "rgg",
                 "fefef"

@@ -3,6 +3,7 @@ package com.example.piscisoftmobile
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.piscisoftmobile.Model.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_perfil.*
 
@@ -21,7 +23,6 @@ class PerfilFragment : Fragment() {
 
     private lateinit var mContext: Context
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,7 +31,6 @@ class PerfilFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_perfil, container, false)
         val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
-        val tv_prueba: TextView = root.findViewById(R.id.tv_prueba)
 
 
         //Obtener el usuario que se logueo
@@ -48,6 +48,7 @@ class PerfilFragment : Fragment() {
 
     }
 
+
     private fun verInfoUsuario(userID : String?){
         val db = FirebaseFirestore.getInstance()
         val ref = db.collection("usuario")
@@ -56,16 +57,21 @@ class PerfilFragment : Fragment() {
         query.get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    Log.d("MYTAG","${document.data}")
-                    val datos = "${document.data}"
-                    tv_prueba.text = datos
+                    val datos = document.data
+                    tv_nombre.text = datos["nombre"].toString()
+                    tv_codigo.text = datos["codigo"].toString()
+                    rv_inasistencias.rating = datos["inasistencias"].toString().toFloat()
+                    tv_estado.text = datos["estado"].toString()
+                    tv_tipo.text = datos["tipo"].toString()
+                    tv_nivel.text = datos["nivel"].toString()
+                    tv_observaciones.text = datos["observaciones"].toString()
                 }
             }
             .addOnFailureListener{
                 Toast.makeText(context, "Error en Firebase", Toast.LENGTH_SHORT).show()
             }
 
-        
+
     }
 
 

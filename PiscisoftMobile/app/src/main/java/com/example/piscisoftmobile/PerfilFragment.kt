@@ -30,19 +30,19 @@ class PerfilFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_perfil, container, false)
+        val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
 
-        val userID = obtenerUsuarioLogueado(savedInstanceState)
+        val userID = obtenerUsuarioLogueado()
         verInfoUsuario(userID)
 
-        //btn_modificar.setOnClickListener { ir_modificar() }
+        btn_modificar.setOnClickListener { ir_modificar() }
 
         mContext = root.context
         return root
 
     }
 
-    private fun obtenerUsuarioLogueado(savedInstanceState:Bundle?):String?{
-        //val codigo = savedInstanceState?.get("codigo")
+    private fun obtenerUsuarioLogueado():String?{
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",Context.MODE_PRIVATE)
         var userID = sharedPreferences.getString("userID","")
         Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
@@ -57,14 +57,14 @@ class PerfilFragment : Fragment() {
         query.get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    val datos = document.data
-                    tv_nombre.text = datos["nombre"].toString()
-                    tv_codigo.text = datos["codigo"].toString()
-                    rv_inasistencias.rating = datos["inasistencias"].toString().toFloat()
-                    tv_estado.text = datos["estado"].toString()
-                    tv_tipo.text = datos["tipo"].toString()
-                    tv_nivel.text = datos["nivel"].toString()
-                    tv_observaciones.text = datos["observaciones"].toString()
+                    val usuario = document.toObject(Usuario::class.java)
+                    tv_nombre.text = usuario.nombre
+                    tv_codigo.text = usuario.codigo
+                    rv_inasistencias.rating = usuario.inasistencias!!.toFloat()
+                    tv_estado.text =  "Estado: ${usuario.estado!!.toUpperCase()}"
+                    tv_tipo.text = "Tipo de usuario: ${usuario.tipo}"
+                    tv_nivel.text = "Nivel de natación: ${usuario.nivel}"
+                    tv_observaciones.text = "Observaciones: ${usuario.observaciones}"
                 }
             }
             .addOnFailureListener{

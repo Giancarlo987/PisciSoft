@@ -11,12 +11,131 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="348dp">
+        tools:layout_editor_absoluteY="348dp"
+        android:id="@+id/primero">
 
-        <Button
-            android:id="@+id/btn_registrarse"
-            android:layout_width="match_parent"
+        <ScrollView android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registrarse" />
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/padreView">
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+
+                android:layout_marginHorizontal="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Registro"
+                    android:textSize="20sp"/>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etCodigo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese codigo"
+                        android:inputType="text"
+                        android:textSize="18sp"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese contraseña"
+                        android:inputType="textPassword"
+                        android:textSize="18sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRepetirPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Repetir contraseña"
+                        android:inputType="textPassword"
+                        android:textSize="18sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <ImageView android:layout_width="200dp" android:layout_height="200dp"
+                    app:srcCompat="@drawable/ic_person_black_24dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/iviFoto"/>
+
+
+                <Button
+                    android:id="@+id/butUploadFoto"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingHorizontal="50dp"
+                    android:textColor="#ffffff"
+                    android:text="Subir Foto"
+                    android:background="@android:color/holo_orange_light"
+                    android:layout_marginTop="20dp"/>
+
+
+                <Button
+                    android:id="@+id/btnRegistrarse"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingHorizontal="50dp"
+                    android:textColor="#ffffff"
+                    android:text="Registrarse"
+                    android:background="@android:color/holo_orange_light"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="50dp"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+        <FrameLayout
+            android:id="@+id/loadingScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.75"
+            android:background="@android:color/black"
+            android:visibility="gone"
+            android:layout_below="@id/primero">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

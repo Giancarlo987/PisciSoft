@@ -1,9 +1,8 @@
-package com.example.piscisoftmobile
+package com.example.piscisoftmobile.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-
-import kotlinx.android.synthetic.main.activity_modificar.*
+import com.example.piscisoftmobile.R
 
 class ModificarActivity : AppCompatActivity() {
 
@@ -11,8 +10,6 @@ class ModificarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modificar)
         actionBar?.setDisplayHomeAsUpEnabled(true)
-
-
 
     }
 

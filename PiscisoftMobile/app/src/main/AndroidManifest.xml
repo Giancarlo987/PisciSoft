@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ModificarActivity"
+            android:name=".views.ModificarActivity"
             android:label="@string/title_activity_modificar"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".SesionActivity"
+            android:name=".views.SesionActivity"
             android:label="@string/title_activity_sesion" />
-        <activity android:name=".RegistroActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".views.RegistroActivity" />
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

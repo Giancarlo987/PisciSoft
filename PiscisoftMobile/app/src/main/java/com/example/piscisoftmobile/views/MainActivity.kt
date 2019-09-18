@@ -1,4 +1,4 @@
-package com.example.piscisoftmobile
+package com.example.piscisoftmobile.views
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
 import android.content.SharedPreferences
-
+import com.example.piscisoftmobile.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,8 +16,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         btn_registrarse.setOnClickListener{irRegistro()}
         btn_iniciar_sesion.setOnClickListener {iniciarSesion()}
 
@@ -67,12 +69,12 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener{
                 Toast.makeText(this, "Error en Firebase", Toast.LENGTH_SHORT).show()
             }
-
     }
 
     private fun irPerfil(codigo:String){
 
         val intent = Intent()
+        intent.putExtra("codigo",codigo)
         intent.setClass(this, SesionActivity::class.java)
         startActivityForResult(intent,1)
 

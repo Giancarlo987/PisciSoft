@@ -1,4 +1,4 @@
-package com.example.piscisoftmobile
+package com.example.piscisoftmobile.views
 
 
 import android.content.Context
@@ -7,11 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CalendarView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_reservar.*
+import com.example.piscisoftmobile.R
 
 class ReservarFragment : Fragment() {
 
@@ -24,9 +23,6 @@ class ReservarFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_reservar, container, false)
         val calendarView : CalendarView = root.findViewById(R.id.calendario)
-
-        val btn_prueba: Button = root.findViewById(R.id.btn_prueba)
-
 
         //val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
 
@@ -45,6 +41,4 @@ class ReservarFragment : Fragment() {
 
         return root
     }
-
-
 }

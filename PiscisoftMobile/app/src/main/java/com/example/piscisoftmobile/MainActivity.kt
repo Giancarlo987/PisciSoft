@@ -12,7 +12,6 @@ import android.content.SharedPreferences
 import android.util.Log
 
 
-class Texto ( val textox: String = "" )
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,28 +28,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun irRegistro(){ //Dirigirse al formulario de registro
-
         val intent = Intent()
         intent.setClass(this, RegistroActivity::class.java)
         startActivityForResult(intent,1)
-
     }
 
 
-    private fun iniciarSesion(){ //Verificar credenciales -> Ir al perfil
-
-        //Verificamos que estén llenos los campos
+    private fun iniciarSesion(){
         val codigo = et_codigo.text.toString()
         val password = et_password.text.toString()
 
-        if (codigo != "" && password != ""){
-            verificar(codigo,password)
+        if (codigo != "" && password != ""){ //Verificar si los campos están llenos
 
+
+            verificar(codigo,password)
         } else {
             Toast.makeText(this, "Por favor, complete los campos", Toast.LENGTH_SHORT).show()
-
         }
-
     }
 
     private fun verificar(codigo:String,password:String)  {

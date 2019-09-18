@@ -3,6 +3,8 @@ package com.example.piscisoftmobile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.piscisoftmobile.Model.Usuario
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
 class RegistroActivity : AppCompatActivity() {
@@ -19,6 +21,20 @@ class RegistroActivity : AppCompatActivity() {
         //Verificar
         //Agregar nuevo usuario a Firebase
 
+        //De ejemplo maso
+        val usuarioPrueba : Usuario =
+            Usuario(
+                "Juana",
+                "111",
+                "1234",
+                "fdgf",
+                3,
+                "fef",
+                "rgg",
+                "fefef"
+            )
+        val db = FirebaseFirestore.getInstance()
+        db.collection("usuario").document("111").set(usuarioPrueba)
 
 
         //Volver al login

@@ -21,6 +21,7 @@ class PerfilFragment : Fragment() {
 
     private lateinit var mContext: Context
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,7 +63,9 @@ class PerfilFragment : Fragment() {
             }
             .addOnFailureListener{
                 Toast.makeText(context, "Error en Firebase", Toast.LENGTH_SHORT).show()
-            } 
+            }
+
+        
     }
 
 

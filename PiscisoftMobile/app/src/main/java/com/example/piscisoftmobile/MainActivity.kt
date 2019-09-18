@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity() {
         val password = et_password.text.toString()
 
         if (codigo != "" && password != ""){ //Verificar si los campos están llenos
-
-
             verificar(codigo,password)
         } else {
             Toast.makeText(this, "Por favor, complete los campos", Toast.LENGTH_SHORT).show()
@@ -79,7 +77,6 @@ class MainActivity : AppCompatActivity() {
     private fun irPerfil(codigo:String){
 
         val intent = Intent()
-        intent.putExtra("codigo",codigo)
         intent.setClass(this, SesionActivity::class.java)
         startActivityForResult(intent,1)
 

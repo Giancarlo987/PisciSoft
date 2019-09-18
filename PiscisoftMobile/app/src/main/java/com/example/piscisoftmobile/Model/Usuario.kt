@@ -9,5 +9,6 @@ data class Usuario(
     var nivel: String? = null,
     var nombre: String? = null,
     var password: String? = null,
-    var tipo: String? = null
+    var tipo: String? = null,
+    var observaciones: String? = null
 )

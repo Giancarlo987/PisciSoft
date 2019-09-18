@@ -30,24 +30,24 @@ class PerfilFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_perfil, container, false)
-        val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
 
-
-        //Obtener el usuario que se logueo
-        val codigo = savedInstanceState?.get("codigo")
-        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",Context.MODE_PRIVATE)
-        var userID = sharedPreferences.getString("userID","")
-        Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
-
+        val userID = obtenerUsuarioLogueado(savedInstanceState)
         verInfoUsuario(userID)
 
+        //btn_modificar.setOnClickListener { ir_modificar() }
 
-        btn_modificar.setOnClickListener { ir_modificar() }
         mContext = root.context
         return root
 
     }
 
+    private fun obtenerUsuarioLogueado(savedInstanceState:Bundle?):String?{
+        //val codigo = savedInstanceState?.get("codigo")
+        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",Context.MODE_PRIVATE)
+        var userID = sharedPreferences.getString("userID","")
+        Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
+        return userID
+    }
 
     private fun verInfoUsuario(userID : String?){
         val db = FirebaseFirestore.getInstance()
@@ -70,13 +70,11 @@ class PerfilFragment : Fragment() {
             .addOnFailureListener{
                 Toast.makeText(context, "Error en Firebase", Toast.LENGTH_SHORT).show()
             }
-
-
     }
 
 
     private fun ir_modificar(){
-        val intent : Intent = Intent()
+        val intent = Intent()
         intent.setClass(mContext, ModificarActivity::class.java)
         startActivity(intent)
     }

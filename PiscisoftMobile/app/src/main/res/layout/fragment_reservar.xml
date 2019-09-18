@@ -39,6 +39,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ver reservas disponibles" />
+
+        <TextView
+            android:id="@+id/tv_pruebita"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/btn_prueba"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,7 @@ class RegistroActivity : AppCompatActivity() {
         //Agregar nuevo usuario a Firebase
 
         //De ejemplo maso
+        /**
         val usuarioPrueba : Usuario =
             Usuario(
                 "Juana",
@@ -35,7 +36,7 @@ class RegistroActivity : AppCompatActivity() {
             )
         val db = FirebaseFirestore.getInstance()
         db.collection("usuario").document("111").set(usuarioPrueba)
-
+**/
 
         //Volver al login
         regresar()

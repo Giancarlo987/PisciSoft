@@ -57,18 +57,14 @@ class PerfilFragment : Fragment() {
                 for (document in documents) {
                     Log.d("MYTAG","${document.data}")
                     val datos = "${document.data}"
-                    enviar(datos)
+                    tv_prueba.text = datos
                 }
             }
             .addOnFailureListener{
                 Toast.makeText(context, "Error en Firebase", Toast.LENGTH_SHORT).show()
-            }
+            } 
     }
 
-    private fun enviar(datos:String){
-        Toast.makeText(context, datos, Toast.LENGTH_SHORT).show()
-        tv_prueba.text = datos
-    }
 
     private fun ir_modificar(){
         val intent : Intent = Intent()

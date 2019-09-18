@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_perfil"
-        android:name="com.example.piscisoftmobile.views.PerfilFragment"
+        android:name="com.example.piscisoftmobile.PerfilFragment"
         android:label="@string/title_perfil"
         tools:layout="@layout/fragment_perfil" />
 
     <fragment
         android:id="@+id/navigation_reservar"
-        android:name="com.example.piscisoftmobile.views.ReservarFragment"
+        android:name="com.example.piscisoftmobile.ReservarFragment"
         android:label="@string/title_reservar"
         tools:layout="@layout/fragment_reservar" />
 
     <fragment
         android:id="@+id/navigation_historial"
-        android:name="com.example.piscisoftmobile.views.HistorialFragment"
+        android:name="com.example.piscisoftmobile.HistorialFragment"
         android:label="@string/title_historial"
         tools:layout="@layout/fragment_historial" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.piscisoftmobile.views
+package com.example.piscisoftmobile
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.piscisoftmobile.R
 
 
 class HistorialFragment : Fragment() {

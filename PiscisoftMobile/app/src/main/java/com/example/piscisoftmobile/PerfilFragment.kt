@@ -1,8 +1,9 @@
-package com.example.piscisoftmobile.views
+package com.example.piscisoftmobile
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.piscisoftmobile.R
+import com.example.piscisoftmobile.Model.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_perfil.*
 
@@ -22,7 +23,6 @@ class PerfilFragment : Fragment() {
 
     private lateinit var mContext: Context
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,22 +31,22 @@ class PerfilFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_perfil, container, false)
         val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
-        val tv_prueba: TextView = root.findViewById(R.id.tv_prueba)
 
-
-        //Obtener el usuario que se logueo
-        val codigo = savedInstanceState?.get("codigo")
-        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",Context.MODE_PRIVATE)
-        var userID = sharedPreferences.getString("userID","")
-        Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
-
+        val userID = obtenerUsuarioLogueado()
         verInfoUsuario(userID)
 
-
         btn_modificar.setOnClickListener { ir_modificar() }
+
         mContext = root.context
         return root
 
+    }
+
+    private fun obtenerUsuarioLogueado():String?{
+        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",Context.MODE_PRIVATE)
+        var userID = sharedPreferences.getString("userID","")
+        Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
+        return userID
     }
 
     private fun verInfoUsuario(userID : String?){
@@ -57,21 +57,24 @@ class PerfilFragment : Fragment() {
         query.get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    Log.d("MYTAG","${document.data}")
-                    val datos = "${document.data}"
-                    tv_prueba.text = datos
+                    val usuario = document.toObject(Usuario::class.java)
+                    tv_nombre.text = usuario.nombre
+                    tv_codigo.text = usuario.codigo
+                    rv_inasistencias.rating = usuario.inasistencias!!.toFloat()
+                    tv_estado.text =  "Estado: ${usuario.estado!!.toUpperCase()}"
+                    tv_tipo.text = "Tipo de usuario: ${usuario.tipo}"
+                    tv_nivel.text = "Nivel de natación: ${usuario.nivel}"
+                    tv_observaciones.text = "Observaciones: ${usuario.observaciones}"
                 }
             }
             .addOnFailureListener{
                 Toast.makeText(context, "Error en Firebase", Toast.LENGTH_SHORT).show()
             }
-
-        
     }
 
 
     private fun ir_modificar(){
-        val intent : Intent = Intent()
+        val intent = Intent()
         intent.setClass(mContext, ModificarActivity::class.java)
         startActivity(intent)
     }

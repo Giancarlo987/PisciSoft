@@ -1,4 +1,4 @@
-package com.example.piscisoftmobile.views
+package com.example.piscisoftmobile
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,7 +7,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.piscisoftmobile.R
 
 class SesionActivity : AppCompatActivity() {
 
@@ -21,9 +20,7 @@ class SesionActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_perfil,
-                R.id.navigation_reservar,
-                R.id.navigation_historial
+                R.id.navigation_perfil, R.id.navigation_reservar, R.id.navigation_historial
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

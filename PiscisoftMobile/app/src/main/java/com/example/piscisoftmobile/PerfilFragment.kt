@@ -61,10 +61,10 @@ class PerfilFragment : Fragment() {
                     tv_nombre.text = usuario.nombre
                     tv_codigo.text = usuario.codigo
                     rv_inasistencias.rating = usuario.inasistencias!!.toFloat()
-                    tv_estado.text = usuario.estado
-                    tv_tipo.text = usuario.tipo
-                    tv_nivel.text = usuario.nivel
-                    tv_observaciones.text = usuario.observaciones
+                    tv_estado.text =  "Estado: ${usuario.estado!!.toUpperCase()}"
+                    tv_tipo.text = "Tipo de usuario: ${usuario.tipo}"
+                    tv_nivel.text = "Nivel de natación: ${usuario.nivel}"
+                    tv_observaciones.text = "Observaciones: ${usuario.observaciones}"
                 }
             }
             .addOnFailureListener{

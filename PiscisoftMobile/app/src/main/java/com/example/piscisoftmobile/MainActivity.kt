@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("userID",codigo)
                     editor.apply()
 
-                    irPerfil(codigo)
+                    irPerfil()
 
                 } else {
                     Toast.makeText(this, "Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show()
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun irPerfil(codigo:String){
+    private fun irPerfil(){
 
         val intent = Intent()
         intent.setClass(this, SesionActivity::class.java)

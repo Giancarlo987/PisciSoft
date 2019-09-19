@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.activity_registro.*
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -70,37 +71,17 @@ class RegistroActivity : AppCompatActivity() {
         continuarButton.setOnClickListener { registrar() }
     }
     // FUNCION PARA ESCRIBIR UN USUARIO EN LA DB
-    private fun writeNewUser(codigo: String, password: String, foto: String) {
-        // Datos del usuario faltantes
+    //private fun writeNewUser(codigo: String, password: String, foto: String) {
+    private fun writeNewUser(usuario:Usuario) {
 
-        var estado: String? = null
-        var tipo: String? = null
-        var observaciones: String? = null
-        var celular: String? = null
-        var inasistencias: Long = 0
-        var nivel: String? = null
-        var nombre: String? = null
-
-        // Crear un usuario para registrarlo en la DB
-        val user = Usuario(
-            codigo,
-            estado,
-            password,
-            tipo,
-            observaciones,
-            celular,
-            inasistencias,
-            nivel,
-            nombre,
-            foto
-        )
         // Enviar los datos a la DB
         val db = FirebaseFirestore.getInstance()
-        db.collection("usuario").document(codigo).set(user)
-        Toast.makeText(this, "Registro Existoso", Toast.LENGTH_SHORT).show()
+        db.collection("usuario").document(usuario.codigo!!).set(usuario)
+        Toast.makeText(this, "Registro existoso!!!", Toast.LENGTH_SHORT).show()
         padreView.visibility = View.VISIBLE
         loadingScreen.visibility = View.GONE
     }
+
     // FUNCION PARA MOSTRAR LA FOTO EN LA PANTALLA
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -117,29 +98,73 @@ class RegistroActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun vacio(et: EditText) : Boolean{
+        if (et.text.toString().contentEquals("")) {
+            return true
+        }
+        return false
+    }
+
+    private fun avisar(razon : String) {
+        Toast.makeText(this, "Por favor, ingrese ${razon}", Toast.LENGTH_SHORT).show()
+    }
     // FUNCION PARA OBTENER LAS CREDENCIALES--------------------------------------------------------
     private fun registrar(){
         padreView.visibility = View.GONE
         loadingScreen.visibility = View.VISIBLE
 
-        if (!etCodigo.text.toString().contentEquals("")) {
-            codigo = etCodigo.text.toString()
-        } else {
-            Toast.makeText(this, "Por favor, ingrese usuario..", Toast.LENGTH_SHORT).show()
+        //Creo un objeto Usuario
+        var usuario = Usuario()
+
+        if (vacio(etCodigo)){ //Agregar más validaciones Ricardo (8 caracteres, que sean numeros)
+            avisar("código")
             return
+        }else{
+            usuario.codigo = etCodigo.text.toString()
         }
 
-        if (!etPassword.text.toString().contentEquals("")) {
-            password = etPassword.text.toString()
-        } else {
-            Toast.makeText(this, "Por favor, ingrese contraseña..", Toast.LENGTH_SHORT).show()
+        if (vacio(etPassword)){
+            avisar("contraseña")
             return
+        }else{
+            password = etPassword.text.toString()
         }
+
+        if (vacio(et_nombre)){
+            avisar("nombre")
+            return
+        }else{
+            usuario.nombre = et_nombre.text.toString()
+        }
+
+        if (vacio(et_celular)){ //Más restricciones
+            avisar("celular")
+            return
+        }else{
+            usuario.celular = et_celular.text.toString()
+        }
+
+
+        usuario.tipo = s_tipo.selectedItem.toString()
+        usuario.nivel = s_nivel.selectedItem.toString()
+
+        if (vacio(et_observaciones)){
+            usuario.observaciones = "Ninguna"
+        }else{
+            usuario.observaciones = et_observaciones.text.toString()
+        }
+
+
+        usuario.inasistencias = 0 //Nuevo usuario
+        usuario.estado = "Habilitado" //Nuevo usuario
+
+
 
         if (!etRepetirPassword.text.toString().contentEquals("")) {
             repetirPassword = etRepetirPassword.text.toString()
         } else {
-            Toast.makeText(this, "Por favor, repita la contraseña..", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Por favor, repita la contraseña.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -147,9 +172,10 @@ class RegistroActivity : AppCompatActivity() {
             Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
             return
         } else {
+            usuario.password = password
             val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
             storageRef =
-                FirebaseStorage.getInstance().reference.child("profiles").child(codigo + "_" + timeStamp)
+                FirebaseStorage.getInstance().reference.child("profiles").child(usuario.codigo.toString() + "_" + timeStamp)
 
             iviFoto.isDrawingCacheEnabled = true
             iviFoto.buildDrawingCache()
@@ -170,7 +196,9 @@ class RegistroActivity : AppCompatActivity() {
                 return@Continuation storageRef.downloadUrl
             }).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    verificar(codigo,password,task.result.toString())
+                    usuario.foto = task.result.toString()
+                    //verificar(codigo,password,task.result.toString())
+                    verificar(usuario)
                     regresar()
                 } else {
                     padreView.visibility = View.VISIBLE
@@ -182,11 +210,12 @@ class RegistroActivity : AppCompatActivity() {
         //verificar(usuario,contrasena)
     }
     // FUNCION DE VERIFICAR DE USUARIO--------------------------------------------------------------
-    private fun verificar(codigo:String, password: String, foto: String) {
+    //private fun verificar(codigo:String, password: String, foto: String) {
+    private fun verificar(usuario:Usuario) {
         // Buscar usuario con codigo similar
         val db = FirebaseFirestore.getInstance()
         val ref = db.collection("usuario")
-        val query = ref.whereEqualTo("codigo",codigo)
+        val query = ref.whereEqualTo("codigo",usuario.codigo)
         // Resultado de la busqueda
         query.get()
             .addOnSuccessListener { documents ->
@@ -196,7 +225,7 @@ class RegistroActivity : AppCompatActivity() {
                 } else {
                     // Si no encuentra, escribe en la BD
                     Toast.makeText(this, "Conectando...", Toast.LENGTH_SHORT).show()
-                    writeNewUser(codigo,password,foto)
+                    writeNewUser(usuario)
                     finish()
                 }
             }

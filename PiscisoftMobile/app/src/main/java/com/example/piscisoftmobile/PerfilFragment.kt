@@ -15,7 +15,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.piscisoftmobile.Model.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_perfil.*
+import java.net.URL
 
 
 class PerfilFragment : Fragment() {
@@ -60,11 +62,13 @@ class PerfilFragment : Fragment() {
                     val usuario = document.toObject(Usuario::class.java)
                     tv_nombre.text = usuario.nombre
                     tv_codigo.text = usuario.codigo
-                    rv_inasistencias.rating = usuario.inasistencias!!.toFloat()
+                    rv_inasistencias.rating = 3 - usuario.inasistencias!!.toFloat()
                     tv_estado.text =  "Estado: ${usuario.estado!!.toUpperCase()}"
                     tv_tipo.text = "Tipo de usuario: ${usuario.tipo}"
                     tv_nivel.text = "Nivel de natación: ${usuario.nivel}"
                     tv_observaciones.text = "Observaciones: ${usuario.observaciones}"
+                    val url = usuario.foto
+                    Picasso.get().load(url).resize(350,350).into(iv_foto)
                 }
             }
             .addOnFailureListener{

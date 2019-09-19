@@ -5,4 +5,16 @@
     <string name="title_reservar">Reservar</string>
     <string name="title_historial">Historial</string>
     <string name="title_activity_modificar">ModificarActivity</string>
+
+    <string-array name="tipos">
+        <item>Alumno</item>
+        <item>Trabajador</item>
+        <item>Egresado</item>
+    </string-array>
+
+    <string-array name="niveles">
+        <item>Básico</item>
+        <item>Intermedio</item>
+        <item>Avanzado</item>
+    </string-array>
 </resources>

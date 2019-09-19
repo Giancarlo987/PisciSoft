@@ -25,12 +25,12 @@ class ReservarFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_reservar, container, false)
         val calendarView : CalendarView = root.findViewById(R.id.calendario)
 
-        val btn_prueba: Button = root.findViewById(R.id.btn_prueba)
+        //val btn_prueba: Button = root.findViewById(R.id.btn_prueba)
 
 
         //val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
 
-        val codigo = savedInstanceState?.get("codigo")
+        //val codigo = savedInstanceState?.get("codigo")
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",
             Context.MODE_PRIVATE)
         var userID = sharedPreferences.getString("userID","")

@@ -109,6 +109,7 @@ class RegistroActivity : AppCompatActivity() {
     private fun avisar(razon : String) {
         Toast.makeText(this, "Por favor, ingrese ${razon}", Toast.LENGTH_SHORT).show()
     }
+
     // FUNCION PARA OBTENER LAS CREDENCIALES--------------------------------------------------------
     private fun registrar(){
         padreView.visibility = View.GONE

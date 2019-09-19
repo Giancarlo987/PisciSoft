@@ -77,7 +77,7 @@ class RegistroActivity : AppCompatActivity() {
         var tipo: String? = null
         var observaciones: String? = null
         var celular: String? = null
-        var inasistencias: Number = 0
+        var inasistencias: Long = 0
         var nivel: String? = null
         var nombre: String? = null
 

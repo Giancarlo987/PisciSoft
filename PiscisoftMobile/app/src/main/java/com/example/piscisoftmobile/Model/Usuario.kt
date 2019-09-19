@@ -10,7 +10,7 @@ data class Usuario(
     var tipo: String? = null,
     var observaciones: String? = null,
     var celular: String? = null,
-    var inasistencias: Number? = null,
+    var inasistencias: Long? = null,
     var nivel: String? = null,
     var nombre: String? = null,
     var foto: String? = null

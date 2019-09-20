@@ -21,7 +21,7 @@ function mostrarTabla(filtro,palabra){
                             <td style='vertical-align:middle'>${doc.data().nombre}</td> 
                             <td style='vertical-align:middle'>${doc.data().celular}</td>
                             <td style='vertical-align:middle'>${doc.data().observaciones}</td>
-                            <td style='vertical-align:middle'><button class="btn btn-danger" onclick="location.href='./Detalle_Usuarios.html'">Ver detalle</button></td>  
+                            <td style='vertical-align:middle'><button class="btn btn-danger" onclick="location.href='./Detalle_Usuarios.html?id=${doc.id}'">Ver detalle</button></td>   
                         </tr>`;
             });
     });

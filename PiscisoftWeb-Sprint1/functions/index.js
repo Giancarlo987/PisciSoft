@@ -21,13 +21,13 @@ exports.FuncionPruebaHBS = functions.https.onRequest(app);
 
 //Fin
 
-//Función de autenticación
+//Función de autenticación //Función reemplazada por la autenticación en la creación de Cookies
 /*
 exports.Autenticacion = functions.https.onRequest((req,res) => {
     let store = firebase.firestore()
     store.collection('AdministradorUsuario').doc("AtyyZuBXX3ButSAB9OLH").get().then(doc  => {
         if (doc.data().usuario==req.query.usuario && doc.data().password==req.query.password) {
-            res.redirect("https://piscisoft.firebaseapp.com/paginaPrincipal.html") //Cambia esto al principal
+            res.redirect("https://piscisoft.firebaseapp.com/paginaPrincipal.html")
 
         }
         else {
@@ -39,7 +39,7 @@ exports.Autenticacion = functions.https.onRequest((req,res) => {
 });
 */
 
-//Función actualizar (Sprint 0)
+//Función actualizar
 exports.FuncionGuardarEnBase = functions.https.onRequest((req,res) => {
     firebase.firestore().collection('colx').doc('docx').update(
         {textox: req.query.inf 
@@ -52,16 +52,6 @@ exports.FuncionGuardarEnBase = functions.https.onRequest((req,res) => {
 //FIN
 
 
-
-
-
-
-
-
-////
-/////
-/////
-///
 //Para probar logica de firestore
 
 exports.PruebarGuardarEnBase = functions.https.onRequest((req,res) => {

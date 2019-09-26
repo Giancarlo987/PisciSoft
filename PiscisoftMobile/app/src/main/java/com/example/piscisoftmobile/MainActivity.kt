@@ -15,7 +15,9 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //aron
 
+        //ayawdaw
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btn_registrarse.setOnClickListener{irRegistro()}

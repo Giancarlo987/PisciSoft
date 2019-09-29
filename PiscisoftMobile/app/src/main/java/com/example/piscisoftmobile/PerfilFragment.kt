@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.piscisoftmobile.Model.Usuario
+import com.example.piscisoftmobile.Model.UsuarioFirebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_perfil.*
@@ -35,7 +36,10 @@ class PerfilFragment : Fragment() {
         val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
 
         val userID = obtenerUsuarioLogueado()
-        verInfoUsuario(userID)
+
+        //Enviar mensaje a dao para que busque la info
+        val usuarioFirebase = UsuarioFirebase()
+        usuarioFirebase.retornarUsuario(this,userID!!)
 
         btn_modificar.setOnClickListener { ir_modificar() }
 
@@ -51,29 +55,17 @@ class PerfilFragment : Fragment() {
         return userID
     }
 
-    private fun verInfoUsuario(userID : String?){
-        val db = FirebaseFirestore.getInstance()
-        val ref = db.collection("usuario")
-        val query = ref.whereEqualTo("codigo",userID)
 
-        query.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val usuario = document.toObject(Usuario::class.java)
-                    tv_nombre.text = usuario.nombre
-                    tv_codigo.text = usuario.codigo
-                    rv_inasistencias.rating = 3 - usuario.inasistencias!!.toFloat()
-                    tv_estado.text =  "Estado: ${usuario.estado!!.toUpperCase()}"
-                    tv_tipo.text = "Tipo de usuario: ${usuario.tipo}"
-                    tv_nivel.text = "Nivel de natación: ${usuario.nivel}"
-                    tv_observaciones.text = "Observaciones: ${usuario.observaciones}"
-                    val url = usuario.foto
-                    Picasso.get().load(url).resize(350,350).into(iv_foto)
-                }
-            }
-            .addOnFailureListener{
-                Toast.makeText(context, "Error en Firebase", Toast.LENGTH_SHORT).show()
-            }
+    fun colocarInfo(usuario:Usuario){
+        tv_nombre.text = usuario.nombre
+        tv_codigo.text = usuario.codigo
+        rv_inasistencias.rating = 3 - usuario.inasistencias!!.toFloat()
+        tv_estado.text =  "Estado: ${usuario.estado!!.toUpperCase()}"
+        tv_tipo.text = "Tipo de usuario: ${usuario.tipo}"
+        tv_nivel.text = "Nivel de natación: ${usuario.nivel}"
+        tv_observaciones.text = "Observaciones: ${usuario.observaciones}"
+        val url = usuario.foto
+        Picasso.get().load(url).resize(350,350).into(iv_foto)
     }
 
 

@@ -43,6 +43,8 @@
             android:hint="Contraseña"
             android:inputType="textPassword" />
 
+
+
         <Button
             android:id="@+id/btn_iniciar_sesion"
             android:layout_width="match_parent"

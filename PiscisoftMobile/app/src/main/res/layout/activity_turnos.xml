@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".TurnosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="328dp">
+        tools:layout_editor_absoluteX="309dp"
+        tools:layout_editor_absoluteY="354dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,18 +31,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Escoger fecha"
+                android:text="Escoger turno"
                 android:textAlignment="gravity"
                 android:textSize="25dp" />
 
         </LinearLayout>
 
-        <CalendarView
-            android:id="@+id/calendario"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp" />
-
+            android:text="Aqui se veran los turnos" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

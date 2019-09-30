@@ -8,7 +8,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
 import android.content.SharedPreferences
+import android.util.Log
+import com.example.piscisoftmobile.Model.Horario
+import com.example.piscisoftmobile.Model.Turno
 import com.example.piscisoftmobile.Model.UsuarioFirebase
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +27,10 @@ class MainActivity : AppCompatActivity() {
         btn_registrarse.setOnClickListener{irRegistro()}
         btn_iniciar_sesion.setOnClickListener {verificarCampos()}
 
+
     }
+
+
 
     private fun irRegistro(){ //Dirigirse al formulario de registro
         val intent = Intent()

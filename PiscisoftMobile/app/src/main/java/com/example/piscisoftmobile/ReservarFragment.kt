@@ -64,7 +64,6 @@ class ReservarFragment : Fragment() {
             intent.putExtra("userID",userID)
             intent.setClass(mContext, TurnosActivity::class.java)
             startActivity(intent)
-
         } else {
             Toast.makeText( context, "No hay turnos registrados para esa fecha", Toast.LENGTH_SHORT).show()
         }

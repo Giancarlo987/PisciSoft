@@ -34,9 +34,7 @@ class TurnoFirebase {
                 for (document in documents) {
                     val turno = document.toObject(Turno::class.java)
                     turnos.add(turno)
-                    Log.v("TURNO XD", "${turno.codHorario}")
                 }
-
                 activity.setRecyclerAdapter(turnos)
             }
             .addOnFailureListener { exception ->

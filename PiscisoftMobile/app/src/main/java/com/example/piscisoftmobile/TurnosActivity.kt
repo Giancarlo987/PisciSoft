@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.piscisoftmobile.Model.Turno
 import com.example.piscisoftmobile.Model.TurnoFirebase
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_turnos.*
 
 class TurnosActivity : AppCompatActivity() {
 
     val turnoFirebase = TurnoFirebase()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

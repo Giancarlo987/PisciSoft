@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.piscisoftmobile.Model.Horario
+import com.example.piscisoftmobile.Model.Profesor
 import com.example.piscisoftmobile.Model.Turno
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_turno.*
 import kotlinx.android.synthetic.main.item_turno.view.*
 
@@ -15,6 +18,8 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
 
     private lateinit var mContext: Context
     private lateinit var listaTurnos : List<Turno>
+
+    val db = FirebaseFirestore.getInstance()
 
     constructor(mContext: Context, listaTurnos: List<Turno>) : super() {
         this.mContext = mContext
@@ -33,11 +38,31 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val turno: Turno = listaTurnos.get(position)
-        holder.item_disponibilidad.text = "${turno.abierto}"
-        holder.item_capacidad.text = "${turno.capacidadCubierta}"
-        holder.item_profesor.text = "Andrea"
-        holder.item_hora.text = "${turno.fecha}"
+
+        if (turno.abierto == true){
+            holder.item_disponibilidad.text = "Disponible"
+        }else{
+            holder.item_disponibilidad.text = "Cerrado"
+        }
+
+        db.collection("horario").document(turno.codHorario!!)
+            .get().addOnSuccessListener { document ->
+                val horario = document.toObject(Horario::class.java)
+                holder.item_hora.text = horario!!.horaInicio + " - " + horario!!.horaFin
+                holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${horario.capacidadTotal}"
+                colocarProfesor(holder,position,horario.codProfesor.toString())
+            }
+
+        //Confirmar reserva
         holder.item_holder.setOnClickListener(View.OnClickListener { Toast.makeText(mContext, "hola mundo xd",Toast.LENGTH_LONG).show() })
+    }
+
+    fun colocarProfesor (holder: ViewHolder, position: Int, codProfesor:String){
+        db.collection("profesor").document(codProfesor)
+            .get().addOnSuccessListener { document ->
+                val profesor = document.toObject(Profesor::class.java)
+                holder.item_profesor.text = profesor!!.nombre
+            }
     }
 
     class ViewHolder

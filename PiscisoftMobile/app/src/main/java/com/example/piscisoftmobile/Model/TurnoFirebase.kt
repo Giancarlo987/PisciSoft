@@ -35,6 +35,8 @@ class TurnoFirebase {
                     val turno = document.toObject(Turno::class.java)
                     turnos.add(turno)
                 }
+
+                turnos.sortBy { turno -> turno.codHorario?.substring(turno.codHorario?.indexOf("-")!! + 1, turno.codHorario?.indexOf(":")!!)!!.toInt();}
                 activity.setRecyclerAdapter(turnos)
             }
             .addOnFailureListener { exception ->

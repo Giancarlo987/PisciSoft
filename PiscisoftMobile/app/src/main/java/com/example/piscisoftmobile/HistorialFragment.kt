@@ -41,18 +41,6 @@ class HistorialFragment : Fragment() {
         return root
     }
 
-    /*fun irReservas(existen:Boolean){ //Dirigirse a ver los turnos
-        if (existen){
-            Toast.makeText( context, "Si hay turnos", Toast.LENGTH_SHORT).show()
-            val intent = Intent()
-            intent.putExtra("codUsuario", codigoUsuario)
-            intent.setClass(mContext, HistorialActivity::class.java)
-            startActivity(intent)
-        } else {
-            Toast.makeText( context, "No hay reservas realizadas", Toast.LENGTH_SHORT).show()
-        }
-    }*/
-
     fun irReservas(existen:Boolean){ //Dirigirse a ver los turnos
         if (existen){
             Toast.makeText( context, "Si hay reservas", Toast.LENGTH_SHORT).show()
@@ -65,7 +53,7 @@ class HistorialFragment : Fragment() {
     fun setRecyclerAdapter(listaReservas:List<Reserva>){
         val recyclerView: RecyclerView = reservas_recycler_view
         recyclerView.layoutManager = LinearLayoutManager(mContext)
-        val adapter = ReservasRecyclerAdapter(mContext, listaReservas)
+        val adapter = ReservasRecyclerAdapter(mContext, listaReservas, codigoUsuario)
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
     }
@@ -74,7 +62,6 @@ class HistorialFragment : Fragment() {
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",
             Context.MODE_PRIVATE)
         var userID = sharedPreferences.getString("userID","")
-        //Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
         return userID!!
     }
 

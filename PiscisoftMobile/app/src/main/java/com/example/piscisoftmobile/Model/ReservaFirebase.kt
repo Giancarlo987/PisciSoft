@@ -24,24 +24,6 @@ class ReservaFirebase {
             }
     }
 
-    /*fun retornarReservas(activity: HistorialActivity, codigo:String){
-        val query = ref.whereEqualTo("codUsuario",codigo)
-        query.get()
-            .addOnSuccessListener { documents ->
-                var reservas = mutableListOf<Reserva>()
-                for (document in documents) {
-                    val reserva = document.toObject(Reserva::class.java)
-                    reservas.add(reserva)
-                }
-
-                //reservas.sortBy { reserva -> reserva.fecha?.substring(reserva.fecha?.indexOf("-")!! + 1, reserva.fecha?.indexOf("-")!!)!!;}
-                activity.setRecyclerAdapter(reservas)
-            }
-            .addOnFailureListener { exception ->
-                Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
-            }
-    }*/
-
     fun retornarReservas(fragment: HistorialFragment, codigo:String){
         val query = ref.whereEqualTo("codUsuario",codigo)
         query.get()

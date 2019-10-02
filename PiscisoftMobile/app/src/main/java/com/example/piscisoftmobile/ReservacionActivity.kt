@@ -1,20 +1,12 @@
 package com.example.piscisoftmobile
 
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.piscisoftmobile.Model.Turno
-import com.example.piscisoftmobile.Model.TurnoFirebase
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_turnos.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.piscisoftmobile.Model.ReservaFirebase
 
-class TurnosActivity : AppCompatActivity() {
-
-    val turnoFirebase = TurnoFirebase()
+class ReservacionActivity : AppCompatActivity() {
+    val reservaFirebase = ReservaFirebase()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +21,7 @@ class TurnosActivity : AppCompatActivity() {
     }
 
     fun setRecyclerAdapter(listaTurnos:List<Turno>){
-        val recyclerView: RecyclerView = turnos_recycler_view
+        val recyclerView: RecyclerView = null
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = TurnosRecyclerAdapter(this, listaTurnos, userID)
         recyclerView.adapter = adapter
@@ -37,4 +29,3 @@ class TurnosActivity : AppCompatActivity() {
     }
 
 }
-

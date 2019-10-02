@@ -34,24 +34,15 @@ class ConfirmarReservaActivity : AppCompatActivity() {
 
         tv_fecha.text = "Fecha: "+date.dayOfMonth+"/"+date.monthValue+"/"+date.year
         tv_horario.text = "Horario: "+horario
-        tv_profesor.text = "Profesor(a): "+profesor
+        tv_profesor.text = profesor
 
         //Toast.makeText(this, codUsuario , Toast.LENGTH_SHORT).show()
 
         btn_confirmar.setOnClickListener { verificarUsuario(codUsuario) }
+        btn_cancelar.setOnClickListener { irPerfil() }
 
     }
 
-    /**
-     *
-     * data class Reserva(
-    var codTurno:String? = null,
-    var codUsuario:String? = null,
-    var fechaReserva:String? = null,
-    var modalidad: String? = null,
-    var estado : String? = null
-    ): Serializable
-     */
 
     fun verificarUsuario(codUsuario:String){
         val db = FirebaseFirestore.getInstance()

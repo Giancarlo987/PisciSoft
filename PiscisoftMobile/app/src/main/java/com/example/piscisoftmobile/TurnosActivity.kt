@@ -31,7 +31,7 @@ class TurnosActivity : AppCompatActivity() {
     fun setRecyclerAdapter(listaTurnos:List<Turno>){
         val recyclerView: RecyclerView = turnos_recycler_view
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = TurnosRecyclerAdapter(this, listaTurnos)
+        val adapter = TurnosRecyclerAdapter(this, listaTurnos, userID)
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
     }

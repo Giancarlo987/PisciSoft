@@ -33,6 +33,7 @@ class TurnoFirebase {
                 var turnos = mutableListOf<Turno>()
                 for (document in documents) {
                     val turno = document.toObject(Turno::class.java)
+                    turno.codTurno = document.id
                     turnos.add(turno)
                 }
 

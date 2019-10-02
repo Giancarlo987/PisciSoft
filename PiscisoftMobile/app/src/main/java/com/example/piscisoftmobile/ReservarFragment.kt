@@ -18,8 +18,11 @@ import com.example.piscisoftmobile.Model.TurnoFirebase
 import com.example.piscisoftmobile.Model.UsuarioFirebase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_reservar.*
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.Month
 import java.time.Year
+import java.time.format.DateTimeFormatter
 
 val usuarioFirebase = UsuarioFirebase()
 val turnoFirebase = TurnoFirebase()
@@ -39,16 +42,35 @@ class ReservarFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_reservar, container, false)
         val calendarView : CalendarView = root.findViewById(R.id.calendario)
 
-        //val btn_prueba: Button = root.findViewById(R.id.btn_prueba)
-        //val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
-
         userID = retornarUserID()
 
-
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            fecha = "${year}-${(month + 1)}-${dayOfMonth}"
-            Toast.makeText( context, fecha, Toast.LENGTH_SHORT).show()
-            turnoFirebase.existenTurnos(this,fecha)
+            var dia = ""
+            var mes = ""
+
+            if (dayOfMonth<10){
+                dia = "0${dayOfMonth}"
+            }else{
+                dia = "${dayOfMonth}"
+            }
+            if ((month+1)<10){
+                mes = "0${(month + 1)}"
+            }else{
+                mes = "${(month + 1)}"
+            }
+
+            fecha = "${year}-${mes}-${dia}"
+
+            val hoy = LocalDate.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val fechaEscogida = LocalDate.parse(fecha, formatter)
+
+            if (fechaEscogida.isBefore(hoy)){
+                Toast.makeText( context, "Esa fecha ya pasó", Toast.LENGTH_SHORT).show()
+            }else{
+                turnoFirebase.existenTurnos(this,fecha)
+            }
+
         }
 
         mContext = root.context
@@ -73,7 +95,6 @@ class ReservarFragment : Fragment() {
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",
             Context.MODE_PRIVATE)
         var userID = sharedPreferences.getString("userID","")
-        //Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
         return userID!!
     }
 

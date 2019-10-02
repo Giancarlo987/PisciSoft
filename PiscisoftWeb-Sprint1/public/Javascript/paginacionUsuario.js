@@ -27,6 +27,9 @@ Paginador = function (divPaginador, tabla, tamPagina) {
 
     this.SetPagina = function (num) {
         if (num < 0 || num > this.paginas) {
+            console.log("aqui")
+            console.log(num)
+            console.log(this.paginas)
             return
         }
 
@@ -75,9 +78,10 @@ Paginador = function (divPaginador, tabla, tamPagina) {
         sig.innerHTML = '>>'
         sig.className = 'pag_num'
         sig.onclick = function () {
-            if (self.pagActual == self.paginas)
+            if (self.pagActual == self.paginas){
                 return
-            self.SetPagina(self.pagActual + 1)
+            }
+            self.SetPagina(parseInt(self.pagActual) + 1 ) //ACA CAMBIO
             pintar(self.paginas, self.pagActual)
         }
 

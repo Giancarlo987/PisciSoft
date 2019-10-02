@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener{
                 Toast.makeText(this, "Error en Firebase", Toast.LENGTH_SHORT).show()
             }
-
+//hola
     }
 
     private fun irPerfil(){

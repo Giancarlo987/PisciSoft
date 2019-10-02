@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/item_holder_reservacion"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_weight="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content">
+            <TextView
+                android:id="@+id/item_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alumno"
+                android:padding="5dp"/>
+            <TextView
+                android:id="@+id/item_codigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Codigo"
+                android:padding="5dp"/>
+            <TextView
+                android:id="@+id/item_fecha_reservacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:padding="3dp"/>
+            <TextView
+                android:id="@+id/item_horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horario"
+                android:padding="3dp"/>
+            <TextView
+                android:id="@+id/item_profesor_reservacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profesor"
+                android:padding="3dp"/>
+            <TextView
+                android:id="@+id/item_modalidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modalidad"
+                android:padding="3dp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/item_QR"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3dp"
+            android:padding="8dp"
+            android:src="@drawable/logotipo" />
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Cancelar" />
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@android:color/darker_gray"/>
+</LinearLayout>

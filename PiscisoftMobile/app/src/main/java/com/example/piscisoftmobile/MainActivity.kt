@@ -8,22 +8,28 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
 import android.content.SharedPreferences
-
+import android.util.Log
+import com.example.piscisoftmobile.Model.Horario
+import com.example.piscisoftmobile.Model.Turno
+import com.example.piscisoftmobile.Model.UsuarioFirebase
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 
 class MainActivity : AppCompatActivity() {
 
+    val usuarioFirebase = UsuarioFirebase()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //aron
 
-        //ayawdaw
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btn_registrarse.setOnClickListener{irRegistro()}
-        btn_iniciar_sesion.setOnClickListener {iniciarSesion()}
+        btn_iniciar_sesion.setOnClickListener {verificarCampos()}
 
     }
+
+
 
     private fun irRegistro(){ //Dirigirse al formulario de registro
         val intent = Intent()
@@ -32,51 +38,36 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun iniciarSesion(){
+    private fun verificarCampos(){
         val codigo = et_codigo.text.toString()
         val password = et_password.text.toString()
 
-        if (codigo != "" && password != ""){ //Verificar si los campos están llenos
-            verificar(codigo,password)
+        if (codigo != "" && password != ""){
+            usuarioFirebase.verificarUsuario(this, codigo, password)
         } else {
             Toast.makeText(this, "Por favor, complete los campos", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun verificar(codigo:String,password:String)  {
-
-        val db = FirebaseFirestore.getInstance()
-        val ref = db.collection("usuario")
-        val query = ref.whereEqualTo("codigo",codigo).whereEqualTo("password",password)
-
-        query.get()
-            .addOnSuccessListener { documents ->
-                if ( ! documents.isEmpty ) {
-                    Toast.makeText(this, "Inicio exitoso", Toast.LENGTH_SHORT).show()
-
-                    //"Guardar en la sesión"
-                    val editor : SharedPreferences.Editor = getSharedPreferences("login",
-                        Context.MODE_PRIVATE).edit()
-                    editor.putString("userID",codigo)
-                    editor.apply()
-
-                    irPerfil()
-
-                } else {
-                    Toast.makeText(this, "Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show()
-                }
-            }
-            .addOnFailureListener{
-                Toast.makeText(this, "Error en Firebase", Toast.LENGTH_SHORT).show()
-            }
-
+    fun iniciarSesion(codigo:String,mensaje:String){
+        if (mensaje=="existe"){
+            //"Guardamos en la sesión"
+            val editor : SharedPreferences.Editor = getSharedPreferences("login",
+                Context.MODE_PRIVATE).edit()
+            editor.putString("userID",codigo)
+            editor.apply()
+            irPerfil()
+        }else{
+            Toast.makeText(this, "Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private fun irPerfil(){
 
+    private fun irPerfil(){
         val intent = Intent()
         intent.setClass(this, SesionActivity::class.java)
         startActivityForResult(intent,1)
-
     }
+
+
 }

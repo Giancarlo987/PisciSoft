@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ConfirmarReservaActivity"></activity>
+        <activity android:name=".TurnosActivity" />
         <activity
             android:name=".ModificarActivity"
             android:label="@string/title_activity_modificar"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SesionActivity"
-            android:label="@string/title_activity_sesion"/>
+            android:label="@string/title_activity_sesion" />
         <activity android:name=".RegistroActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

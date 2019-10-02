@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistorialFragment">
+    tools:context=".TurnosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteY="354dp">
 
         <LinearLayout
-            android:id="@+id/header_reservas"
+            android:id="@+id/header_turnos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top">
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Reservaciones"
+                android:text="Escoger turno"
                 android:textAlignment="gravity"
                 android:textSize="25dp" />
 
@@ -45,7 +45,7 @@
             android:background="@android:color/darker_gray"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reservas_recycler_view"
+            android:id="@+id/turnos_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>

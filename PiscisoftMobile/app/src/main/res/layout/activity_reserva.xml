@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TurnosActivity">
+    tools:context=".ReservaFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteY="354dp">
 
         <LinearLayout
-            android:id="@+id/header_turnos"
+            android:id="@+id/header_reserva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top">
@@ -27,12 +27,12 @@
                 android:src="@drawable/logotipo" />
 
             <TextView
-                android:id="@+id/header_perfil"
+                android:id="@+id/header_reservacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Escoger turno"
+                android:text="Reservacion"
                 android:textAlignment="gravity"
                 android:textSize="25dp" />
 
@@ -45,10 +45,10 @@
             android:background="@android:color/darker_gray"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/turnos_recycler_view"
+            android:id="@+id/reserva_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

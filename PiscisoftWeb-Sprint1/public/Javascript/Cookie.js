@@ -15,7 +15,3 @@ function MakeCookie(){
         )
 }
 
-
-
-
-//hola :)

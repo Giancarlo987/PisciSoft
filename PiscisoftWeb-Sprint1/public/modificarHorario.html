@@ -1,0 +1,472 @@
+<html lang="en">
+
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" href="">
+        <link rel="stylesheet" href="./CSS/footer.css">
+        <link rel="stylesheet" href="./CSS/tablaHorario.css">
+        <link rel="stylesheet" href="./CSS/pop-up.css" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                crossorigin="anonymous">
+        <script type="text/javascript">
+                function EatCookie() {
+                        document.cookie = "Login=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+                        window.location.href = "https://piscisoft.firebaseapp.com";
+                }
+        </script>
+        <script type="text/javascript">
+                function getCookie(name) {
+                        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+                        return v ? v[2] : null;
+                }
+
+                function Verify() {
+                        var cookiePage = getCookie("Login");
+                        if (cookiePage == null) {
+                                window.location.href = "https://piscisoft.firebaseapp.com";
+                        }
+                }
+                window.onload = Verify;
+        </script>
+        <title>Modificar horario</title>
+</head>
+
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+                <div class="container">
+                        <a class="navbar-brand" href="#"><img src=".//imagenes//Logotipo_reducido.png" class="w-50"
+                                        alt="Logo"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                                <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item ">
+                                                <a class="nav-link" href="./paginaPrincipal.html">Turnos Actuales</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="./usuarios.html">Usuarios</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                                <a class="nav-link" href="./modificarHorario.html">Modificar horario
+                                                        <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="./404.html">Justificaciones</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <button class="btn btn-danger" onclick="EatCookie()"> Salir </button>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+        </nav>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table align="center" class="table table-bordered my-3" style="text-align:center; width: 90%">
+                <tr>
+                        <th scope="col" class="primeraFila"> Hora </th>
+                        <th scope="col" class="primeraFila"> Lunes </th>
+                        <th scope="col" class="primeraFila"> Martes </th>
+                        <th scope="col" class="primeraFila"> Miercoles </th>
+                        <th scope="col" class="primeraFila"> Jueves </th>
+                        <th scope="col" class="primeraFila"> Viernes </th>
+                        <th scope="col" class="primeraFila"> Sabado </th>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 05:30 - 06:15 </td>
+                        <!-- <td> <input type="button" value="Modify" onclick="AbrirPopup()"> </td> -->
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF" onclick="generarPop('Lunes-5:30')"
+                                        value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-5:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-5:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-5:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-5:30')" value="Modify">Prueba</button></td>
+                        <td class="horarioCerrado" style="vertical-align:middle;">Cerrado</td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 06:30 - 07:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF" onclick="generarPop('Lunes-6:30')"
+                                        value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-6:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-6:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-6:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-6:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Sabado-6:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 07:30 - 08:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF" onclick="generarPop('Lunes-7:30')"
+                                        value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-7:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-7:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-7:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-7:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Sabado-7:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 08:30 - 09:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF" onclick="generarPop('Lunes-8:30')"
+                                        value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-8:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-8:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-8:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-8:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Sabado-8:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 09:30 - 10:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF" onclick="generarPop('Lunes-9:30')"
+                                        value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-9:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-9:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-9:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-9:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Sabado-9:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 10:30 - 11:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Lunes-10:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-10:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-10:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-10:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-10:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Sabado-10:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 11:30 - 12:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Lunes-11:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-11:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-11:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-11:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-11:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Sabado-11:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 12:30 - 13:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Lunes-12:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-12:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-12:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-12:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-12:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Sabado-12:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 13:30 - 14:15 </td>
+                        <td class="horarioCerrado" style="vertical-align:middle;">Cerrado</td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-13:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-13:30')" value="Modify">Prueba</button></td>
+                        <td class="horarioCerrado" style="vertical-align:middle;">Cerrado</td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-13:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 14:30 - 15:15 </td>
+                        <td class="horarioCerrado" style="vertical-align:middle;">Cerrado</td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-14:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-14:30')" value="Modify">Prueba</button></td>
+                        <td class="horarioCerrado" style="vertical-align:middle;">Cerrado</td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-14:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 15:30 - 16:15 </td>
+                        <td class="horarioCerrado" style="vertical-align:middle;">Cerrado</td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-15:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-15:30')" value="Modify">Prueba</button></td>
+                        <td class="horarioCerrado" style="vertical-align:middle;">Cerrado</td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-15:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 16:30 - 17:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Lunes-16:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-16:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-16:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-16:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-16:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 17:30 - 18:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Lunes-17:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-17:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-17:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-17:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-17:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 18:30 - 19:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Lunes-18:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-18:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-18:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-18:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-18:30')" value="Modify">Prueba</button></td>
+                </tr>
+                <tr>
+                        <td class="primeraColumna" style="vertical-align:middle;"> 19:30 - 20:15 </td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Lunes-19:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Martes-19:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Miercoles-19:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Jueves-19:30')" value="Modify">Prueba</button></td>
+                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
+                                        style="width:100%;height:100%; color:#FFFFFF"
+                                        onclick="generarPop('Viernes-19:30')" value="Modify">Prueba</button></td>
+                </tr>
+        </table>
+
+        <br>
+        <br>
+        <div class="modal" id="myForm">
+                <div class="modal-dialog">
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                        <h4 class="modal-title" id="tituloPop">Editar fecha</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                        <form>
+                                                <h5 class="modal-title" id="tituloPop">General</h5>
+                                                <div class="form-group row">
+                                                        <label for="inputCapacidad"
+                                                                class="col-sm-3 col-form-label">Capacidad</label>
+                                                        <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="capacidad"
+                                                                        placeholder="Ingrese un número">
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                        <label for="inputProfesor"
+                                                                class="col-sm-3 col-form-label">Profesor</label>
+                                                        <div class="col-sm-9">
+                                                                <select class="form-control" id="profesores">
+                                                                </select>
+                                                        </div>
+                                                </div>
+                                                <br>
+                                                <h5 class="modal-title" id="tituloPop">Por fecha</h5>
+                                                <div class="form-group row">
+                                                        <label for="inputFecha"
+                                                                class="col-sm-3 col-form-label">Fecha</label>
+                                                        <div class="col-sm-9">
+                                                                <select class="form-control" id="fechas">
+                                                                </select>
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                        <label for="inputDisponibilidad"
+                                                                class="col-sm-3 col-form-label">Disponibilidad</label>
+                                                        <div class="col-sm-9">
+                                                                <select class="form-control" id="disponibilidad">
+                                                                        <option>Disponible</option>
+                                                                        <option>No disponible</option>
+                                                                </select>
+                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="inputComentario">Observación</label>
+                                                        <textarea class="form-control" id="comentario"
+                                                                rows="3"></textarea>
+                                                </div>
+                                        </form>
+                                </div>
+                                <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" 
+                                                id="botonGuardarC">
+                                                Guardar Cambios </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                </div>
+
+                        </div>
+                </div>
+        </div>
+
+        <div class="container ">
+                <footer class="footer-bs">
+                        <div class="row">
+                                <div class="col-md-6 footer-brand animated fadeInLeft">
+                                        <br>
+                                        <p>Av. Las Palmas 179 Urb. Mayorazgo</p>
+                                        <p>Distrito de Ate</p>
+                                        <p>Lima,Perú</p>
+                                        <p>© 2019 PisciSoft. Todos los derechos reservados</p>
+                                </div>
+                                <div class="col-md-6 footer-social animated fadeInRight ">
+                                        <ul>
+                                                <div class="card-header mx-auto ">
+                                                        <span> <img src=".//imagenes//Logo%20en%20blanco.png"
+                                                                        class="w-75" alt="Logo" style="float:right">
+                                                        </span><br />
+                                                </div>
+                                        </ul>
+                                </div>
+                        </div>
+                </footer>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
+        <script type="text/javascript" src="./Javascript/conexion.js"></script>
+        <script type="text/javascript" src="./Javascript/modificarHorario.js"></script>
+</body>
+
+</html>

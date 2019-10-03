@@ -1,3 +1,18 @@
+function validarSiNumero(numero) {
+    var capacidad = document.getElementById("capacidad")
+    if (!/^([0-9])*$/.test(numero)) {
+        alert("En capacidad no se coloco un número")
+        capacidad.value=""
+        return 0; //No es un numero
+    } else if (numero > 26) {
+        alert("La capacidad no puede ser mayor a 26")
+        capacidad.value=""
+    } else {
+        return 1;
+    }
+}
+
+
 PopUp = function (id) {
     this.id = id
     var db = firebase.firestore();
@@ -21,8 +36,7 @@ PopUp = function (id) {
             });
     }
 
-    this.guardarCambioCapacidad = function () {
-        var nuevaCapacidad = document.getElementById("capacidad").value
+    this.guardarCambioCapacidad = function (nuevaCapacidad) {
         db.collection('horario').doc(this.id).update(
             {
                 capacidadTotal: nuevaCapacidad
@@ -42,8 +56,14 @@ PopUp = function (id) {
 function generarPop(id) {
     var p = new PopUp(id);
     var boton = document.getElementById("botonGuardarC")
+
     boton.onclick = function () {
-        p.guardarCambioCapacidad()
+        var nuevaCapacidad = parseInt(document.getElementById("capacidad").value)
+        if (validarSiNumero(nuevaCapacidad) == 1) {
+            boton.setAttribute("data-dismiss", "modal");
+            //p.guardarCambioCapacidad(nuevaCapacidad)
+        }
+
     }
     p.mostrarDatosenPopUp()
 }

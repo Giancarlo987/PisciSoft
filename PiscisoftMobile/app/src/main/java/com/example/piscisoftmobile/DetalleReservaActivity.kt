@@ -48,10 +48,7 @@ class DetalleReservaActivity : AppCompatActivity() {
 
         codigo.setText(codigo.text.toString()+codigoUsuario)
 
-        var date = LocalDate.parse(intent.getStringExtra("fecha"))
-        var fechaF = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
-
-        fecha.setText(fecha.text.toString() + fechaF)
+        fecha.setText(intent.getStringExtra("fecha"))
         hora.setText(hora.text.toString() + intent.getStringExtra("hora"))
         profesor.setText(profesor.text.toString() + intent.getStringExtra("profesor"))
         modalidad.setText(modalidad.text.toString() + intent.getStringExtra("modalidad"))

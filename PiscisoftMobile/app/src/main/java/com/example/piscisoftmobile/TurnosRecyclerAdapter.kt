@@ -80,6 +80,7 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
 
     //lateinit var horaTurno : String
     fun aTiempo(hora: String):Boolean{
+
         var horaTurno = hora
         if (horaTurno.length==4){
             horaTurno = "0${horaTurno}"

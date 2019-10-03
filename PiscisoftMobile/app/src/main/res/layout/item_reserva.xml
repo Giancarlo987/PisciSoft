@@ -5,7 +5,6 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,35 +18,64 @@
             android:src="@drawable/logotipo" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="5dp">
+
             <TextView
                 android:id="@+id/item_estado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Disponibilidad"
-                android:padding="5dp"/>
+                android:padding="5dp" />
+
             <TextView
                 android:id="@+id/item_fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Capacidad"
-                android:padding="3dp"/>
+                android:padding="3dp"
+                android:text="Fecha: " />
+
             <TextView
                 android:id="@+id/item_profesor_asignado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profesor"
-                android:padding="3dp"/>
+                android:padding="3dp"
+                android:text="Profesor: " />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/fecha_reserva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp" />
+
+            <TextView
+                android:id="@+id/profesor_asignado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp" />
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/item_hora_reserva"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:foregroundTint="#00D12424"
             android:gravity="center"

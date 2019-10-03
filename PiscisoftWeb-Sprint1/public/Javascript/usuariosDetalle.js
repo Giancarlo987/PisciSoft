@@ -1,5 +1,6 @@
 var db= firebase.firestore();
 var data = document.getElementById("userData");
+var historyData = document.getElementById("TablaHistorial");
 
 function getGET()
 {
@@ -31,3 +32,22 @@ db.collection("usuario").doc(getGET().id).get().then(
                             <p align="center"> Observaciones : ${doc.data().observaciones} </p>`;
     }
 );
+
+
+let reservaRef = db.collection("reserva").where('codUsuario', '==', getGET().id);
+let turnoRef = db.collection("turno");
+let query1 = reservaRef.get().then(
+    snapshot => {
+        snapshot.forEach( doc => {
+            turnoRef.where('codTurno', '==', doc.data().codTurno).get().then(
+                snapshot2 => {
+                    snapshot2.forEach( doc2 => {
+                        historyData.innerHTML += `<tr>
+                                                  <td> ${doc2.data().fecha} </td>
+                                                  <td> ${doc2.data().codHorario} </td>
+                                                  <td> ${doc.data().estado} </td>
+                                                  </tr>`
+                    })
+                })
+        })
+});

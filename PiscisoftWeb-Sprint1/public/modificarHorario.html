@@ -362,24 +362,6 @@
                                         style="width:100%;height:100%; color:#FFFFFF"
                                         onclick="generarPop('Viernes-19:30')" value="Modify">Prueba</button></td>
                 </tr>
-                <tr>
-                        <td class="primeraColumna" style="vertical-align:middle;"> 20:30 - 21:15 </td>
-                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
-                                        style="width:100%;height:100%; color:#FFFFFF"
-                                        onclick="generarPop('Lunes-20:30')" value="Modify">Prueba</button></td>
-                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
-                                        style="width:100%;height:100%; color:#FFFFFF"
-                                        onclick="generarPop('Martes-20:30')" value="Modify">Prueba</button></td>
-                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
-                                        style="width:100%;height:100%; color:#FFFFFF"
-                                        onclick="generarPop('Miercoles-20:30')" value="Modify">Prueba</button></td>
-                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
-                                        style="width:100%;height:100%; color:#FFFFFF"
-                                        onclick="generarPop('Jueves-20:30')" value="Modify">Prueba</button></td>
-                        <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myForm"
-                                        style="width:100%;height:100%; color:#FFFFFF"
-                                        onclick="generarPop('Viernes-20:30')" value="Modify">Prueba</button></td>
-                </tr>
         </table>
 
         <br>
@@ -393,16 +375,7 @@
                                 </div>
                                 <div class="modal-body">
                                         <form>
-                                                <div class="form-group row">
-                                                        <label for="inputDisponibilidad"
-                                                                class="col-sm-3 col-form-label">Disponibilidad</label>
-                                                        <div class="col-sm-9">
-                                                                <select class="form-control" id="disponibilidad">
-                                                                        <option>Disponible</option>
-                                                                        <option>No disponible</option>
-                                                                </select>
-                                                        </div>
-                                                </div>
+                                                <h5 class="modal-title" id="tituloPop">General</h5>
                                                 <div class="form-group row">
                                                         <label for="inputCapacidad"
                                                                 class="col-sm-3 col-form-label">Capacidad</label>
@@ -419,8 +392,28 @@
                                                                 </select>
                                                         </div>
                                                 </div>
+                                                <br>
+                                                <h5 class="modal-title" id="tituloPop">Por fecha</h5>
+                                                <div class="form-group row">
+                                                        <label for="inputFecha"
+                                                                class="col-sm-3 col-form-label">Fecha</label>
+                                                        <div class="col-sm-9">
+                                                                <select class="form-control" id="fechas">
+                                                                </select>
+                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                        <label for="inputDisponibilidad"
+                                                                class="col-sm-3 col-form-label">Disponibilidad</label>
+                                                        <div class="col-sm-9">
+                                                                <select class="form-control" id="disponibilidad">
+                                                                        <option>Disponible</option>
+                                                                        <option>No disponible</option>
+                                                                </select>
+                                                        </div>
+                                                </div>
                                                 <div class="form-group">
-                                                        <label for="inputComentario">Comentario</label>
+                                                        <label for="inputComentario">Observación</label>
                                                         <textarea class="form-control" id="comentario"
                                                                 rows="3"></textarea>
                                                 </div>

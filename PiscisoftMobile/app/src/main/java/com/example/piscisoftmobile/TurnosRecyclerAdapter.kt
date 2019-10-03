@@ -65,7 +65,7 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
                     intent.putExtra("capacidadTotal",horario.capacidadTotal)
                     colocarProfesor(holder,position,horario.codProfesor.toString())
 
-                    if (aTiempo(horario.horaInicio!!)){
+                    if (aTiempo(horario.horaInicio!!,turno.fecha!!)){
                             holder.item_holder.setOnClickListener { irConfirmarReserva(turno.codTurno!!,turno.fecha!!,holder.item_hora.text.toString(),holder.item_profesor.text.toString() ) }
                     } else {
                         holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno ya pasó", Toast.LENGTH_SHORT).show() }
@@ -79,21 +79,30 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
     }
 
     //lateinit var horaTurno : String
-    fun aTiempo(hora: String):Boolean{
+    fun aTiempo(hora: String, fechaTurno : String):Boolean{
 
-        var horaTurno = hora
-        if (horaTurno.length==4){
-            horaTurno = "0${horaTurno}"
+        val hoy = LocalDate.now()
+        val formato = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val fechaEscogida = LocalDate.parse(fechaTurno, formato)
+
+        if (fechaEscogida.isEqual(hoy)){
+            var horaTurno = hora
+            if (horaTurno.length==4){
+                horaTurno = "0${horaTurno}"
+            }
+
+            val horaActual = LocalTime.now()
+            val formatter = DateTimeFormatter.ofPattern("HH:mm")
+            val horaAEvaluar = LocalTime.parse(horaTurno, formatter)
+
+            if (horaActual.isAfter(horaAEvaluar)) {
+                return false
+            }
+            return true
+        }else{
+            return true
         }
 
-        val horaActual = LocalTime.now()
-        val formatter = DateTimeFormatter.ofPattern("HH:mm")
-        val horaAEvaluar = LocalTime.parse(horaTurno, formatter)
-
-        if (horaActual.isAfter(horaAEvaluar)) {
-            return false
-        }
-        return true
     }
 
     fun colocarProfesor (holder: ViewHolder, position: Int, codProfesor:String){

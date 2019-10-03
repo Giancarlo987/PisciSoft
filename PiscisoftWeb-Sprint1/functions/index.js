@@ -3,7 +3,7 @@ const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 const express = require('express');
 const engines= require('consolidate');
-firebase.initializeApp();
+const firebaseApp=firebase.initializeApp()
 
 
 
@@ -15,7 +15,7 @@ app.set('view engine','hbs');
 
 app.get('/FuncionPruebaHBS',(request,response) =>{
     response.set('Cache-Control','public, max-age-300, s-maxage-600');
-    response.render('prueba');
+    response.render('prueba', {facts});
 });
 exports.FuncionPruebaHBS = functions.https.onRequest(app);
 

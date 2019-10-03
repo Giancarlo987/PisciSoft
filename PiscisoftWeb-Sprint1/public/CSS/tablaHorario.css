@@ -1,0 +1,19 @@
+.primeraColumna{
+    color:	#FFFFFF; 
+    text-align:center; 
+    background-color: #B0B5B5;
+    
+
+}
+.primeraFila{
+    color:	#FFFFFF;
+    text-align:center; 
+    background-color:	#689ACA; 
+    vertical-align:middle;
+}
+
+.horarioCerrado{
+    color:	#FFFFFF;
+    text-align:center; 
+    background-color:	#000000; 
+}

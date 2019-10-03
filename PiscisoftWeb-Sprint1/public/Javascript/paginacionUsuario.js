@@ -47,7 +47,7 @@ Paginador = function (divPaginador, tabla, tamPagina) {
 
     this.Mostrar = function () {
         var tblPaginador = document.createElement('table')
-        tblPaginador.className = "table-bordered table-info"
+        tblPaginador.className = "table-primary"
         var fil = tblPaginador.insertRow(tblPaginador.rows.length)
         var ant = fil.insertCell(fil.cells.length)
         ant.innerHTML = '<<'
@@ -63,8 +63,11 @@ Paginador = function (divPaginador, tabla, tamPagina) {
         for (var i = 1; i <= this.paginas; i++) {
             var num1 = fil.insertCell(fil.cells.length);
             num1.innerHTML = `${i}`
-            num1.className = 'pag_num'
-            num1.id = i
+            if (i == 1) {
+                num1.className = 'pag_selec'
+            } else {
+                num1.className = 'pag_num'
+            } num1.id = i
             num1.onclick = function () {
                 if (self.pagActual == this.getAttribute('id')) {
                     return;
@@ -73,15 +76,15 @@ Paginador = function (divPaginador, tabla, tamPagina) {
                 self.SetPagina(this.getAttribute('id'))
             }
         }
-        
+
         var sig = fil.insertCell(fil.cells.length)
         sig.innerHTML = '>>'
         sig.className = 'pag_num'
         sig.onclick = function () {
-            if (self.pagActual == self.paginas){
+            if (self.pagActual == self.paginas) {
                 return
             }
-            self.SetPagina(parseInt(self.pagActual) + 1 ) //ACA CAMBIO
+            self.SetPagina(parseInt(self.pagActual) + 1) //ACA CAMBIO
             pintar(self.paginas, self.pagActual)
         }
 

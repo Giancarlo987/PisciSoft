@@ -11,8 +11,10 @@ import com.example.piscisoftmobile.Model.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import kotlinx.android.synthetic.main.activity_confirmar_reserva.*
 import kotlinx.android.synthetic.main.activity_detalle_reserva.*
 import java.lang.Exception
+import java.time.LocalDate
 
 class DetalleReservaActivity : AppCompatActivity() {
 
@@ -45,7 +47,11 @@ class DetalleReservaActivity : AppCompatActivity() {
         var codigo = findViewById<TextView>(R.id.codigo)
 
         codigo.setText(codigo.text.toString()+codigoUsuario)
-        fecha.setText(fecha.text.toString() + intent.getStringExtra("fecha"))
+
+        var date = LocalDate.parse(intent.getStringExtra("fecha"))
+        var fechaF = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
+
+        fecha.setText(fecha.text.toString() + fechaF)
         hora.setText(hora.text.toString() + intent.getStringExtra("hora"))
         profesor.setText(profesor.text.toString() + intent.getStringExtra("profesor"))
         modalidad.setText(modalidad.text.toString() + intent.getStringExtra("modalidad"))

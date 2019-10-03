@@ -69,5 +69,4 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent,1)
     }
 
-
 }

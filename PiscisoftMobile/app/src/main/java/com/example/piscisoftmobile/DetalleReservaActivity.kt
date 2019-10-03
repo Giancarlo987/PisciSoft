@@ -6,7 +6,10 @@ import android.util.Log
 import android.widget.TextView
 import com.example.piscisoftmobile.Model.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.zxing.BarcodeFormat
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import kotlinx.android.synthetic.main.activity_detalle_reserva.*
+import java.lang.Exception
 
 class DetalleReservaActivity : AppCompatActivity() {
 
@@ -41,6 +44,22 @@ class DetalleReservaActivity : AppCompatActivity() {
         hora.setText(hora.text.toString() + intent.getStringExtra("hora"))
         profesor.setText(profesor.text.toString() + intent.getStringExtra("profesor"))
         modalidad.setText(modalidad.text.toString() + intent.getStringExtra("modalidad"))
+
+        generarQR(codigoUsuario)
+
+    }
+
+    fun generarQR(codigo: String){
+        val cod = codigo
+
+        try{
+            val barcodeEncoder = BarcodeEncoder()
+            val bitMap = barcodeEncoder.encodeBitmap(cod, BarcodeFormat.QR_CODE,400,400)
+            imageView_QR.setImageBitmap(bitMap)
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+
     }
 
 }

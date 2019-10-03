@@ -63,16 +63,18 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
             irDetalleReserva(holder.item_fecha.text.toString(),
                 holder.item_hora.text.toString(),
                 holder.item_profesor.text.toString(),
-                reserva.modalidad.toString()) }
+                reserva.modalidad.toString(),
+                reserva.estado.toString()) }
 
     }
 
-    fun irDetalleReserva(fecha: String, hora: String, profesor: String, modalidad: String) {
+    fun irDetalleReserva(fecha: String, hora: String, profesor: String, modalidad: String, estado: String) {
         val intent = Intent()
         intent.putExtra("fecha",fecha)
         intent.putExtra("hora",hora)
         intent.putExtra("profesor",profesor)
         intent.putExtra("modalidad",modalidad)
+        intent.putExtra("estado", estado)
         intent.putExtra("codigo",this.codigoUsuario)
         intent.setClass(mContext, DetalleReservaActivity::class.java)
         mContext.startActivity(intent)

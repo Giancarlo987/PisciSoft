@@ -37,7 +37,7 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view : View = LayoutInflater.from(mContext).inflate(R.layout.item_turno,parent,false)
+        val view : View = LayoutInflater.from(mContext).inflate(R.layout.item_turno, parent,false)
         return ViewHolder(view)
     }
 
@@ -51,9 +51,13 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
         if (turno.abierto == true){
             holder.item_disponibilidad.text = "Disponible"
             holder.item_disponibilidad.setTextColor(Color.GREEN)
+            holder.item_image.setImageResource(R.drawable.disponible)
+
+
         }else{
             holder.item_disponibilidad.text = "Cerrado"
             holder.item_disponibilidad.setTextColor(Color.RED)
+            holder.item_image.setImageResource(R.drawable.cancelada)
         }
 
         db.collection("horario").document(turno.codHorario!!)
@@ -130,6 +134,7 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
         val item_profesor = itemView.item_profesor
         val item_hora = itemView.item_hora
         val item_holder = itemView.item_holder
+        val item_image = itemView.item_image
     }
 
 }

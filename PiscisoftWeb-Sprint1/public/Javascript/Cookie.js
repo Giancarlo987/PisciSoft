@@ -1,4 +1,4 @@
-function MakeCookie(){
+function MakeCookie(){ //Generar cookie
     var usuarioNombre = document.getElementById('nombre').value;
     var usuarioPassword = document.getElementById('password').value;
     var store = firebase.firestore();
@@ -14,4 +14,3 @@ function MakeCookie(){
             }
         )
 }
-

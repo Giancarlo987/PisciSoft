@@ -49,7 +49,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         db.collection("turno").document(reserva.codTurno.toString())
             .get().addOnSuccessListener { document ->
                 val turno = document.toObject(Turno::class.java)
-                holder.item_fecha.text = "Fecha de reserva: ${turno!!.fecha.toString()}"
+                holder.item_fecha.text = turno!!.fecha.toString()
                 db.collection("horario").document(turno.codHorario.toString())
                     .get().addOnSuccessListener { document ->
                         val horario = document.toObject(Horario::class.java)
@@ -59,13 +59,23 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
             }
 
         //Ver reserva
-        holder.item_holder.setOnClickListener { irDetalleReserva() }
+        holder.item_holder.setOnClickListener {
+            irDetalleReserva(holder.item_fecha.text.toString(),
+                holder.item_hora.text.toString(),
+                holder.item_profesor.text.toString(),
+                reserva.modalidad.toString(),
+                reserva.estado.toString()) }
 
     }
 
-    fun irDetalleReserva() {
+    fun irDetalleReserva(fecha: String, hora: String, profesor: String, modalidad: String, estado: String) {
         val intent = Intent()
-        //intent.putExtra("userID",this.userID)
+        intent.putExtra("fecha",fecha)
+        intent.putExtra("hora",hora)
+        intent.putExtra("profesor",profesor)
+        intent.putExtra("modalidad",modalidad)
+        intent.putExtra("estado", estado)
+        intent.putExtra("codigo",this.codigoUsuario)
         intent.setClass(mContext, DetalleReservaActivity::class.java)
         mContext.startActivity(intent)
     }
@@ -74,15 +84,15 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         db.collection("profesor").document(codProfesor)
             .get().addOnSuccessListener { document ->
                 val profesor = document.toObject(Profesor::class.java)
-                holder.item_profesor.text = "Profesor: " + profesor!!.nombre
+                holder.item_profesor.text = profesor!!.nombre
             }
     }
 
     class ViewHolder
     constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val item_estado = itemView.item_estado
-        val item_fecha= itemView.item_fecha
-        val item_profesor = itemView.item_profesor_asignado
+        val item_fecha= itemView.fecha_reserva
+        val item_profesor = itemView.profesor_asignado
         val item_hora = itemView.item_hora_reserva
         val item_holder = itemView.item_holder_historial
     }

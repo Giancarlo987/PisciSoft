@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         btn_registrarse.setOnClickListener{irRegistro()}
         btn_iniciar_sesion.setOnClickListener {verificarCampos()}
 
-
     }
 
 
@@ -65,10 +64,10 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun irPerfil(){
-
         val intent = Intent()
         intent.setClass(this, SesionActivity::class.java)
         startActivityForResult(intent,1)
-
     }
+
+
 }

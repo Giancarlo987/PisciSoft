@@ -4,6 +4,7 @@ import java.io.Serializable
 
 
 data class Turno(
+    var codTurno:String? = null,
     var codHorario: String? = null,
     var fecha : String? = null,
     var capacidadCubierta: Int? = null,

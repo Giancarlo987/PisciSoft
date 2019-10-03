@@ -1,0 +1,19 @@
+.pag_btn {
+    border: solid 1px;
+    border-color: rgb(0, 0, 255);
+    color: rgb(0, 0, 255);
+    background-color: rgb(255, 255, 255);
+}
+
+.pag_num {
+    margin: 15px;
+    padding: 15px;
+    
+}
+
+.pag_selec {
+    margin: 15px;
+    padding: 15px;
+    background-color: #606E8C
+    
+}

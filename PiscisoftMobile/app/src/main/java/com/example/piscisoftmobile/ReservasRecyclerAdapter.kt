@@ -49,7 +49,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         db.collection("turno").document(reserva.codTurno.toString())
             .get().addOnSuccessListener { document ->
                 val turno = document.toObject(Turno::class.java)
-                holder.item_fecha.text = "Fecha_reserva: ${turno!!.fecha.toString()}"
+                holder.item_fecha.text = "Fecha de reserva: ${turno!!.fecha.toString()}"
                 db.collection("horario").document(turno.codHorario.toString())
                     .get().addOnSuccessListener { document ->
                         val horario = document.toObject(Horario::class.java)
@@ -59,31 +59,23 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
             }
 
         //Ver reserva
-        holder.item_holder.setOnClickListener(View.OnClickListener {
-            irDetalleReserva(reserva.codTurno.toString(),
-                             holder.item_fecha.text.toString(),
-                             holder.item_profesor.text.toString(),
-                             reserva.modalidad.toString(),
-                             holder.item_hora.text.toString())})
+        holder.item_holder.setOnClickListener { irDetalleReserva() }
+
+    }
+
+    fun irDetalleReserva() {
+        val intent = Intent()
+        //intent.putExtra("userID",this.userID)
+        intent.setClass(mContext, DetalleReservaActivity::class.java)
+        mContext.startActivity(intent)
     }
 
     fun colocarProfesor (holder: ViewHolder, position: Int, codProfesor:String){
         db.collection("profesor").document(codProfesor)
             .get().addOnSuccessListener { document ->
                 val profesor = document.toObject(Profesor::class.java)
-                holder.item_profesor.text = profesor!!.nombre
+                holder.item_profesor.text = "Profesor: " + profesor!!.nombre
             }
-    }
-
-    private fun irDetalleReserva(codigoTurno: String, fecha: String, profesor: String, modalidad: String, hora: String){
-        intent.putExtra("codTurno",codigoTurno)
-        intent.putExtra("fecha",fecha)
-        intent.putExtra("hora",hora)
-        intent.putExtra("profesor",profesor)
-        intent.putExtra("modalidad",modalidad)
-        intent.putExtra("userID",this.codigoUsuario)
-        intent.setClass(mContext, ReservacionActivity::class.java)
-        mContext.startActivity(intent)
     }
 
     class ViewHolder

@@ -4,56 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfirmarReservaActivity">
+    tools:context=".RegistroActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="178dp"
+        tools:layout_editor_absoluteY="348dp"
+        android:id="@+id/primero">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/logotipo" />
+
+        <TextView
+            android:id="@+id/header_perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Realizar reserva"
+            android:textAlignment="gravity"
+            android:textSize="25dp" />
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/logotipo" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/header_perfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:text="Realizar reserva"
-                android:textAlignment="gravity"
-                android:textSize="25dp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@android:color/darker_gray"/>
 
-        </LinearLayout>
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:background="@android:color/darker_gray"/>
+    <TextView
+        android:id="@+id/tv_instruccion_reserva"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:text="Escoge la modalidad y confirma tu reserva."/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_fecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Fecha" />
+            android:text="Fecha"
+            android:layout_marginBottom="50px"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_horario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
+            android:layout_marginBottom="50px"
             android:text="Horario" />
 
         <TextView
@@ -61,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
+            android:layout_marginBottom="50px"
             android:text="Profesor(a)" />
 
         <TextView
@@ -68,23 +93,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
+            android:layout_marginBottom="50px"
             android:text="Modalidad: " />
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:layout_marginTop="50px">
 
             <RadioButton
                 android:id="@+id/rb_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:layout_marginLeft="70px"
+                android:layout_marginRight="70px"
                 android:text="Aprendizaje y mejora" />
 
             <RadioButton
                 android:id="@+id/rb_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="70px"
+                android:layout_marginRight="70px"
                 android:textSize="14sp"
                 android:text="Práctica libre" />
 
@@ -92,15 +123,27 @@
                 android:id="@+id/btn_confirmar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Confirmar" />
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/boton_azul"
+                android:text="Confirmar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/btn_cancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cancelar" />
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/boton_gris"
+                android:text="Cancelar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         </RadioGroup>
 
 
+    </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

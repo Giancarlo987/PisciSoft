@@ -2,6 +2,7 @@ package com.example.piscisoftmobile
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
 
         if (reserva.estado == "Pendiente"){
             holder.item_estado.text = "Pendiente"
+            holder.item_estado.setTextColor(Color.BLUE)
         }else{
             holder.item_estado.text = "Asistió"
         }

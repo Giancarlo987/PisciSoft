@@ -36,6 +36,13 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@android:color/darker_gray"/>
+
         <CalendarView
             android:id="@+id/calendario"
             android:layout_width="match_parent"

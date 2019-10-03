@@ -33,6 +33,9 @@ class ReservarFragment : Fragment() {
     var fecha = ""
     private lateinit var mContext: Context
 
+    lateinit var hoy: LocalDate
+    lateinit var fechaEscogida: LocalDate
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,9 +64,9 @@ class ReservarFragment : Fragment() {
 
             fecha = "${year}-${mes}-${dia}"
 
-            val hoy = LocalDate.now()
+            this.hoy = LocalDate.now()
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val fechaEscogida = LocalDate.parse(fecha, formatter)
+            this.fechaEscogida = LocalDate.parse(fecha, formatter)
 
             if (fechaEscogida.isBefore(hoy)){
                 Toast.makeText( context, "Esa fecha ya pasó", Toast.LENGTH_SHORT).show()
@@ -84,6 +87,8 @@ class ReservarFragment : Fragment() {
             val intent = Intent()
             intent.putExtra("fecha",fecha)
             intent.putExtra("userID",userID)
+            intent.putExtra("fechaEscogida",this.fechaEscogida)
+            intent.putExtra("hoy",this.hoy)
             intent.setClass(mContext, TurnosActivity::class.java)
             startActivity(intent)
         } else {

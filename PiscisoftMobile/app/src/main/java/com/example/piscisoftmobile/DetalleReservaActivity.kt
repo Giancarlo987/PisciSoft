@@ -3,7 +3,10 @@ package com.example.piscisoftmobile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.piscisoftmobile.Model.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.BarcodeFormat
@@ -19,6 +22,8 @@ class DetalleReservaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_reserva)
+
+        var botonCancelar = findViewById<Button>(R.id.cancelar_reserva)
 
         val codigoUsuario = intent.getStringExtra("codigo")
         val query = ref.whereEqualTo("codigo",codigoUsuario)
@@ -45,8 +50,13 @@ class DetalleReservaActivity : AppCompatActivity() {
         profesor.setText(profesor.text.toString() + intent.getStringExtra("profesor"))
         modalidad.setText(modalidad.text.toString() + intent.getStringExtra("modalidad"))
 
-        generarQR(codigoUsuario)
-
+        if (intent.getStringExtra("estado").equals("Pendiente")){
+            generarQR(codigoUsuario)
+            botonCancelar.setOnClickListener { cancelarReserva() }
+        }else{
+            botonCancelar.visibility = View.INVISIBLE
+        }
+        
     }
 
     fun generarQR(codigo: String){
@@ -60,6 +70,10 @@ class DetalleReservaActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
+    }
+
+    fun cancelarReserva(){
+        Toast.makeText(this, "Cancelar la reserva", Toast.LENGTH_SHORT).show()
     }
 
 }

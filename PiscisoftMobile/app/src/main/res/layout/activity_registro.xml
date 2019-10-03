@@ -117,16 +117,15 @@
 
                 <Button
                     android:id="@+id/butUploadFoto"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/boton_naranja"
                     android:paddingHorizontal="50dp"
                     android:text="Subir Foto"
-                    android:background="@drawable/boton_naranja"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="20dp"/>
-
+                    android:textColor="@android:color/white" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TurnosActivity"></activity>
+        <activity android:name=".DetalleReservaActivity"></activity>
+        <activity android:name=".ConfirmarReservaActivity" />
+        <activity android:name=".TurnosActivity" />
         <activity
             android:name=".ModificarActivity"
             android:label="@string/title_activity_modificar"

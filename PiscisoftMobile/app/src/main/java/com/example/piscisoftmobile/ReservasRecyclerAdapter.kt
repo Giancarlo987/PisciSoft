@@ -13,6 +13,7 @@ import com.example.piscisoftmobile.Model.Reserva
 import com.example.piscisoftmobile.Model.Turno
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_reserva.view.*
+import java.time.LocalDate
 
 class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.ViewHolder> {
     private lateinit var mContext: Context
@@ -49,7 +50,12 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         db.collection("turno").document(reserva.codTurno.toString())
             .get().addOnSuccessListener { document ->
                 val turno = document.toObject(Turno::class.java)
-                holder.item_fecha.text = turno!!.fecha.toString()
+
+                var date = LocalDate.parse(turno!!.fecha.toString())
+                var fechaF = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
+                holder.item_fecha.text = fechaF
+
+
                 db.collection("horario").document(turno.codHorario.toString())
                     .get().addOnSuccessListener { document ->
                         val horario = document.toObject(Horario::class.java)

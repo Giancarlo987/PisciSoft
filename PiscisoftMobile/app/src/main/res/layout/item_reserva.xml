@@ -15,7 +15,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
             android:padding="8dp"
-            android:src="@drawable/logotipo" />
+            android:src="@drawable/pendiente" />
 
         <LinearLayout
             android:layout_width="wrap_content"

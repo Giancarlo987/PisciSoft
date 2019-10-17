@@ -33,11 +33,11 @@ class TurnoFirebase {
                 var turnos = mutableListOf<Turno>()
                 for (document in documents) {
                     val turno = document.toObject(Turno::class.java)
-                    turno.codTurno = document.id
+                    turno.id = document.id
                     turnos.add(turno)
                 }
 
-                turnos.sortBy { turno -> turno.codHorario?.substring(turno.codHorario?.indexOf("-")!! + 1, turno.codHorario?.indexOf(":")!!)!!.toInt();}
+                turnos.sortBy { turno -> turno.horaInicio?.substring(0, turno.horaInicio?.indexOf(":")!!)!!.toInt()-1;}
                 activity.setRecyclerAdapter(turnos)
             }
             .addOnFailureListener { exception ->

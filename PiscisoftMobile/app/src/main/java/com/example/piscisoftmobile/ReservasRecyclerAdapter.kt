@@ -17,9 +17,9 @@ import kotlinx.android.synthetic.main.item_reserva.view.*
 import java.time.LocalDate
 
 class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.ViewHolder> {
-    private lateinit var mContext: Context
-    private lateinit var listaReservas : List<Reserva>
-    private lateinit var codigoUsuario: String
+    private var mContext: Context
+    private var listaReservas : List<Reserva>
+    private var codigoUsuario: String
     val intent = Intent()
 
     val db = FirebaseFirestore.getInstance()
@@ -56,19 +56,17 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
                 var date = LocalDate.parse(turno!!.fecha.toString())
                 var fechaF = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
                 holder.item_fecha.text = fechaF
+                holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+                colocarProfesor(holder,position,turno.profesor.toString())
 
-
-                db.collection("horario").document(turno.codHorario.toString())
-                    .get().addOnSuccessListener { document ->
-                        val horario = document.toObject(Horario::class.java)
-                        holder.item_hora.text = horario!!.horaInicio + " - " + horario!!.horaFin
-                        colocarProfesor(holder,position,horario.codProfesor.toString())
-                    }
             }
 
         //Ver reserva
+
+        var date = LocalDate.parse(reserva.fechaReserva!!.toString())
+        var fechaReserva = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
         holder.item_holder.setOnClickListener {
-            irDetalleReserva(holder.item_fecha.text.toString(),
+            irDetalleReserva(fechaReserva,
                 holder.item_hora.text.toString(),
                 holder.item_profesor.text.toString(),
                 reserva.modalidad.toString(),

@@ -59,19 +59,22 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
             intent.putExtra("capacidadTotal",turno.capacidadTotal)
             colocarProfesor(holder,position,turno.profesor.toString())
 
-            if (aTiempo(turno.horaInicio!!,turno.fecha!!)){
-                holder.item_holder.setOnClickListener { irConfirmarReserva(turno.id!!,turno.fecha!!,holder.item_hora.text.toString(),holder.item_profesor.text.toString() ) }
-            } else {
-                holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno ya pasó", Toast.LENGTH_SHORT).show() }
-            }
+            holder.item_holder.setOnClickListener { irConfirmarReserva(turno.id!!,turno.fecha!!,holder.item_hora.text.toString(),holder.item_profesor.text.toString() ) }
 
-        } else {
+        } else if (turno.estado == "Cerrado") {
             holder.item_disponibilidad.text = "Cerrado"
             holder.item_disponibilidad.setTextColor(Color.RED)
             holder.item_image.setImageResource(R.drawable.cancelada)
 
             holder.item_capacidad.text = "Observaciones: ${turno.observaciones}"
             holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno se encuentra cerrado", Toast.LENGTH_SHORT).show() }
+        } else {
+            holder.item_disponibilidad.text = "Caducado"
+            holder.item_disponibilidad.setTextColor(Color.BLACK)
+            holder.item_image.setImageResource(R.drawable.cancelada)
+            holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+            holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${turno.capacidadTotal}"
+            colocarProfesor(holder,position,turno.profesor.toString())
         }
 
 
@@ -98,31 +101,6 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
             } **/
     }
 
-
-    fun aTiempo(hora: String, fechaTurno : String):Boolean{
-
-        val hoy = LocalDate.now()
-        val formato = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val fechaEscogida = LocalDate.parse(fechaTurno, formato)
-
-        if (fechaEscogida.isEqual(hoy)){
-            var horaTurno = hora
-            if (horaTurno.length==4){
-                horaTurno = "0${horaTurno}"
-            }
-
-            val horaActual = LocalTime.now()
-            val formatter = DateTimeFormatter.ofPattern("HH:mm")
-            val horaAEvaluar = LocalTime.parse(horaTurno, formatter)
-
-            if (horaActual.isAfter(horaAEvaluar)) {
-                return false
-            }
-            return true
-        }
-        return true
-
-    }
 
     fun colocarProfesor (holder: ViewHolder, position: Int, codProfesor:String){
         db.collection("profesor").document(codProfesor)

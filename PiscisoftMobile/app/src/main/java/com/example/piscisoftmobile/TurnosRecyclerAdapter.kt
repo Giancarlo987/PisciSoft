@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.piscisoftmobile.Model.Horario
 import com.example.piscisoftmobile.Model.Profesor
+import com.example.piscisoftmobile.Model.Reserva
 import com.example.piscisoftmobile.Model.Turno
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_turno.*
@@ -48,23 +49,41 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val turno: Turno = listaTurnos.get(position)
 
-        if (turno.abierto == true){
-            holder.item_disponibilidad.text = "Disponible"
+        if (turno.estado == "Abierto"){
+            holder.item_disponibilidad.text = turno.estado
             holder.item_disponibilidad.setTextColor(Color.GREEN)
             holder.item_image.setImageResource(R.drawable.disponible)
 
+            holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+            holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${turno.capacidadTotal}"
+            intent.putExtra("capacidadTotal",turno.capacidadTotal)
+            colocarProfesor(holder,position,turno.profesor.toString())
 
-        }else{
+            holder.item_holder.setOnClickListener { irConfirmarReserva(turno.id!!,turno.fecha!!,holder.item_hora.text.toString(),holder.item_profesor.text.toString() ) }
+
+        } else if (turno.estado == "Cerrado") {
             holder.item_disponibilidad.text = "Cerrado"
             holder.item_disponibilidad.setTextColor(Color.RED)
             holder.item_image.setImageResource(R.drawable.cancelada)
+
+            holder.item_capacidad.text = "Observaciones: ${turno.observaciones}"
+            holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno se encuentra cerrado", Toast.LENGTH_SHORT).show() }
+        } else {
+            holder.item_disponibilidad.text = "Caducado"
+            holder.item_disponibilidad.setTextColor(Color.BLACK)
+            holder.item_image.setImageResource(R.drawable.cancelada)
+            holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+            holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${turno.capacidadTotal}"
+            colocarProfesor(holder,position,turno.profesor.toString())
         }
 
+
+        /**
         db.collection("horario").document(turno.codHorario!!)
             .get().addOnSuccessListener { document ->
                 val horario = document.toObject(Horario::class.java)
                 holder.item_hora.text = horario!!.horaInicio + " - " + horario!!.horaFin
-                if (turno.abierto == true){
+                if (turno.estado == "Abierto"){
                     holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${horario.capacidadTotal}"
                     intent.putExtra("capacidadTotal",horario.capacidadTotal)
                     colocarProfesor(holder,position,horario.codProfesor.toString())
@@ -79,35 +98,9 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
                     holder.item_capacidad.text = "Observaciones: ${turno.observaciones}"
                     holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno se encuentra cerrado", Toast.LENGTH_SHORT).show() }
                 }
-            }
+            } **/
     }
 
-    //lateinit var horaTurno : String
-    fun aTiempo(hora: String, fechaTurno : String):Boolean{
-
-        val hoy = LocalDate.now()
-        val formato = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val fechaEscogida = LocalDate.parse(fechaTurno, formato)
-
-        if (fechaEscogida.isEqual(hoy)){
-            var horaTurno = hora
-            if (horaTurno.length==4){
-                horaTurno = "0${horaTurno}"
-            }
-
-            val horaActual = LocalTime.now()
-            val formatter = DateTimeFormatter.ofPattern("HH:mm")
-            val horaAEvaluar = LocalTime.parse(horaTurno, formatter)
-
-            if (horaActual.isAfter(horaAEvaluar)) {
-                return false
-            }
-            return true
-        }else{
-            return true
-        }
-
-    }
 
     fun colocarProfesor (holder: ViewHolder, position: Int, codProfesor:String){
         db.collection("profesor").document(codProfesor)

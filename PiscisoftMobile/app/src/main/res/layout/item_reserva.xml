@@ -2,8 +2,11 @@
 <LinearLayout
     android:id="@+id/item_holder_historial"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/customborder"
+    >
     <LinearLayout
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,9 +21,9 @@
             android:src="@drawable/pendiente" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -28,36 +31,9 @@
                 android:id="@+id/item_estado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" />
-
-            <TextView
-                android:id="@+id/item_fecha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:text="Fecha: " />
-
-            <TextView
-                android:id="@+id/item_profesor_asignado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:text="Profesor: " />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/estado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp" />
+                android:padding="5dp"
+                android:text="Estado "
+                />
 
             <TextView
                 android:id="@+id/fecha_reserva"

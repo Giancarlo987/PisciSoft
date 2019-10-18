@@ -54,7 +54,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
                 val turno = document.toObject(Turno::class.java)
 
                 var date = LocalDate.parse(turno!!.fecha.toString())
-                var fechaF = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
+                var fechaF = "Fecha: ${date.dayOfMonth}/${date.monthValue}/${date.year}"
                 holder.item_fecha.text = fechaF
                 holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
                 colocarProfesor(holder,position,turno.profesor.toString())
@@ -66,17 +66,17 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         var date = LocalDate.parse(reserva.fechaReserva!!.toString())
         var fechaReserva = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
         holder.item_holder.setOnClickListener {
-            irDetalleReserva(fechaReserva,
-                holder.item_hora.text.toString(),
+            irDetalleReserva(fechaReserva, holder.item_fecha.text.toString(),
+                    holder.item_hora.text.toString(),
                 holder.item_profesor.text.toString(),
                 reserva.modalidad.toString(),
                 reserva.estado.toString()) }
-
     }
 
-    fun irDetalleReserva(fecha: String, hora: String, profesor: String, modalidad: String, estado: String) {
+    fun irDetalleReserva(fechaReserva: String, fechaTurno: String, hora: String, profesor: String, modalidad: String, estado: String) {
         val intent = Intent()
-        intent.putExtra("fecha",fecha)
+        intent.putExtra("fechaR",fechaReserva)
+        intent.putExtra("fechaT",fechaTurno)
         intent.putExtra("hora",hora)
         intent.putExtra("profesor",profesor)
         intent.putExtra("modalidad",modalidad)
@@ -90,7 +90,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         db.collection("profesor").document(codProfesor)
             .get().addOnSuccessListener { document ->
                 val profesor = document.toObject(Profesor::class.java)
-                holder.item_profesor.text = profesor!!.nombre
+                holder.item_profesor.text = "Profesor(a): "+profesor!!.nombre
             }
     }
 

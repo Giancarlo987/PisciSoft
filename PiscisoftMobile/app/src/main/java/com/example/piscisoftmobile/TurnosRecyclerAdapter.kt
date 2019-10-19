@@ -57,7 +57,7 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
             holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno se encuentra cerrado", Toast.LENGTH_SHORT).show() }
         } else {
             holder.item_disponibilidad.setTextColor(Color.BLACK)
-            holder.item_image.setImageResource(R.drawable.cancelada)
+            holder.item_image.setImageResource(R.drawable.caducada)
             holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${turno.capacidadTotal}"
             holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno ya pasó", Toast.LENGTH_SHORT).show() }
         }

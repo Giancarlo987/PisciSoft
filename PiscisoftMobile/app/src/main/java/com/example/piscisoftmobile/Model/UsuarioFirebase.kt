@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.example.piscisoftmobile.MainActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.piscisoftmobile.PerfilFragment
+import com.example.piscisoftmobile.VerReservasProfesorActivity
 
 //Código que se conecta a la base de datos
 
@@ -44,5 +45,7 @@ class UsuarioFirebase  {
             }
 
     }
+
+
 
 }

@@ -78,6 +78,8 @@ class MainActivity : AppCompatActivity() {
     private fun irRegistro(){ //Dirigirse al formulario de registro
         val intent = Intent()
         intent.setClass(this, RegistroActivity::class.java)
+
+
         startActivityForResult(intent,1)
     }
 

@@ -37,8 +37,9 @@ class TurnoFirebase {
                 for (document in documents) {
                     var turno = document.toObject(Turno::class.java)
                     evaluarTurno(turno,document.id)
-
-                    turno = document.toObject(Turno::class.java)
+                }
+                for (document in documents) {
+                    var turno = document.toObject(Turno::class.java)
                     turno.id = document.id
                     turnos.add(turno)
                 }
@@ -53,14 +54,15 @@ class TurnoFirebase {
 
     fun evaluarTurno(turno:Turno,id:String){
 
-        if (turnoCaducado(turno.horaInicio!!)){
+        if (turnoCaducado(turno.horaInicio!!,turno.fecha!!)){
             ref.document(id).update("estado","Caducado")
+        } else {
+            if (turnoLleno(turno.capacidadTotal!! - turno.capacidadCubierta!!)){
+                ref.document(id).update("estado","Cerrado")
+                ref.document(id).update("observaciones","Turno lleno")
+            }
         }
-        if (turnoLleno(turno.capacidadTotal!! - turno.capacidadCubierta!!)){
-            ref.document(id).update("estado","Cerrado")
-            ref.document(id).update("observaciones","Turno lleno")
-        }
-        
+
     }
 
     fun turnoLleno(diferencia:Int):Boolean{
@@ -70,19 +72,27 @@ class TurnoFirebase {
         return false
     }
 
-    fun turnoCaducado(horaInicio:String):Boolean{
+    fun turnoCaducado(horaInicio:String,fechaTurno:String):Boolean{
 
-        var horaTurno = horaInicio
-        if (horaTurno.length==4){
-            horaTurno = "0${horaTurno}"
-        }
+        val hoy = LocalDate.now()
+        val formato = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val fechaEscogida = LocalDate.parse(fechaTurno, formato)
 
-        val horaActual = LocalTime.now()
-        val formatter = DateTimeFormatter.ofPattern("HH:mm")
-        val horaAEvaluar = LocalTime.parse(horaTurno, formatter)
+        if (fechaEscogida.isEqual(hoy)) {
 
-        if (horaActual.isAfter(horaAEvaluar)) {
-            return true
+            var horaTurno = horaInicio
+            if (horaTurno.length == 4) {
+                horaTurno = "0${horaTurno}"
+            }
+
+            val horaActual = LocalTime.now()
+            val formatter = DateTimeFormatter.ofPattern("HH:mm")
+            val horaAEvaluar = LocalTime.parse(horaTurno, formatter)
+
+            if (horaActual.isAfter(horaAEvaluar)) {
+                return true
+            }
+            return false
         }
         return false
 

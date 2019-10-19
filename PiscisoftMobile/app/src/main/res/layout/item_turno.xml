@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/item_image"
+            android:id="@+id/item_foto"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
@@ -28,13 +28,13 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/item_disponibilidad"
+                android:id="@+id/item_nombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp" />
 
             <TextView
-                android:id="@+id/item_capacidad"
+                android:id="@+id/item_codigo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp" />

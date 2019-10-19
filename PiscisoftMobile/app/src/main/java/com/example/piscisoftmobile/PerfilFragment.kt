@@ -71,7 +71,8 @@ class PerfilFragment : Fragment() {
 
     private fun ir_modificar(){
         val intent = Intent()
-        intent.setClass(mContext, ModificarActivity::class.java)
+        //intent.setClass(mContext, ModificarActivity::class.java)
+        intent.setClass(mContext, VerReservasProfesorActivity::class.java)
         startActivity(intent)
     }
 }

@@ -23,7 +23,7 @@ class TurnosActivity : AppCompatActivity() {
 
         val fecha = intent.getStringExtra("fecha")
         val userID = intent.getStringExtra("userID")
-        Toast.makeText( this, fecha + " " + userID, Toast.LENGTH_SHORT).show()
+        //Toast.makeText( this, fecha + " " + userID, Toast.LENGTH_SHORT).show()
         turnoFirebase.retornarTurnos(this, fecha)
     }
 

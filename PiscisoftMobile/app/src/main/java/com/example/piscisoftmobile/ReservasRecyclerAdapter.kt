@@ -2,6 +2,7 @@ package com.example.piscisoftmobile
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,12 @@ import com.example.piscisoftmobile.Model.Reserva
 import com.example.piscisoftmobile.Model.Turno
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_reserva.view.*
+import java.time.LocalDate
 
 class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.ViewHolder> {
-    private lateinit var mContext: Context
-    private lateinit var listaReservas : List<Reserva>
-    private lateinit var codigoUsuario: String
+    private var mContext: Context
+    private var listaReservas : List<Reserva>
+    private var codigoUsuario: String
     val intent = Intent()
 
     val db = FirebaseFirestore.getInstance()
@@ -42,6 +44,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
 
         if (reserva.estado == "Pendiente"){
             holder.item_estado.text = "Pendiente"
+            holder.item_estado.setTextColor(Color.BLUE)
         }else{
             holder.item_estado.text = "Asistió"
         }
@@ -49,28 +52,31 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         db.collection("turno").document(reserva.codTurno.toString())
             .get().addOnSuccessListener { document ->
                 val turno = document.toObject(Turno::class.java)
-                holder.item_fecha.text = turno!!.fecha.toString()
-                db.collection("horario").document(turno.codHorario.toString())
-                    .get().addOnSuccessListener { document ->
-                        val horario = document.toObject(Horario::class.java)
-                        holder.item_hora.text = horario!!.horaInicio + " - " + horario!!.horaFin
-                        colocarProfesor(holder,position,horario.codProfesor.toString())
-                    }
+
+                var date = LocalDate.parse(turno!!.fecha.toString())
+                var fechaF = "Fecha: ${date.dayOfMonth}/${date.monthValue}/${date.year}"
+                holder.item_fecha.text = fechaF
+                holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+                colocarProfesor(holder,position,turno.profesor.toString())
+
             }
 
         //Ver reserva
+
+        var date = LocalDate.parse(reserva.fechaReserva!!.toString())
+        var fechaReserva = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
         holder.item_holder.setOnClickListener {
-            irDetalleReserva(holder.item_fecha.text.toString(),
-                holder.item_hora.text.toString(),
+            irDetalleReserva(fechaReserva, holder.item_fecha.text.toString(),
+                    holder.item_hora.text.toString(),
                 holder.item_profesor.text.toString(),
                 reserva.modalidad.toString(),
                 reserva.estado.toString()) }
-
     }
 
-    fun irDetalleReserva(fecha: String, hora: String, profesor: String, modalidad: String, estado: String) {
+    fun irDetalleReserva(fechaReserva: String, fechaTurno: String, hora: String, profesor: String, modalidad: String, estado: String) {
         val intent = Intent()
-        intent.putExtra("fecha",fecha)
+        intent.putExtra("fechaR",fechaReserva)
+        intent.putExtra("fechaT",fechaTurno)
         intent.putExtra("hora",hora)
         intent.putExtra("profesor",profesor)
         intent.putExtra("modalidad",modalidad)
@@ -84,7 +90,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         db.collection("profesor").document(codProfesor)
             .get().addOnSuccessListener { document ->
                 val profesor = document.toObject(Profesor::class.java)
-                holder.item_profesor.text = profesor!!.nombre
+                holder.item_profesor.text = "Profesor(a): "+profesor!!.nombre
             }
     }
 

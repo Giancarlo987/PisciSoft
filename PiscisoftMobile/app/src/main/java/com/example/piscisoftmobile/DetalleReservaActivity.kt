@@ -38,14 +38,20 @@ class DetalleReservaActivity : AppCompatActivity() {
                 Log.d("ERROR EN FIREBASE", "get failed with ", exception)
             }
 
-        var fecha = findViewById<TextView>(R.id.fecha)
+        var fecha = findViewById<TextView>(R.id.fechaR)
         var hora = findViewById<TextView>(R.id.hora)
         var profesor = findViewById<TextView>(R.id.profesor)
         var modalidad = findViewById<TextView>(R.id.modalidad)
         var codigo = findViewById<TextView>(R.id.codigo)
 
         codigo.setText(codigo.text.toString()+codigoUsuario)
-        fecha.setText(fecha.text.toString() + intent.getStringExtra("fecha"))
+
+        //intent.putExtra("fechaR",fechaReserva)
+        //intent.putExtra("fechaT",fechaTurno)
+
+        fechaR.setText("Fecha Reservación: "+intent.getStringExtra("fechaR"))
+        fechaT.setText(intent.getStringExtra("fechaT"))
+
         hora.setText(hora.text.toString() + intent.getStringExtra("hora"))
         profesor.setText(profesor.text.toString() + intent.getStringExtra("profesor"))
         modalidad.setText(modalidad.text.toString() + intent.getStringExtra("modalidad"))

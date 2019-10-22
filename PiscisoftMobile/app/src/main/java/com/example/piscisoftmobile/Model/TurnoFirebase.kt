@@ -2,6 +2,7 @@ package com.example.piscisoftmobile.Model
 
 import android.util.Log
 import android.widget.Toast
+import com.example.piscisoftmobile.OnDataFinishedListener
 import com.example.piscisoftmobile.ReservarFragment
 import com.example.piscisoftmobile.TurnosActivity
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,14 +15,14 @@ class TurnoFirebase {
     val db = FirebaseFirestore.getInstance()
     val ref = db.collection("turno")
 
-    fun existenTurnos(fragment: ReservarFragment, fecha:String){
+    fun existenTurnosRegistrados(listener: OnDataFinishedListener, fecha:String){
         val query = ref.whereEqualTo("fecha",fecha)
         query.get()
             .addOnSuccessListener { documents ->
                 if ( ! documents.isEmpty ) {
-                    fragment.irTurnos(true)
+                    listener.OnVerificacionFinished(true)
                 } else {
-                    fragment.irTurnos(false)
+                    listener.OnVerificacionFinished(false)
                 }
             }
             .addOnFailureListener { exception ->
@@ -29,40 +30,41 @@ class TurnoFirebase {
             }
     }
 
-    fun retornarTurnos(activity:TurnosActivity, fecha:String){
+    fun obtenerTurnosByFecha(listener: OnDataFinishedListener, fecha:String){
         val query = ref.whereEqualTo("fecha",fecha)
         query.get()
             .addOnSuccessListener { documents ->
                 var turnos = mutableListOf<Turno>()
                 for (document in documents) {
                     var turno = document.toObject(Turno::class.java)
-                    evaluarTurno(turno,document.id)
-                }
-                for (document in documents) {
-                    var turno = document.toObject(Turno::class.java)
                     turno.id = document.id
                     turnos.add(turno)
                 }
-
                 turnos.sortBy { turno -> turno.horaInicio?.substring(0, turno.horaInicio?.indexOf(":")!!)!!.toInt()-1;}
-                activity.setRecyclerAdapter(turnos)
+                listener.OnListaTurnosDataFinished(turnos)
             }
             .addOnFailureListener { exception ->
                 Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
             }
     }
 
-    fun evaluarTurno(turno:Turno,id:String){
-
-        if (turnoCaducado(turno.horaInicio!!,turno.fecha!!)){
-            ref.document(id).update("estado","Caducado")
-        } else {
-            if (turnoLleno(turno.capacidadTotal!! - turno.capacidadCubierta!!)){
-                ref.document(id).update("estado","Cerrado")
-                ref.document(id).update("observaciones","Turno lleno")
+    fun actualizarTurnos(listener: OnDataFinishedListener, fecha:String){
+        val query = ref.whereEqualTo("fecha",fecha)
+        query.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    var turno = document.toObject(Turno::class.java)
+                    if (turnoCaducado(turno.horaInicio!!,turno.fecha!!)){
+                        ref.document(document.id).update("estado","Caducado")
+                    } else {
+                        if (turnoLleno(turno.capacidadTotal!! - turno.capacidadCubierta!!)){
+                            ref.document(document.id).update("estado","Cerrado")
+                            ref.document(document.id).update("observaciones","Turno lleno")
+                        }
+                    }
+                }
+                listener.OnActualizacionFinished()
             }
-        }
-
     }
 
     fun turnoLleno(diferencia:Int):Boolean{

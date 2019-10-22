@@ -5,20 +5,23 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.piscisoftmobile.Model.Reserva
-import com.example.piscisoftmobile.Model.Turno
-import com.example.piscisoftmobile.Model.Usuario
+import androidx.core.app.ActivityCompat.startActivityForResult
+import com.example.piscisoftmobile.Model.*
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_confirmar_reserva.*
+import kotlinx.android.synthetic.main.activity_detalle_reserva.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class ConfirmarReservaActivity : AppCompatActivity() {
+class ConfirmarReservaActivity : AppCompatActivity(), OnDataFinishedListener {
 
     private lateinit var codTurno : String
     private lateinit var codUsuario : String
+    private lateinit var modalidad : String
+    val usuarioFirebase = UsuarioFirebase()
+    val reservaFirebase = ReservaFirebase()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,113 +39,54 @@ class ConfirmarReservaActivity : AppCompatActivity() {
         tv_horario.text = "Horario: "+horario
         tv_profesor.text = profesor
 
-        //Toast.makeText(this, codUsuario , Toast.LENGTH_SHORT).show()
-
-        btn_confirmar.setOnClickListener { verificarUsuario(codUsuario) }
+        btn_confirmar.setOnClickListener { validarCampos() }
         btn_cancelar.setOnClickListener { irPerfil() }
 
     }
 
 
-    fun verificarUsuario(codUsuario:String){
-        val db = FirebaseFirestore.getInstance()
-        val ref = db.collection("usuario")
-
-        val query = ref.whereEqualTo("codigo",codUsuario)
-        query.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val usuario = document.toObject(Usuario::class.java)
-                    if (usuario.estado!="Suspendido"){
-                        verificarReservas(codUsuario)
-                    }else{
-                        Toast.makeText(this, "No puede realizar reservas, se encuentra suspendido", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-    }
-
-    fun camposVacios(): Boolean {
+    fun validarCampos() {
         if (!rb_1.isChecked && !rb_2.isChecked){
             Toast.makeText(this, "Por favor, ingrese la modalidad", Toast.LENGTH_SHORT).show()
-            return true
-        }
-        return false
-    }
-
-    fun procesarReserva(){
-        if (camposVacios()==false){
-            var modalidad = ""
+        } else {
             if (rb_1.isChecked){
                 modalidad = "Aprendizaje y mejora"
             }else {
                 modalidad = "Práctica libre"
             }
-            writeReserva(modalidad)
+            usuarioFirebase.verificarUsuarioHabilitado(this,codUsuario)
         }
     }
 
-    fun writeReserva(modalidad:String){
+    override fun OnUsuarioHabilitadoFinished(habilitado : Boolean) {
+        if (habilitado){
+            reservaFirebase.existeReservaEsteDia(this,codUsuario,codTurno)
+        } else {
+            Toast.makeText(this, "No puede realizar reservas, se encuentra suspendido", Toast.LENGTH_SHORT).show()
+        }
+    }
 
-        var reserva = Reserva()
-        reserva.codTurno = this.codTurno
-        reserva.codUsuario = this.codUsuario
-        reserva.modalidad = modalidad
-        val formatter = DateTimeFormatter. ofPattern("yyyy-MM-dd")
-        val current = LocalDateTime.now()
-        val formatted = current. format(formatter)
-        reserva.fechaReserva = formatted
-        reserva.estado = "Pendiente"
+    override fun OnVerificacionFinished(existe : Boolean) {
+        if (existe){
+            Toast.makeText(this, "Ya cuenta con reservas para este día", Toast.LENGTH_SHORT).show()
+        } else {
+            var reserva = Reserva()
+            reserva.codTurno = this.codTurno
+            reserva.codUsuario = this.codUsuario
+            reserva.modalidad = modalidad
+            val formatter = DateTimeFormatter. ofPattern("yyyy-MM-dd")
+            val current = LocalDateTime.now()
+            val formatted = current. format(formatter)
+            reserva.fechaReserva = formatted
+            reserva.estado = "Pendiente"
 
-        val db = FirebaseFirestore.getInstance()
-        db.collection("reserva").add(reserva)
+            reservaFirebase.registrarReserva(this,reserva)
+        }
+    }
 
-        actualizarCapacidad(reserva.codTurno!!)
+    override fun OnRegistroReservaFinished() {
         Toast.makeText(this, "¡Reserva realizada!", Toast.LENGTH_SHORT).show()
         irPerfil()
-
-    }
-
-    //Verificar si el usuario ya a realizado una reserva ese día
-    fun verificarReservas(codUsuario: String){
-        var fechaANoRepetir = this.codTurno.substring(0, 10)
-        val db = FirebaseFirestore.getInstance()
-        val ref = db.collection("reserva")
-        val query = ref.whereEqualTo("codUsuario",codUsuario)
-        query.get()
-            .addOnSuccessListener { documents ->
-                var existe = false
-                for (document in documents) {
-                    val reserva = document.toObject(Reserva::class.java)
-                    if (reserva.codTurno!!.contains(fechaANoRepetir,false)){
-                        Toast.makeText(this, "Ya cuenta con reservas para este día", Toast.LENGTH_SHORT).show()
-                        existe = true
-                        break
-                    }
-                }
-                if (existe == false){
-                    procesarReserva()
-                }
-            }
-    }
-
-
-
-    fun actualizarCapacidad(codTurno:String){
-        val db = FirebaseFirestore.getInstance()
-        val ref = db.collection("turno").document(codTurno)
-        val capacidadTotal = intent.getIntExtra("capacidadTotal",0)
-
-        ref.get()
-            .addOnSuccessListener { document ->
-                val turno = document.toObject(Turno::class.java)
-                ref.update("capacidadCubierta", turno!!.capacidadCubierta!!+1)
-
-                if (turno!!.capacidadCubierta!!+1 == capacidadTotal){
-                    ref.update("abierto", false)
-                    ref.update("observaciones", "No se cuenta con capacidad")
-                }
-            }
     }
 
     private fun irPerfil(){

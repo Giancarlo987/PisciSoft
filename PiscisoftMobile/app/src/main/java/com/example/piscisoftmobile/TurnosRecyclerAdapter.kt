@@ -13,7 +13,7 @@ import com.example.piscisoftmobile.Model.Turno
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_turno.view.*
 
-class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHolder>{
+class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHolder> , OnDataFinishedListener{
 
     private lateinit var mContext: Context
     private lateinit var listaTurnos : List<Turno>
@@ -42,33 +42,29 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
         val turno: Turno = listaTurnos.get(position)
 
         holder.item_disponibilidad.text = turno.estado
+        holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+        colocarProfesor(holder, turno.profesor.toString())
 
-        if (turno.estado == "Abierto"){
-            holder.item_disponibilidad.setTextColor(Color.GREEN)
-            holder.item_image.setImageResource(R.drawable.disponible)
-            holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${turno.capacidadTotal}"
-            intent.putExtra("capacidadTotal",turno.capacidadTotal)
-            holder.item_holder.setOnClickListener { irConfirmarReserva(turno.id!!,turno.fecha!!,holder.item_hora.text.toString(),holder.item_profesor.text.toString() ) }
-
-        } else if (turno.estado == "Cerrado") {
+        if (turno.estado == "Cerrado") {
             holder.item_disponibilidad.setTextColor(Color.RED)
             holder.item_image.setImageResource(R.drawable.cancelada)
             holder.item_capacidad.text = "Observaciones: ${turno.observaciones}"
             holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno se encuentra cerrado", Toast.LENGTH_SHORT).show() }
         } else {
-            holder.item_disponibilidad.setTextColor(Color.BLACK)
-            holder.item_image.setImageResource(R.drawable.caducada)
             holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${turno.capacidadTotal}"
-            holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno ya pasó", Toast.LENGTH_SHORT).show() }
+            if (turno.estado == "Abierto") {
+                holder.item_disponibilidad.setTextColor(Color.GREEN)
+                holder.item_image.setImageResource(R.drawable.disponible)
+                holder.item_holder.setOnClickListener { irConfirmarReserva(turno.id!!,turno.fecha!!,holder.item_hora.text.toString(),holder.item_profesor.text.toString() ) }
+            } else {
+                holder.item_disponibilidad.setTextColor(Color.BLACK)
+                holder.item_image.setImageResource(R.drawable.caducada)
+                holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno ya pasó", Toast.LENGTH_SHORT).show() }
+            }
         }
-
-        holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
-        colocarProfesor(holder,position,turno.profesor.toString())
-
     }
 
-
-    fun colocarProfesor (holder: ViewHolder, position: Int, codProfesor:String){
+    fun colocarProfesor (holder: ViewHolder, codProfesor:String) {
         db.collection("profesor").document(codProfesor)
             .get().addOnSuccessListener { document ->
                 val profesor = document.toObject(Profesor::class.java)
@@ -76,7 +72,7 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
                 }
     }
 
-    private fun irConfirmarReserva(codTurno:String,fecha:String,hora:String,nombreProfesor:String ){
+    private fun irConfirmarReserva(codTurno:String, fecha:String, hora:String , nombreProfesor:String ){
         intent.putExtra("codTurno",codTurno)
         intent.putExtra("fecha",fecha)
         intent.putExtra("horario",hora)

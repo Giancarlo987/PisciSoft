@@ -18,3 +18,22 @@
     background-color: rgb(74, 85, 250);
     
 }
+
+.primeraFila{
+    color:	#FFFFFF;
+    text-align:center; 
+    background-color:	#689ACA; 
+    vertical-align:middle;
+}
+
+.celdaInicial{
+    vertical-align:middle; 
+    color:	#FFFFFF;
+}
+
+.botonInicial{
+    color:	#FFFFFF !important; 
+}
+.imagenIncial{
+    vertical-align:middle;
+}

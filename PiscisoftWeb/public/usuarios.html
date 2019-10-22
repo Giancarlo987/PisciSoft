@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./CSS/footer.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     function EatCookie() {
       document.cookie = "Login=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/";
       window.location.href = "https://piscisoft.firebaseapp.com";
@@ -28,7 +28,7 @@
       }
     }
     window.onload = Verify;
-  </script>
+  </script> -->
   <title>Usuarios</title>
 </head>
 
@@ -53,7 +53,7 @@
             <a class="nav-link" href="./modificarHorario.html">Modificar horario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Justificaciones</a>
+            <a class="nav-link" href="./justificaciones.html">Justificaciones</a>
           </li>
           <li class="nav-item">
             <button class="btn btn-danger" onclick=""> Salir </button>
@@ -72,7 +72,7 @@
     <div class="control-group" id="cab_filtrado">
       <label class="control-label">Buscar alumno por código:</label>
       <input type="text" id="texto" placeholder="" class="input-xlarge" onkeyup="buscarTiempoReal()">
-      <button class="btn btn-primary float-right" onclick="generarPaginacion()"> Ver listado </button>
+      <button class="btn btn-primary float-right btn-lg" onclick="generarPaginacion()"> Ver listado </button>
       <br>
       <br>
     </div>
@@ -81,75 +81,67 @@
     </div>
     <table class="table table-bordered my-3" style="text-align:center " id="tablaUsuarios">
 
-      <tr style="background-color:	#689ACA; text-align:center">
-        <th scope="col" style="color:	#FFFFFF; text-align:center ">Código</th>
-        <th scope="col" style="color:	#FFFFFF; text-align:center">Foto</th>
-        <th scope="col" style="color:	#FFFFFF; text-align:center">Nombre Completo</th>
-        <th scope="col" style="color:	#FFFFFF; text-align:center">Teléfono</th>
-        <th scope="col" style="color:	#FFFFFF; text-align:center">Observación</th>
-        <th scope="col" style="color:	#FFFFFF; text-align:center">Ver detalles</th>
+      <tr>
+        <th scope="col" class="primeraFila">Código</th>
+        <th scope="col" class="primeraFila">Foto</th>
+        <th scope="col" class="primeraFila">Nombre Completo</th>
+        <th scope="col" class="primeraFila">Teléfono</th>
+        <th scope="col" class="primeraFila">Observación</th>
+        <th scope="col" class="primeraFila">Ver detalles</th>
       </tr>
 
-      <!-- Se genera la tabla -->
-
       <tr>
-        <th scope='row' style='vertical-align:middle; color:	#FFFFFF;'>20169999</th>
-        <td valign="middle" style='vertical-align:middle'><img src='./imagenes/foto_en_blanco.png' width=109 height=123>
-        </td>
-        <td style='vertical-align:middl '>Nombre Completo</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Teléfono</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Observación</td>
-        <td style='vertical-align:middle'><button class="btn btn-default" style="color:	#FFFFFF"> Ver detalle</button>
+        <th scope='row' class='celdaInicial'>20169999</th>
+        <td valign="middle" class='imagenInicial'><img src='./imagenes/foto_en_blanco.png' width=109 height=123></td>
+        <td class='celdaInicial'>Nombre Completo</td>
+        <td class='celdaInicial'>Teléfono</td>
+        <td class='celdaInicial'>Observación</td>
+        <td class='celdaInicial'><button class="btn btn-default botonInicial"> Ver detalle</button>
         </td>
       </tr>
       <tr>
-        <th scope='row' style='vertical-align:middle; color:	#FFFFFF;'>20169999</th>
-        <td valign="middle" style='vertical-align:middle'><img src='./imagenes/foto_en_blanco.png' width=109 height=123>
-        </td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Nombre Completo</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Teléfono</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Observación</td>
-        <td style='vertical-align:middle'><button class="btn btn-default" style="color:	#FFFFFF"> Ver detalle</button>
-        </td>
-      </tr>
-      <tr>
-        <th scope='row' style='vertical-align:middle; color:	#FFFFFF;'>20169999</th>
-        <td valign="middle" style='vertical-align:middle'><img src='./imagenes/foto_en_blanco.png' width=109 height=123>
-        </td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Nombre Completo</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Teléfono</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Observación</td>
-        <td style='vertical-align:middle'><button class="btn btn-default" style="color:	#FFFFFF"> Ver detalle</button>
+        <th scope='row' class='celdaInicial'>20169999</th>
+        <td valign="middle" class='imagenInicial'><img src='./imagenes/foto_en_blanco.png' width=109 height=123></td>
+        <td class='celdaInicial'>Nombre Completo</td>
+        <td class='celdaInicial'>Teléfono</td>
+        <td class='celdaInicial'>Observación</td>
+        <td class='celdaInicial'><button class="btn btn-default botonInicial"> Ver detalle</button>
         </td>
       </tr>
       <tr>
-        <th scope='row' style='vertical-align:middle; color:	#FFFFFF;'>20169999</th>
-        <td valign="middle" style='vertical-align:middle'><img src='./imagenes/foto_en_blanco.png' width=109 height=123>
-        </td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Nombre Completo</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Teléfono</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Observación</td>
-        <td style='vertical-align:middle'><button class="btn btn-default" style="color:	#FFFFFF"> Ver detalle</button>
-        </td>
-      </tr>
-      <tr>
-        <th scope='row' style='vertical-align:middle; color:	#FFFFFF;'>20169999</th>
-        <td valign="middle" style='vertical-align:middle'><img src='./imagenes/foto_en_blanco.png' width=109 height=123>
-        </td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Nombre Completo</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Teléfono</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Observación</td>
-        <td style='vertical-align:middle'><button class="btn btn-default" style="color:	#FFFFFF"> Ver detalle</button>
+        <th scope='row' class='celdaInicial'>20169999</th>
+        <td valign="middle" class='imagenInicial'><img src='./imagenes/foto_en_blanco.png' width=109 height=123></td>
+        <td class='celdaInicial'>Nombre Completo</td>
+        <td class='celdaInicial'>Teléfono</td>
+        <td class='celdaInicial'>Observación</td>
+        <td class='celdaInicial'><button class="btn btn-default botonInicial"> Ver detalle</button>
         </td>
       </tr>
       <tr>
-        <th scope='row' style='vertical-align:middle; color:	#FFFFFF;'>20169999</th>
-        <td valign="middle" style='vertical-align:middle'><img src='./imagenes/foto_en_blanco.png' width=109 height=123>
+        <th scope='row' class='celdaInicial'>20169999</th>
+        <td valign="middle" class='imagenInicial'><img src='./imagenes/foto_en_blanco.png' width=109 height=123></td>
+        <td class='celdaInicial'>Nombre Completo</td>
+        <td class='celdaInicial'>Teléfono</td>
+        <td class='celdaInicial'>Observación</td>
+        <td class='celdaInicial'><button class="btn btn-default botonInicial"> Ver detalle</button>
         </td>
-        <td style='vertical-align:middle;'>Nombre Completo</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Teléfono</td>
-        <td style='vertical-align:middle; color:	#FFFFFF; '>Observación</td>
-        <td style='vertical-align:middle'><button class="btn btn-default" style="color:	#FFFFFF"> Ver detalle</button>
+      </tr>
+      <tr>
+        <th scope='row' class='celdaInicial'>20169999</th>
+        <td valign="middle" class='imagenInicial'><img src='./imagenes/foto_en_blanco.png' width=109 height=123></td>
+        <td class='celdaInicial'>Nombre Completo</td>
+        <td class='celdaInicial'>Teléfono</td>
+        <td class='celdaInicial'>Observación</td>
+        <td style='vertical-align:middle'><button class="btn btn-default botonInicial"> Ver detalle</button>
+        </td>
+      </tr>
+      <tr>
+        <th scope='row' class='celdaInicial'>20169999</th>
+        <td valign="middle" class='imagenInicial'><img src='./imagenes/foto_en_blanco.png' width=109 height=123></td>
+        <td class='celdaInicial'>Nombre Completo</td>
+        <td class='celdaInicial'>Teléfono</td>
+        <td class='celdaInicial'>Observación</td>
+        <td class='celdaInicial'><button class="btn btn-default botonInicial"> Ver detalle</button>
         </td>
       </tr>
     </table>
@@ -194,8 +186,9 @@
   <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
-  <script type="text/javascript" src="./Javascript/conexion.js"></script>
-  <script type="text/javascript" src="./Javascript/paginacionUsuario.js"></script>
+  <script type="text/javascript" src="./Javascript/ConexionFirebase/conexion.js"></script>
+  <script type="text/javascript" src="./Javascript/Objetos/paginador.js"></script>
+  <script type="text/javascript" src="./Javascript/Formatos/tablaUsuarios.js"></script>
   <script type="text/javascript" src="./Javascript/usuarios.js"></script>
 </body>
 

@@ -1,19 +1,5 @@
 var store = firebase.firestore();
 
-function pintar(tamano, pag_selec) {
-    for (var j = 1; j <= tamano; j++) {
-        if (j == pag_selec) {
-            let pag_seleccionada = document.getElementById(pag_selec)
-            pag_seleccionada.className = 'pag_selec'
-        } else {
-            let pagNoSeleccionada = document.getElementById(j)
-            pagNoSeleccionada.className = 'pag_num'
-        }
-    }
-}
-
-
-
 Paginador = function (divPaginador, tabla, tamPagina) {
     this.miDiv = divPaginador
     this.tabla = tabla
@@ -95,3 +81,16 @@ Paginador = function (divPaginador, tabla, tamPagina) {
     }
 }
 
+
+
+function pintar(tamano, pag_selec) {
+    for (var j = 1; j <= tamano; j++) {
+        if (j == pag_selec) {
+            let pag_seleccionada = document.getElementById(pag_selec)
+            pag_seleccionada.className = 'pag_selec'
+        } else {
+            let pagNoSeleccionada = document.getElementById(j)
+            pagNoSeleccionada.className = 'pag_num'
+        }
+    }
+}

@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="./CSS/footer.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     function getCookie(name) {
       var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
       return v ? v[2] : null;
@@ -21,7 +21,7 @@
       }
     }
     window.onload = Verify;
-  </script>
+  </script> -->
   <title> Detalle de Usuario </title>
 </head>
 
@@ -46,7 +46,7 @@
             <a class="nav-link" href="./modificarHorario.html">Modificar horario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Justificaciones</a>
+            <a class="nav-link" href="./justificaciones.html">Justificaciones</a>
           </li>
           <li class="nav-item">
             <button class="btn btn-danger" onclick=""> Salir </button>
@@ -63,8 +63,8 @@
   <br>
   <div class="row">
     <div class="col-md-6">
-      <h1 align="center"> Datos de usuario</h1>
-      <div id="userData">
+      <h1> Datos de usuario</h1>
+      <div id="userData" >
       </div>
     </div>
     <div class="col-md-6">
@@ -88,7 +88,7 @@
       </div>
       <br>
       <div class="text-right" style="width: 80%">
-        <button class="btn btn-info btn-lg" onclick="window.location.href='./usuarios.html'" ;> Volver </button>
+        <button class="btn btn-info btn-lg" style="background: #000000" onclick="window.location.href='./usuarios.html'" ;> Regresar</button>
       </div>
     </div>
 
@@ -130,7 +130,8 @@
   <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
-  <script type="text/javascript" src="./Javascript/conexion.js"></script>
+  <script type="text/javascript" src="./Javascript/ConexionFirebase/conexion.js"></script>
+  <script type="text/javascript" src="./Javascript/Modificadores/obtenerDatosURL.js"></script>
   <script type="text/javascript" src="./Javascript/usuariosDetalle.js"></script>
 </body>
 

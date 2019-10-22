@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./CSS/footer.css">
     <link rel="stylesheet" href="./CSS/index.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         function getCookie(name) {
             var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
             return v ? v[2] : null;
@@ -23,7 +23,7 @@
             }
         }
         window.onload = Verify;
-    </script>
+    </script> -->
     <title>Inicio de sesión</title>
 </head>
 
@@ -56,12 +56,33 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- POP UP -->
+    <div class="container">
+        <div class="modal fade" id="ventanaError" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Datos incorrectos</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Usuario y/o contraseña ingresados no son correctos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <br>
     <br>
     <br>
     <br>
     <br>
     <br>
+
+    <!-- FOOTER -->
     <div class="container ">
         <footer class="footer-bs">
             <div class="row">
@@ -83,6 +104,8 @@
             </div>
         </footer>
     </div>
+
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -94,8 +117,8 @@
         crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
-    <script type="text/javascript" src="./Javascript/conexion.js"></script>
-    <script src="./Javascript/cookie.js" type="text/javascript"> </script>
+    <script type="text/javascript" src="./Javascript/ConexionFirebase/conexion.js"></script>
+    <script src="./Javascript/Objetos/cookie.js" type="text/javascript"> </script>
 </body>
 
 </html>

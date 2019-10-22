@@ -1,21 +1,4 @@
-var db = firebase.firestore(); //Declarar la base de datos firestore
-var tabla = document.getElementById("tablaUsuarios");
-
-
-function generarPaginacion() {
-    let cab_filtrado =document.getElementById('cab_filtrado');
-    cab_filtrado.innerHTML =''
-    var p = new Paginador(
-        document.getElementById('paginador'),
-        document.getElementById('tablaUsuarios'),
-        5
-    );
-    p.Mostrar()
-}
-
-
-//Tabla de usuarios actualizando en tiempo real 
-function mostrarTabla(filtro, palabra) {
+function TablaUsuario(filtro, palabra) {
     let texto = "";
     let fin = "";
     if (filtro == true) {
@@ -45,23 +28,8 @@ function mostrarTabla(filtro, palabra) {
                             <td style='vertical-align:middle'>${doc.data().nombre}</td> 
                             <td style='vertical-align:middle'>${doc.data().celular}</td>
                             <td style='vertical-align:middle'>${doc.data().observaciones}</td>
-                            <td style='vertical-align:middle'><button class="btn btn-info" onclick="location.href='./usuariosDetalle.html?id=${doc.id}'">Ver detalle</button></td>   
+                            <td style='vertical-align:middle'><button class="btn btn-info" style="background: #FC663D;" onclick="location.href='./usuariosDetalle.html?id=${doc.id}'">Ver detalle</button></td>   
                         </tr>`;
         });
     });
 }
-
-
-function buscarTiempoReal() {
-    var texto = document.getElementById("texto").value;
-    if (texto == "") {
-        mostrarTabla(false)
-    } else {
-        tabla.innerHTML = "";
-        mostrarTabla(true, texto)
-    }
-    console.log(texto)
-}
-
-
-mostrarTabla()

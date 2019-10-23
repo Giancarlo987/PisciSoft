@@ -3,11 +3,8 @@ package com.example.piscisoftmobile.Model
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.piscisoftmobile.MainActivity
-import com.example.piscisoftmobile.OnDataFinishedListener
+import com.example.piscisoftmobile.*
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.piscisoftmobile.PerfilFragment
-import com.example.piscisoftmobile.VerReservasProfesorActivity
 
 class UsuarioFirebase  {
     val db = FirebaseFirestore.getInstance()
@@ -69,6 +66,20 @@ class UsuarioFirebase  {
                 for (document in documents) {
                     val usuario = document.toObject(Usuario::class.java)
                     listener.OnUserNombreDataFinished(usuario.nombre!!)
+                }
+            }
+            .addOnFailureListener{ exception ->
+                Log.d("ERROR EN FIREBASE", "get failed with ", exception)
+            }
+    }
+
+    fun obtenerUsuarioById(listener: OnDataFinishedListener, codUsuario: String, holder: ReservasProfesorRecyclerAdapter.ViewHolder, position: Int, reserva:Reserva){
+        val query = ref.whereEqualTo("codigo",codUsuario)
+        query.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val usuario = document.toObject(Usuario::class.java)
+                    listener.OnUserDataFinished(usuario, holder, position, reserva)
                 }
             }
             .addOnFailureListener{ exception ->

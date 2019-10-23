@@ -53,8 +53,6 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         holder.item_fecha.text = fechaF
         holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
         colocarProfesor(holder,position,turno.profesor.toString())
-        var dateReservacion = LocalDate.parse(reserva.fechaReserva!!.toString())
-        var fechaReservacion = "${dateReservacion.dayOfMonth}/${dateReservacion.monthValue}/${dateReservacion.year}"
 
         holder.item_holder.setOnClickListener{irDetalleReservaActivity(reserva,holder.item_profesor.text.toString(),turno)}
 

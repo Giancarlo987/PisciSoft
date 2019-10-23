@@ -87,6 +87,22 @@ class ReservaFirebase {
             }
     }
 
+    fun obtenerReservasEnTurno(listener:OnDataFinishedListener, codTurno:String){
+        val db = FirebaseFirestore.getInstance()
+        db.collection("reserva").whereEqualTo("codTurno",codTurno)
+            .get()
+            .addOnSuccessListener { documents ->
+                var reservas = mutableListOf<Reserva>()
+                for (document in documents){
+                    val reserva = document.toObject(Reserva::class.java)
+                    reservas.add(reserva)
+                }
+                listener.OnListaReservasDataFinished(reservas)
+            }
+            .addOnFailureListener{ exception ->
+                Log.d("ERROR EN FIREBASE", "get failed with ", exception)
+            }
+    }
     fun eliminarReserva(reserva:Reserva){
         actualizarCapacidad(reserva.codTurno!!, "Aumentar")
         ref.document(reserva.codReserva!!).delete()

@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.piscisoftmobile.OnDataFinishedListener
 import com.example.piscisoftmobile.ReservarFragment
+import com.example.piscisoftmobile.ReservasRecyclerAdapter
 import com.example.piscisoftmobile.TurnosActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
@@ -100,5 +101,17 @@ class TurnoFirebase {
 
     }
 
+    fun obtenerTurnoByCodigo(listener: OnDataFinishedListener, codTurno:String, holder: ReservasRecyclerAdapter.ViewHolder, position: Int, reserva:Reserva){
+        val query = ref.document(codTurno)
+        query.get()
+            .addOnSuccessListener { document ->
+                var turno = document.toObject(Turno::class.java)
+                turno!!.id = document.id
+                listener.OnTurnoDataFinished(turno, holder, position, reserva)
+            }
+            .addOnFailureListener { exception ->
+                Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
+            }
+    }
 
 }

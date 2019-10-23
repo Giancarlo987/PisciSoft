@@ -31,29 +31,37 @@ class ReservaFirebase {
     fun registrarReserva(listener: OnDataFinishedListener, reserva: Reserva){
         val db = FirebaseFirestore.getInstance()
         db.collection("reserva").add(reserva)
-        actualizarCapacidad(reserva.codTurno!!)
+        actualizarCapacidad(reserva.codTurno!!, "Disminuir")
         listener.OnRegistroReservaFinished()
     }
 
-    fun actualizarCapacidad(codTurno:String){
+    fun actualizarCapacidad(codTurno:String, modo:String){
         val db = FirebaseFirestore.getInstance()
         val ref = db.collection("turno").document(codTurno)
 
         ref.get()
             .addOnSuccessListener { document ->
                 val turno = document.toObject(Turno::class.java)
-                ref.update("capacidadCubierta", turno!!.capacidadCubierta!!+1)
+                if (modo == "Disminuir"){
+                    ref.update("capacidadCubierta", turno!!.capacidadCubierta!!+1)
+                } else {
+                    ref.update("capacidadCubierta", turno!!.capacidadCubierta!!-1)
+                    if (turno.estado == "Cerrado" && turno.observaciones == "Turno lleno") {
+                        ref.update("estado","Abierto")
+                        ref.update("observaciones","")
+                    }
+                }
             }
     }
 
-    fun existenReservas(fragment: HistorialFragment, codigo:String){
+    fun existenReservas(listener: OnDataFinishedListener, codigo:String){
         val query = ref.whereEqualTo("codUsuario",codigo)
         query.get()
             .addOnSuccessListener { documents ->
                 if ( ! documents.isEmpty ) {
-                    fragment.irReservas(true)
+                    listener.OnVerificacionFinished(true)
                 } else {
-                    fragment.irReservas(false)
+                    listener.OnVerificacionFinished(false)
                 }
             }
             .addOnFailureListener { exception ->
@@ -61,22 +69,27 @@ class ReservaFirebase {
             }
     }
 
-    fun retornarReservas(fragment: HistorialFragment, codigo:String){
+    fun obtenerReservasByUsuario(listener: OnDataFinishedListener, codigo:String){
         val query = ref.whereEqualTo("codUsuario",codigo)
         query.get()
             .addOnSuccessListener { documents ->
                 var reservas = mutableListOf<Reserva>()
                 for (document in documents) {
                     val reserva = document.toObject(Reserva::class.java)
+                    reserva.codReserva = document.id
                     reservas.add(reserva)
                 }
-
                 //reservas.sortBy { reserva -> reserva.fecha?.substring(reserva.fecha?.indexOf("-")!! + 1, reserva.fecha?.indexOf("-")!!)!!;}
-                fragment.setRecyclerAdapter(reservas)
+                listener.OnListaReservasDataFinished(reservas)
             }
             .addOnFailureListener { exception ->
                 Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
             }
+    }
+
+    fun eliminarReserva(reserva:Reserva){
+        actualizarCapacidad(reserva.codTurno!!, "Aumentar")
+        ref.document(reserva.codReserva!!).delete()
     }
 
 

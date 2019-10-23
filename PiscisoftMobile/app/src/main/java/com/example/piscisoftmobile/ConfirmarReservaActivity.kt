@@ -40,7 +40,7 @@ class ConfirmarReservaActivity : AppCompatActivity(), OnDataFinishedListener {
         tv_profesor.text = profesor
 
         btn_confirmar.setOnClickListener { validarCampos() }
-        btn_cancelar.setOnClickListener { irPerfil() }
+        btn_cancelar.setOnClickListener { irAPerfilActivity() }
 
     }
 
@@ -86,10 +86,10 @@ class ConfirmarReservaActivity : AppCompatActivity(), OnDataFinishedListener {
 
     override fun OnRegistroReservaFinished() {
         Toast.makeText(this, "¡Reserva realizada!", Toast.LENGTH_SHORT).show()
-        irPerfil()
+        irAPerfilActivity()
     }
 
-    private fun irPerfil(){
+    private fun irAPerfilActivity(){
         val intent = Intent()
         intent.setClass(this, SesionActivity::class.java)
         startActivityForResult(intent,1)

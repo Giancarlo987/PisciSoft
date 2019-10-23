@@ -62,4 +62,18 @@ class UsuarioFirebase  {
             }
     }
 
+    fun obtenerNombreUsuarioById(listener: OnDataFinishedListener, userID:String){
+        val query = ref.whereEqualTo("codigo",userID)
+        query.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val usuario = document.toObject(Usuario::class.java)
+                    listener.OnUserNombreDataFinished(usuario.nombre!!)
+                }
+            }
+            .addOnFailureListener{ exception ->
+                Log.d("ERROR EN FIREBASE", "get failed with ", exception)
+            }
+    }
+
 }

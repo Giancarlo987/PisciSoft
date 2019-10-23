@@ -55,7 +55,6 @@ class PerfilFragment : Fragment(), OnDataFinishedListener {
         tv_observaciones.text = "Observaciones: ${usuario.observaciones}"
         val url = usuario.foto
         Picasso.get().load(url).resize(350,350).into(iv_foto)
-
     }
 
     private fun obtenerUsuarioLogueado():String?{

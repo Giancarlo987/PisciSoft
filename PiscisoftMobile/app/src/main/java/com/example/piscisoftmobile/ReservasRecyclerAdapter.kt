@@ -8,20 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.piscisoftmobile.Model.Horario
-import com.example.piscisoftmobile.Model.Profesor
-import com.example.piscisoftmobile.Model.Reserva
-import com.example.piscisoftmobile.Model.Turno
+import com.example.piscisoftmobile.Model.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_reserva.view.*
 import java.time.LocalDate
 
-class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.ViewHolder> {
+class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.ViewHolder> , OnDataFinishedListener {
     private var mContext: Context
     private var listaReservas : List<Reserva>
     private var codigoUsuario: String
     val intent = Intent()
 
+    val turnoFirebase = TurnoFirebase()
     val db = FirebaseFirestore.getInstance()
 
     constructor(mContext: Context, listaReservas: List<Reserva>, codigoUsuario: String) : super() {
@@ -39,49 +37,34 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         return listaReservas.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int){
         val reserva: Reserva = listaReservas.get(position)
-
         if (reserva.estado == "Pendiente"){
             holder.item_estado.text = "Pendiente"
             holder.item_estado.setTextColor(Color.BLUE)
-        }else{
-            holder.item_estado.text = "Asistió"
         }
-
-        db.collection("turno").document(reserva.codTurno.toString())
-            .get().addOnSuccessListener { document ->
-                val turno = document.toObject(Turno::class.java)
-
-                var date = LocalDate.parse(turno!!.fecha.toString())
-                var fechaF = "Fecha: ${date.dayOfMonth}/${date.monthValue}/${date.year}"
-                holder.item_fecha.text = fechaF
-                holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
-                colocarProfesor(holder,position,turno.profesor.toString())
-
-            }
-
-        //Ver reserva
-
-        var date = LocalDate.parse(reserva.fechaReserva!!.toString())
-        var fechaReserva = "${date.dayOfMonth}/${date.monthValue}/${date.year}"
-        holder.item_holder.setOnClickListener {
-            irDetalleReserva(fechaReserva, holder.item_fecha.text.toString(),
-                    holder.item_hora.text.toString(),
-                holder.item_profesor.text.toString(),
-                reserva.modalidad.toString(),
-                reserva.estado.toString()) }
+        turnoFirebase.obtenerTurnoByCodigo(this, reserva.codTurno!!, holder, position, reserva)
     }
 
-    fun irDetalleReserva(fechaReserva: String, fechaTurno: String, hora: String, profesor: String, modalidad: String, estado: String) {
+    override fun OnTurnoDataFinished(turno:Turno, holder: ViewHolder, position: Int, reserva:Reserva) {
+
+        var date = LocalDate.parse(turno!!.fecha.toString())
+        var fechaF = "Fecha: ${date.dayOfMonth}/${date.monthValue}/${date.year}"
+        holder.item_fecha.text = fechaF
+        holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+        colocarProfesor(holder,position,turno.profesor.toString())
+        var dateReservacion = LocalDate.parse(reserva.fechaReserva!!.toString())
+        var fechaReservacion = "${dateReservacion.dayOfMonth}/${dateReservacion.monthValue}/${dateReservacion.year}"
+
+        holder.item_holder.setOnClickListener{irDetalleReservaActivity(reserva,holder.item_profesor.text.toString(),turno)}
+
+    }
+
+    fun irDetalleReservaActivity(reserva:Reserva,profesor:String,turno:Turno){
         val intent = Intent()
-        intent.putExtra("fechaR",fechaReserva)
-        intent.putExtra("fechaT",fechaTurno)
-        intent.putExtra("hora",hora)
+        intent.putExtra("reserva",reserva)
         intent.putExtra("profesor",profesor)
-        intent.putExtra("modalidad",modalidad)
-        intent.putExtra("estado", estado)
-        intent.putExtra("codigo",this.codigoUsuario)
+        intent.putExtra("turno",turno)
         intent.setClass(mContext, DetalleReservaActivity::class.java)
         mContext.startActivity(intent)
     }

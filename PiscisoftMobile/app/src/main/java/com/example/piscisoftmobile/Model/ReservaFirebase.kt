@@ -10,6 +10,7 @@ class ReservaFirebase {
 
     val db = FirebaseFirestore.getInstance()
     val ref = db.collection("reserva")
+    val turnoFirebase = TurnoFirebase()
 
     fun existeReservaEsteDia(listener:OnDataFinishedListener, codUsuario: String, codTurno: String){ //Verificar si existe reserva este día
         var fechaANoRepetir = codTurno.substring(0, 10)
@@ -31,43 +32,10 @@ class ReservaFirebase {
     fun registrarReserva(listener: OnDataFinishedListener, reserva: Reserva){
         val db = FirebaseFirestore.getInstance()
         db.collection("reserva").add(reserva)
-        actualizarCapacidad(reserva.codTurno!!, "Disminuir")
+        turnoFirebase.actualizarCapacidad(reserva.codTurno!!, "Disminuir")
         listener.OnRegistroReservaFinished()
     }
-
-    fun actualizarCapacidad(codTurno:String, modo:String){
-        val db = FirebaseFirestore.getInstance()
-        val ref = db.collection("turno").document(codTurno)
-
-        ref.get()
-            .addOnSuccessListener { document ->
-                val turno = document.toObject(Turno::class.java)
-                if (modo == "Disminuir"){
-                    ref.update("capacidadCubierta", turno!!.capacidadCubierta!!+1)
-                } else {
-                    ref.update("capacidadCubierta", turno!!.capacidadCubierta!!-1)
-                    if (turno.estado == "Cerrado" && turno.observaciones == "Turno lleno") {
-                        ref.update("estado","Abierto")
-                        ref.update("observaciones","")
-                    }
-                }
-            }
-    }
-
-    fun existenReservas(listener: OnDataFinishedListener, codigo:String){
-        val query = ref.whereEqualTo("codUsuario",codigo)
-        query.get()
-            .addOnSuccessListener { documents ->
-                if ( ! documents.isEmpty ) {
-                    listener.OnVerificacionFinished(true)
-                } else {
-                    listener.OnVerificacionFinished(false)
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
-            }
-    }
+    
 
     fun obtenerReservasByUsuario(listener: OnDataFinishedListener, codigo:String){
         val query = ref.whereEqualTo("codUsuario",codigo)
@@ -104,9 +72,8 @@ class ReservaFirebase {
             }
     }
     fun eliminarReserva(reserva:Reserva){
-        actualizarCapacidad(reserva.codTurno!!, "Aumentar")
+        turnoFirebase.actualizarCapacidad(reserva.codTurno!!, "Aumentar")
         ref.document(reserva.codReserva!!).delete()
     }
-
 
 }

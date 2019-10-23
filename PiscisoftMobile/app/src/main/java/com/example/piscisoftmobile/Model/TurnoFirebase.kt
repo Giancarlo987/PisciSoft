@@ -114,4 +114,23 @@ class TurnoFirebase {
             }
     }
 
+    fun actualizarCapacidad(codTurno:String, modo:String){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("turno").document(codTurno)
+
+        ref.get()
+            .addOnSuccessListener { document ->
+                val turno = document.toObject(Turno::class.java)
+                if (modo == "Disminuir"){
+                    ref.update("capacidadCubierta", turno!!.capacidadCubierta!!+1)
+                } else {
+                    ref.update("capacidadCubierta", turno!!.capacidadCubierta!!-1)
+                    if (turno.estado == "Cerrado" && turno.observaciones == "Turno lleno") {
+                        ref.update("estado","Abierto")
+                        ref.update("observaciones","")
+                    }
+                }
+            }
+    }
+
 }

@@ -17,12 +17,12 @@ import com.example.piscisoftmobile.Model.Usuario
 import com.example.piscisoftmobile.Model.UsuarioFirebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detalle_reserva.*
 import kotlinx.android.synthetic.main.fragment_perfil.*
 import java.net.URL
 
 
-class PerfilFragment : Fragment() {
-
+class PerfilFragment : Fragment(), OnDataFinishedListener {
 
     private lateinit var mContext: Context
 
@@ -34,29 +34,18 @@ class PerfilFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_perfil, container, false)
         val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
+        btn_modificar.setOnClickListener { irModificarActivity() }
 
         val userID = obtenerUsuarioLogueado()
-
-        //Enviar mensaje a dao para que busque la info
         val usuarioFirebase = UsuarioFirebase()
-        usuarioFirebase.retornarUsuario(this,userID!!)
-
-        btn_modificar.setOnClickListener { ir_modificar() }
+        usuarioFirebase.obtenerUsuarioById(this,userID!!)
 
         mContext = root.context
         return root
 
     }
 
-    private fun obtenerUsuarioLogueado():String?{
-        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",Context.MODE_PRIVATE)
-        var userID = sharedPreferences.getString("userID","")
-        Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
-        return userID
-    }
-
-
-    fun colocarInfo(usuario:Usuario){
+    override fun OnUserDataFinished(usuario: Usuario) {
         tv_nombre.text = usuario.nombre
         tv_codigo.text = usuario.codigo
         rv_inasistencias.rating = 3 - usuario.inasistencias!!.toFloat()
@@ -68,10 +57,16 @@ class PerfilFragment : Fragment() {
         Picasso.get().load(url).resize(350,350).into(iv_foto)
     }
 
+    private fun obtenerUsuarioLogueado():String?{
+        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",Context.MODE_PRIVATE)
+        var userID = sharedPreferences.getString("userID","")
+        Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
+        return userID
+    }
 
-    private fun ir_modificar(){
+
+    private fun irModificarActivity(){
         val intent = Intent()
-        //intent.setClass(mContext, ModificarActivity::class.java)
         intent.setClass(mContext, VerReservasProfesorActivity::class.java)
         startActivity(intent)
     }

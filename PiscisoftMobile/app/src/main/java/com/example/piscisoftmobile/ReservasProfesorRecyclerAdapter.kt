@@ -10,10 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.piscisoftmobile.Model.Profesor
-import com.example.piscisoftmobile.Model.Reserva
-import com.example.piscisoftmobile.Model.Turno
-import com.example.piscisoftmobile.Model.Usuario
+import com.example.piscisoftmobile.Model.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_perfil.*
@@ -23,13 +20,14 @@ import kotlinx.android.synthetic.main.item_turno.view.item_foto
 import kotlinx.android.synthetic.main.item_turno.view.item_nombre
 import kotlinx.android.synthetic.main.item_usuario.view.*
 
-class ReservasProfesorRecyclerAdapter : RecyclerView.Adapter<ReservasProfesorRecyclerAdapter.ViewHolder>{
+class ReservasProfesorRecyclerAdapter : RecyclerView.Adapter<ReservasProfesorRecyclerAdapter.ViewHolder>, OnDataFinishedListener{
 
     private lateinit var mContext: Context
     private lateinit var reservas: List<Reserva>
     private lateinit var userID : String
     val intent = Intent()
 
+    val usuarioFirebase = UsuarioFirebase()
     val db = FirebaseFirestore.getInstance()
 
     constructor(mContext: Context, reservas: List<Reserva>) : super() {
@@ -47,22 +45,19 @@ class ReservasProfesorRecyclerAdapter : RecyclerView.Adapter<ReservasProfesorRec
         return reservas.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int)  {
         val reserva: Reserva = reservas.get(position)
-
-
-        db.collection("usuario").document(reserva.codUsuario!!).get()
-            .addOnSuccessListener { document ->
-                val usuario = document.toObject(Usuario::class.java)
-                holder.item_codigo.text = "Código: " + usuario!!.codigo
-                holder.item_nombre.text = "Nombre: " + usuario!!.nombre
-                val url = usuario.foto
-                Picasso.get().load(url).fit().into(holder.item_foto)
-                holder.item_holder.setOnClickListener { mostrarDetalle(usuario,reserva) }
-            }
+        usuarioFirebase.obtenerUsuarioById(this, reserva.codUsuario!!, holder, position, reserva)
 
     }
 
+    override fun OnUserDataFinished(usuario:Usuario, holder: ViewHolder, position: Int, reserva:Reserva) {
+        holder.item_codigo.text = "Código: " + usuario!!.codigo
+        holder.item_nombre.text = "Nombre: " + usuario!!.nombre
+        val url = usuario.foto
+        Picasso.get().load(url).fit().into(holder.item_foto)
+        holder.item_holder.setOnClickListener { mostrarDetalle(usuario,reserva) }
+    }
 
 
     class ViewHolder
@@ -74,11 +69,13 @@ class ReservasProfesorRecyclerAdapter : RecyclerView.Adapter<ReservasProfesorRec
     }
 
     fun mostrarDetalle(usuario:Usuario,reserva:Reserva){
+        //RICARDO: Arreglar el dialog o si no se puede poner un activity que muestre los detalles del usuario
 
         val dialogBuilder = AlertDialog.Builder(mContext)
 
         // set message of alert dialog
         dialogBuilder.setMessage(
+                //Aqui deberia de aparecer su foto pero más grande
                 "\nNombre: " + usuario.nombre +
                 "\nCódigo: " + usuario.codigo +
                 "\nTipo de usuario: " + usuario.tipo +

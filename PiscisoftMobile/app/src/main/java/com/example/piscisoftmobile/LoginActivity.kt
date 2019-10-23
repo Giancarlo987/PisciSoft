@@ -12,28 +12,62 @@ import android.util.Log
 import com.example.piscisoftmobile.Model.Horario
 import com.example.piscisoftmobile.Model.Turno
 import com.example.piscisoftmobile.Model.UsuarioFirebase
+import kotlinx.android.synthetic.main.activity_detalle_reserva.*
 import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
 
     val usuarioFirebase = UsuarioFirebase()
+    lateinit var codigo : String
+    lateinit var password : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btn_registrarse.setOnClickListener{irRegistro()}
+        btn_registrarse.setOnClickListener{irARegistroActivity()}
         btn_iniciar_sesion.setOnClickListener {verificarCampos()}
-
-        //crearDatos()
-
     }
 
 
+    private fun verificarCampos(){
+        codigo = et_codigo.text.toString()
+        password = et_password.text.toString()
 
+        if (codigo != "" && password != ""){
+            usuarioFirebase.verificarCredenciales(this, codigo, password)
+        } else {
+            Toast.makeText(this, "Por favor, complete los campos", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun OnVerificacionFinished(existe: Boolean) {
+        if (existe){
+            val editor : SharedPreferences.Editor = getSharedPreferences("login",
+                Context.MODE_PRIVATE).edit()
+            editor.putString("userID",codigo)
+            editor.apply()
+            irAPerfilActivity()
+        } else {
+            Toast.makeText(this, "Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun irAPerfilActivity(){
+        val intent = Intent()
+        intent.setClass(this, SesionActivity::class.java)
+        startActivityForResult(intent,1)
+    }
+
+    private fun irARegistroActivity(){
+        val intent = Intent()
+        intent.setClass(this, RegistroActivity::class.java)
+        startActivityForResult(intent,1)
+    }
+
+    //Esta función es para crear los turnos (no tocar):
     fun crearDatos(){
 
         val db = FirebaseFirestore.getInstance()
@@ -73,46 +107,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
-    private fun irRegistro(){ //Dirigirse al formulario de registro
-        val intent = Intent()
-        intent.setClass(this, RegistroActivity::class.java)
-
-
-        startActivityForResult(intent,1)
-    }
-
-
-    private fun verificarCampos(){
-        val codigo = et_codigo.text.toString()
-        val password = et_password.text.toString()
-
-        if (codigo != "" && password != ""){
-            usuarioFirebase.verificarUsuario(this, codigo, password)
-        } else {
-            Toast.makeText(this, "Por favor, complete los campos", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    fun iniciarSesion(codigo:String,mensaje:String){
-        if (mensaje=="existe"){
-            //"Guardamos en la sesión"
-            val editor : SharedPreferences.Editor = getSharedPreferences("login",
-                Context.MODE_PRIVATE).edit()
-            editor.putString("userID",codigo)
-            editor.apply()
-            irPerfil()
-        }else{
-            Toast.makeText(this, "Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-
-    private fun irPerfil(){
-        val intent = Intent()
-        intent.setClass(this, SesionActivity::class.java)
-        startActivityForResult(intent,1)
-    }
-
 }

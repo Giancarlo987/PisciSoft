@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Nombre: " />
+                android:text="Nombre:" />
 
             <TextView
                 android:id="@+id/codigo"
@@ -68,11 +68,11 @@
                 android:text="Codigo: " />
 
             <TextView
-                android:id="@+id/hora"
+                android:id="@+id/horario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Hora: " />
+                android:text="Horario: " />
 
 
             <TextView
@@ -80,22 +80,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Fecha: " />
+                android:text="Fecha del turno: " />
 
             <TextView
                 android:id="@+id/fechaR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Fecha: " />
+                android:text="Fecha de reserva: " />
 
 
             <TextView
-                android:id="@+id/profesor"
+                android:id="@+id/profesorTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50px"
-                app:layout_constraintTop_toBottomOf="@+id/hora" />
+                android:layout_marginBottom="50px" />
 
             <TextView
                 android:id="@+id/modalidad"
@@ -109,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50px"
-                app:layout_constraintTop_toTopOf="@+id/hora"
+                app:layout_constraintTop_toTopOf="@+id/horario"
                 tools:srcCompat="@tools:sample/avatars" />
 
 
@@ -117,15 +116,15 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/cancelar_reserva"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancelar Reserva"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/boton_naranja"
-        android:layout_marginBottom="100px"
+        android:id="@+id/btnCancelar"
+        android:layout_width="187dp"
+        android:layout_height="38dp"
         android:layout_marginRight="200px"
+        android:layout_marginBottom="100px"
+        android:background="@drawable/boton_naranja"
+        android:text="Cancelar Reserva"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

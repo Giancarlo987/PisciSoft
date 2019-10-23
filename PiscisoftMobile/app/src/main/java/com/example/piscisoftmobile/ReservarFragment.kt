@@ -24,17 +24,15 @@ import java.time.Month
 import java.time.Year
 import java.time.format.DateTimeFormatter
 
-val usuarioFirebase = UsuarioFirebase()
-val turnoFirebase = TurnoFirebase()
-var userID = ""
+class ReservarFragment : Fragment() , OnDataFinishedListener {
 
-class ReservarFragment : Fragment() {
-
-    var fecha = ""
-    private lateinit var mContext: Context
-
+    lateinit var mContext: Context
     lateinit var hoy: LocalDate
     lateinit var fechaEscogida: LocalDate
+    lateinit var fecha : String
+    lateinit var userID : String
+
+    val turnoFirebase = TurnoFirebase()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,52 +46,58 @@ class ReservarFragment : Fragment() {
         userID = retornarUserID()
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            var dia = ""
-            var mes = ""
-
-            if (dayOfMonth<10){
-                dia = "0${dayOfMonth}"
-            }else{
-                dia = "${dayOfMonth}"
-            }
-            if ((month+1)<10){
-                mes = "0${(month + 1)}"
-            }else{
-                mes = "${(month + 1)}"
-            }
-
-            fecha = "${year}-${mes}-${dia}"
-
-            this.hoy = LocalDate.now()
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            this.fechaEscogida = LocalDate.parse(fecha, formatter)
-
-            if (fechaEscogida.isBefore(hoy)){
+            if (validarFechaVigente(year, month, dayOfMonth)){
+                turnoFirebase.existenTurnosRegistrados(this,fecha)
+            } else {
                 Toast.makeText( context, "Esa fecha ya pasó", Toast.LENGTH_SHORT).show()
-            }else{
-                turnoFirebase.existenTurnos(this,fecha)
             }
-
         }
 
         mContext = root.context
-
         return root
     }
 
-    fun irTurnos(existen:Boolean){ //Dirigirse a ver los turnos
-        if (existen){
-            Toast.makeText( context, "Si hay turnos", Toast.LENGTH_SHORT).show()
-            val intent = Intent()
-            intent.putExtra("fecha",fecha)
-            intent.putExtra("userID",userID)
-            intent.putExtra("fechaEscogida",this.fechaEscogida)
-            intent.putExtra("hoy",this.hoy)
-            intent.setClass(mContext, TurnosActivity::class.java)
-            startActivity(intent)
+    fun validarFechaVigente(year:Int, month:Int, dayOfMonth:Int) : Boolean{
+        var dia = ""
+        var mes = ""
+
+        if (dayOfMonth<10){
+            dia = "0${dayOfMonth}"
+        }else{
+            dia = "${dayOfMonth}"
+        }
+        if ((month+1)<10){
+            mes = "0${(month + 1)}"
+        }else{
+            mes = "${(month + 1)}"
+        }
+
+        fecha = "${year}-${mes}-${dia}"
+
+        this.hoy = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        this.fechaEscogida = LocalDate.parse(fecha, formatter)
+
+        if (fechaEscogida.isBefore(hoy)){
+            return false
+        }
+        return true
+    }
+
+    override fun OnVerificacionFinished(existe: Boolean) {
+        if (existe){
+            irATurnosActivity()
         } else {
             Toast.makeText( context, "No hay turnos registrados para esa fecha", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun irATurnosActivity(){
+        val intent = Intent()
+        intent.putExtra("fecha",fecha)
+        intent.putExtra("userID",userID)
+        intent.setClass(mContext, TurnosActivity::class.java)
+        startActivity(intent)
     }
 
     private fun retornarUserID():String {
@@ -102,6 +106,5 @@ class ReservarFragment : Fragment() {
         var userID = sharedPreferences.getString("userID","")
         return userID!!
     }
-
 
 }

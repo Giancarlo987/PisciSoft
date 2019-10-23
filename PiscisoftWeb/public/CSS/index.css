@@ -1,4 +1,11 @@
-        .card-login {
+       
+        .mensajeVacio{
+            color: red !important;;
+            text-align: right !important;;
+            font-size: 11px !important; 
+          }
+
+       .card-login {
             margin-top: 130px;
             padding: 18px;
             max-width: 30rem;
@@ -68,4 +75,3 @@
             border: 1px solid #ced4da;
             border-radius: 0;
         }
-

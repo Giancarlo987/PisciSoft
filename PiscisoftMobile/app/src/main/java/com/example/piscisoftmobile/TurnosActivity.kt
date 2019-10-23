@@ -12,19 +12,28 @@ import com.example.piscisoftmobile.Model.TurnoFirebase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_turnos.*
 
-class TurnosActivity : AppCompatActivity() {
+class TurnosActivity : AppCompatActivity(), OnDataFinishedListener {
 
     val turnoFirebase = TurnoFirebase()
 
+    lateinit var fecha : String
+    lateinit var userID : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_turnos)
 
-        val fecha = intent.getStringExtra("fecha")
-        val userID = intent.getStringExtra("userID")
-        //Toast.makeText( this, fecha + " " + userID, Toast.LENGTH_SHORT).show()
-        turnoFirebase.retornarTurnos(this, fecha)
+        fecha = intent.getStringExtra("fecha")
+        userID = intent.getStringExtra("userID")
+        turnoFirebase.actualizarTurnos(this, fecha)
+    }
+
+    override fun OnActualizacionFinished() {
+        turnoFirebase.obtenerTurnosByFecha(this, fecha)
+    }
+
+    override fun OnListaTurnosDataFinished(listaTurnos : List<Turno>) {
+        setRecyclerAdapter(listaTurnos)
     }
 
     fun setRecyclerAdapter(listaTurnos:List<Turno>){

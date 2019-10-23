@@ -16,11 +16,11 @@ import com.example.piscisoftmobile.Model.ReservaFirebase
 import com.example.piscisoftmobile.Model.UsuarioFirebase
 import kotlinx.android.synthetic.main.fragment_historial.*
 
-val userFirebase = UsuarioFirebase()
+
 val reservaFirebase = ReservaFirebase()
 var codigoUsuario = ""
 
-class HistorialFragment : Fragment() {
+class HistorialFragment : Fragment() , OnDataFinishedListener {
 
     private lateinit var mContext: Context
 
@@ -31,24 +31,21 @@ class HistorialFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_historial, container, false)
-
         codigoUsuario = retornarUserID()
-
-        reservaFirebase.existenReservas(this,codigoUsuario)
-
+        reservaFirebase.obtenerReservasByUsuario(this, codigoUsuario)
         mContext = root.context
-
         return root
     }
 
-    fun irReservas(existen:Boolean){ //Dirigirse a ver los turnos
-        if (existen){
-            Toast.makeText( context, "Si hay reservas", Toast.LENGTH_SHORT).show()
-            reservaFirebase.retornarReservas(this, codigoUsuario)
+
+    override fun OnListaReservasDataFinished(listaReservas : List<Reserva>) {
+        if (listaReservas.isEmpty()){
+            Toast.makeText( context, "Aún no cuentas con reservas", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText( context, "No hay reservas realizadas", Toast.LENGTH_SHORT).show()
+            setRecyclerAdapter(listaReservas)
         }
     }
+
 
     fun setRecyclerAdapter(listaReservas:List<Reserva>){
         val recyclerView: RecyclerView = reservas_recycler_view

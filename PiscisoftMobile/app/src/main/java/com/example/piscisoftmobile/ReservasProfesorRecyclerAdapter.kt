@@ -1,19 +1,22 @@
 package com.example.piscisoftmobile
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.piscisoftmobile.Model.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_perfil.*
+import kotlinx.android.synthetic.main.fragment_ver_reserva_detalle.view.*
 import kotlinx.android.synthetic.main.item_turno.view.*
 import kotlinx.android.synthetic.main.item_turno.view.item_codigo
 import kotlinx.android.synthetic.main.item_turno.view.item_foto
@@ -59,7 +62,6 @@ class ReservasProfesorRecyclerAdapter : RecyclerView.Adapter<ReservasProfesorRec
         holder.item_holder.setOnClickListener { mostrarDetalle(usuario,reserva) }
     }
 
-
     class ViewHolder
     constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val item_nombre = itemView.item_nombre
@@ -68,37 +70,45 @@ class ReservasProfesorRecyclerAdapter : RecyclerView.Adapter<ReservasProfesorRec
         val item_foto = itemView.item_foto
     }
 
-    fun mostrarDetalle(usuario:Usuario,reserva:Reserva){
-        //RICARDO: Arreglar el dialog o si no se puede poner un activity que muestre los detalles del usuario
+
+    fun mostrarDetalle(usuario: Usuario, reserva: Reserva){
 
         val dialogBuilder = AlertDialog.Builder(mContext)
 
-        // set message of alert dialog
-        dialogBuilder.setMessage(
-                //Aqui deberia de aparecer su foto pero más grande
-                "\nNombre: " + usuario.nombre +
-                "\nCódigo: " + usuario.codigo +
-                "\nTipo de usuario: " + usuario.tipo +
-                "\nNivel de natación: " + usuario.nivel +
-                "\nObservaciones: " + usuario.observaciones +
-                "\nModalidad: " + reserva.modalidad +
-                "")
-            // if the dialog is cancelable
-            .setCancelable(false)
-            // positive button text and action
-            .setPositiveButton("Proceed", DialogInterface.OnClickListener {
-                    dialog, id -> dialog.cancel()
-            })
-            // negative button text and action
-            .setNegativeButton("Cancel", DialogInterface.OnClickListener {
-                    dialog, id -> dialog.cancel()
-            })
+        val inflator: LayoutInflater = LayoutInflater.from(mContext)
+        val v : View = inflator.inflate(R.layout.fragment_ver_reserva_detalle,null)
+
+        val fotousuario = v.findViewById<ImageView>(R.id.fotousuario)
+        dialogBuilder.setView(v)
+
+        val url = usuario.foto
+
+        Picasso.get().load(url).resize(600,600).into(fotousuario)
+
+        val username = v.findViewById<TextView>(R.id.username)
+        username.text = username.text.toString() + usuario.nombre.toString()
+
+        val usereid = v.findViewById<TextView>(R.id.userid)
+        usereid.text = usereid.text.toString() + usuario.codigo.toString()
+
+        val tipousuario = v.findViewById<TextView>(R.id.tipousuario)
+        tipousuario.text = tipousuario.text.toString() + usuario.tipo.toString()
+
+        val nivelusuario = v.findViewById<TextView>(R.id.nivelusuario)
+        nivelusuario.text = nivelusuario.text.toString() + usuario.nivel.toString()
+
+        val observacionesusuario = v.findViewById<TextView>(R.id.observacionesusuario)
+        observacionesusuario.text = observacionesusuario.text.toString() + usuario.observaciones.toString()
+
+        val modalidadusuario = v.findViewById<TextView>(R.id.modalidadusuario)
+        modalidadusuario.text = modalidadusuario.text.toString() + reserva.modalidad.toString()
 
         // create dialog box
         val alert = dialogBuilder.create()
         // set title for alert dialog box
-        alert.setTitle(usuario.codigo)
+        //alert.setTitle(usuario.codigo)
         // show alert dialog
+        v.findViewById<Button>(R.id.ok).setOnClickListener {  alert.dismiss()}
         alert.show()
     }
 

@@ -52,7 +52,7 @@ class VerReservasProfesorActivity : AppCompatActivity() , OnDataFinishedListener
     }
 
     fun setSpinner(horarios:List<String>){
-        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, horarios)
+        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, horarios)
         spinner.adapter = arrayAdapter
 
         //RICARDO Agregar más espacio entre los horarios que aparecen en el spinner:

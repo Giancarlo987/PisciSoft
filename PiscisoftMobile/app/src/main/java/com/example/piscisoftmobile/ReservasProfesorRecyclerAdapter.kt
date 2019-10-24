@@ -83,7 +83,7 @@ class ReservasProfesorRecyclerAdapter : RecyclerView.Adapter<ReservasProfesorRec
 
         val url = usuario.foto
 
-        Picasso.get().load(url).resize(600,600).into(fotousuario)
+        Picasso.get().load(url).resize(450,450).into(fotousuario)
 
         val username = v.findViewById<TextView>(R.id.username)
         username.text = username.text.toString() + usuario.nombre.toString()

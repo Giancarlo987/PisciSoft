@@ -14,6 +14,7 @@ PopUpModificarUsuario = function (dia, hora) {
         let profesorSeleccionado = ""
 
         let fechaElegida  = generarFecha(dia)
+        console.log(fechaElegida.generarFormatoFechaBD() + "." + hora)
         db.collection("turno").doc(fechaElegida.generarFormatoFechaBD() + "." + hora).get()
             .then(doc => {
                 tituloPop.innerHTML = `${dia}:  ${doc.data().horaInicio} - ${doc.data().horaFin}  `;

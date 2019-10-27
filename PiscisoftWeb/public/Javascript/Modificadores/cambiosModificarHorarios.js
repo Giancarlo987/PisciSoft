@@ -77,21 +77,11 @@ GuardarCambios = function (dia, hora) {
         this.guardarCambioCapacidad()
         this.guardarObservacion()
         this.cambiarTurno()
-        let etiquetaValidador = document.getElementById("validador")
-        let padre = etiquetaValidador.parentNode;
         if (true) {
-            console.log(etiquetaValidador.innerHTML)
             document.getElementById("ventanaCambios").style.display = "none";
             $(document).ready(function () {
                 $("#ventanaGuardado").modal("show");
             });
-        } else {
-            // console.log(validadorCapacidad)
-            // console.log(validadorProfesor)
-            // document.getElementById("ventanaCambios").style.display = "none";
-            // $(document).ready(function () {
-            //     $("#ventanaFallo").modal("show");
-            // });
         }
     }
 }

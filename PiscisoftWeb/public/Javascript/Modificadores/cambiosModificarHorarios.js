@@ -1,20 +1,20 @@
 GuardarCambios = function (dia, hora) {
     this.dia = dia
     this.hora = hora
-    this.fechaElegida  = generarFecha(dia)
-
+    this.fechaElegida = generarFecha(dia)
+    //console.log(this.fechaElegida.fechaSemana.getDay())
     let etiquetaTituloVal = document.getElementById("tituloVal")
 
     this.guardarCambioCapacidad = function () {
         let nuevaCapacidad = document.getElementById("capacidad").value
-        
+
         let etiquetaValidador = document.getElementById("validador")
         db.collection('turno').doc(this.fechaElegida.generarFormatoFechaBD() + "." + hora).update(
             {
                 capacidadTotal: parseInt(nuevaCapacidad)
-            }).then(r => {        
+            }).then(r => {
             }).catch(err => {
-                etiquetaTituloVal.innerHTML = ` Excepto:<br>`   
+                etiquetaTituloVal.innerHTML = ` Excepto:<br>`
                 etiquetaValidador.innerHTML += ` -Capacidad <br>`
             })
     }
@@ -36,7 +36,7 @@ GuardarCambios = function (dia, hora) {
                             profesor: codigoValorSelec
                         }).then(r => {
                         }).catch(err => {
-                            etiquetaTituloVal.innerHTML = ` Excepto:<br>`   
+                            etiquetaTituloVal.innerHTML = ` Excepto:<br>`
                             etiquetaValidador.innerHTML += ` -Profesor <br>`
                         })
                 });
@@ -51,8 +51,16 @@ GuardarCambios = function (dia, hora) {
             {
                 estado: nuevoEstado
             }).then(r => {
+                if (nuevoEstado == "Abierto") {
+                    let casilla = document.getElementById(`${dia}-${hora}`)
+                    casilla.style.backgroundColor = "#FFFFFF";
+                }
+                if (nuevoEstado == "Cerrado") {
+                    let casilla = document.getElementById(`${dia}-${hora}`)
+                    casilla.style.backgroundColor = "#FF0000";
+                }
             }).catch(err => {
-                etiquetaTituloVal.innerHTML = ` Excepto:<br>`   
+                etiquetaTituloVal.innerHTML = ` Excepto:<br>`
                 etiquetaValidador.innerHTML += ` -Turno <br>`
             })
     }
@@ -65,7 +73,7 @@ GuardarCambios = function (dia, hora) {
                 observaciones: observacion
             }).then(r => {
             }).catch(err => {
-                etiquetaTituloVal.innerHTML = ` Excepto:<br>`   
+                etiquetaTituloVal.innerHTML = ` Excepto:<br>`
                 etiquetaValidador.innerHTML += ` -Observación <br>`
             })
     }
@@ -82,6 +90,7 @@ GuardarCambios = function (dia, hora) {
             $(document).ready(function () {
                 $("#ventanaGuardado").modal("show");
             });
+            pintarTabla()
         }
     }
 }

@@ -8,6 +8,7 @@
 .primeraFila{
     color:	#FFFFFF;
     text-align:center; 
+    width:14.28% !important;
     background-color:	#689ACA; 
     vertical-align:middle;
 }
@@ -30,6 +31,11 @@
 
 .botonDentroDeCelda {
     width:100% !important;
-    height:100% !important; 
+    height:400% !important; 
     color:#FFFFFF !important;
+}
+
+
+.celdaTabla{
+    cursor: pointer
 }

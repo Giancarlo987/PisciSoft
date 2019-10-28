@@ -75,11 +75,12 @@
                 <div class="form-group row">
                         <h1 for="inputFecha" class="col-sm-2 col-form-label">Buscar semana:</h1>
                         <div class="col-sm-5">
-                                <select class="form-control" id="fechas">
+                                <select class="form-control" id="fechas" onchange="pintarTabla()">
                                 </select>
                         </div>
                         <div class="col-sm-5">
-                                <button type="button" class="btn btn-primary float-right" onclick="">Generar
+                                <button type="button" class="btn btn-primary float-right"
+                                        onclick="generadorTurnos()">Generar
                                         turnos para esta semana</button>
 
                         </div>
@@ -98,283 +99,207 @@
                 <tr>
                         <td class="primeraColumna"> 05:30 - 06:15 </td>
                         <!-- <td> <input type="button" value="Modify" onclick="AbrirPopup()"> </td> -->
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','5:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','5:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','5:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','5:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','5:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-5:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','5:30')"></td>
+                        <td id="Martes-5:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','5:30')"></td>
+                        <td id="Miercoles-5:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','5:30')"></td>
+                        <td id="Jueves-5:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','5:30')"></td>
+                        <td id="Viernes-5:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','5:30')"></td>
                         <td class="horarioCerrado"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 06:30 - 07:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','6:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','6:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','6:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','6:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','6:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Sabado','6:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-6:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','6:30')"></td>
+                        <td id="Martes-6:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','6:30')"></td>
+                        <td id="Miercoles-6:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','6:30')"></td>
+                        <td id="Jueves-6:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','6:30')"></td>
+                        <td id="Viernes-6:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','6:30')"></td>
+                        <td id="Sabado-6:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Sabado','6:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 07:30 - 08:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','7:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','7:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','7:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','7:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','7:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Sabado','7:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-7:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','7:30')"></td>
+                        <td id="Martes-7:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','7:30')"></td>
+                        <td id="Miercoles-7:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','7:30')"></td>
+                        <td id="Jueves-7:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','7:30')"></td>
+                        <td id="Viernes-7:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','7:30')"></td>
+                        <td id="Sabado-7:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Sabado','7:30')"></td>></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 08:30 - 09:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','8:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','8:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','8:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','8:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','8:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Sabado','8:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-8:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','8:30')"></td>
+                        <td id="Martes-8:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','8:30')"></td>
+                        <td id="Miercoles-8:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','8:30')"></td>
+                        <td id="Jueves-8:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','8:30')"></td>
+                        <td id="Viernes-8:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','8:30')"></td>
+                        <td id="Sabado-8:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Sabado','8:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 09:30 - 10:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','9:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','9:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','9:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','9:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="ventanaCambios" onclick="generarPop('Viernes','9:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Sabado','9:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-9:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','9:30')"></td>
+                        <td id="Martes-9:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','9:30')"></td>
+                        <td id="Miercoles-9:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','9:30')"></td>
+                        <td id="Jueves-9:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','9:30')"></td>
+                        <td id="Viernes-9:30" class="celdaTabla" data-toggle="modal" data-target="ventanaCambios"
+                                onclick="generarPop('Viernes','9:30')"></td>
+                        <td id="Sabado-9:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Sabado','9:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 10:30 - 11:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','10:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','10:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','10:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','10:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','10:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Sabado','10:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-10:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','10:30')" n></td>
+                        <td id="Martes-10:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','10:30')"></td>
+                        <td id="Miercoles-10:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','10:30')"></td>
+                        <td id="Jueves-10:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','10:30')"></td>
+                        <td id="Viernes-10:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','10:30')"></td>
+                        <td id="Sabado-10:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Sabado','10:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 11:30 - 12:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','11:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','11:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','11:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','11:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','11:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Sabado','11:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-11:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','11:30')"></td>
+                        <td id="Martes-11:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','11:30')"></td>
+                        <td id="Miercoles-11:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','11:30')"></td>
+                        <td id="Jueves-11:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','11:30')"></td>
+                        <td id="Viernes-11:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','11:30')"></td>
+                        <td id="Sabado-11:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Sabado','11:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 12:30 - 13:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','12:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','12:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','12:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','12:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','12:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Sabado','12:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-12:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','12:30')"></td>
+                        <td id="Martes-12:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','12:30')"></td>
+                        <td id="Miercoles-12:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','12:30')"></td>
+                        <td id="Jueves-12:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','12:30')"></td>
+                        <td id="Viernes-12:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','12:30')"></td>
+                        <td id="Sabado-12:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Sabado','12:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 13:30 - 14:15 </td>
                         <td class="horarioCerrado"></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','13:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','13:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Martes-13:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','13:30')"></td>
+                        <td id="Jueves-13:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','13:30')"></td>
                         <td class="horarioCerrado"></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','13:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Viernes-13:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','13:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 14:30 - 15:15 </td>
                         <td class="horarioCerrado"></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','14:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','14:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Martes-14:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','14:30')"></td>
+                        <td id="Jueves-14:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','14:30')"></td>
                         <td class="horarioCerrado"></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','14:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Viernes-14:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','14:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 15:30 - 16:15 </td>
                         <td class="horarioCerrado"></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','15:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','15:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Martes-15:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','15:30')"></td>
+                        <td id="Jueves-15:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','15:30')"></td>
                         <td class="horarioCerrado"></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','15:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Viernes-15:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','15:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 16:30 - 17:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','16:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','16:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','16:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','16:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','16:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-16:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','16:30')"></td>
+                        <td id="Martes-16:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','16:30')"></td>
+                        <td id="Miercoles-16:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','16:30')"></td>
+                        <td id="Jueves-16:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','16:30')"></td>
+                        <td id="Viernes-16:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','16:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 17:30 - 18:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','17:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','17:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','17:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','17:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','17:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-17:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','17:30')"></td>
+                        <td id="Martes-17:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','17:30')"></td>
+                        <td id="Miercoles-17:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','17:30')"></td>
+                        <td id="Jueves-17:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','17:30')"></td>
+                        <td id="Viernes-17:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','17:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 18:30 - 19:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','18:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','18:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','18:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','18:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','18:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-18:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','18:30')"></td>
+                        <td id="Martes-18:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','18:30')"></td>
+                        <td id="Miercoles-18:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','18:30')"></td>
+                        <td id="Jueves-18:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','18:30')"></td>
+                        <td id="Viernes-18:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','18:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 19:30 - 20:15 </td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Lunes','19:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Martes','19:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Miercoles','19:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Jueves','19:30')"
-                                        value="Modify">Boton</button></td>
-                        <td><button type="button" class="btn btn-link botonDentroDeCelda" data-toggle="modal"
-                                        data-target="#ventanaCambios" onclick="generarPop('Viernes','19:30')"
-                                        value="Modify">Boton</button></td>
+                        <td id="Lunes-19:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','19:30')"></td>
+                        <td id="Martes-19:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Martes','19:30')"></td>
+                        <td id="Miercoles-19:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','19:30')"></td>
+                        <td id="Jueves-19:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Jueves','19:30')"></td>
+                        <td id="Viernes-19:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Viernes','19:30')"></td>
                 </tr>
         </table>
 
@@ -520,6 +445,7 @@
         <script type="text/javascript" src="./Javascript/ConexionFirebase/conexion.js"></script>
         <script type="text/javascript" src="./Javascript/Validaciones/validacionNumero.js"></script>
         <script type="text/javascript" src="./Javascript/Formatos/fecha.js"></script>
+        <script type="text/javascript" src="./Javascript/Formatos/pintarTabla.js"></script>
         <script type="text/javascript" src="./Javascript/Modificadores/cambiosModificarHorarios.js"></script>
         <script type="text/javascript" src="./Javascript/Objetos/popUp.js"></script>
         <script type="text/javascript" src="./Javascript/modificarHorario.js"></script>

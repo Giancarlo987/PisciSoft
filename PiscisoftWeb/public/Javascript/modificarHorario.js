@@ -9,8 +9,8 @@ for (var i = 1; i < 3; i++) {
     let suma = hoy.getTime() + semanaEnMilisegundos * i;
     let fechaDentroDeUnaSemana = new Date(suma);
     let fechaInicio = new Fecha(fechaDentroDeUnaSemana, "Lunes");
-    let fechaFin = new Fecha(fechaDentroDeUnaSemana, "Sabado");
-    datosFechas.innerHTML += `<option> Del ${fechaInicio.generarFormatoFechaOriginal()} hasta el ${fechaFin.generarFormatoFechaOriginal()} </option>`;
+    let fechaFin = new Fecha(fechaDentroDeUnaSemana, "Domingo");
+    datosFechas.innerHTML += `<option value=${i}> Del ${fechaInicio.generarFormatoFechaOriginal()} hasta el ${fechaFin.generarFormatoFechaOriginal()} </option>`;
 }
 
 function generarPop(dia, hora) {
@@ -38,7 +38,7 @@ function generarPop(dia, hora) {
             g.guardarTodoCambios()
         } else {
             boton.setAttribute("data-dismiss", "")
-            divCapacidad.innerHTML = `Ingrese un valor númerico positivo`
+            divCapacidad.innerHTML = `Ingrese un valor númerico positivo y menor a 27`
             nuevaCapacidad.innerHTML = ""
         }
     }
@@ -47,7 +47,6 @@ function generarPop(dia, hora) {
 
 
 function habilitar() {
-    var hab;
     let capacidad = document.getElementById("capacidad")
     let observacion = document.getElementById("observacion")
     let listaDesplegableProfesores = document.getElementById("profesores")
@@ -60,19 +59,22 @@ function habilitar() {
     else if (estado == "Abierto") {
         hab1 = false
         hab2 = true
+        document.getElementById("observacion").value=""
     }
     capacidad.disabled = hab1;
     listaDesplegableProfesores.disabled = hab1;
     observacion.disabled = hab2;
 }
-//Arreglar esto, por el cambio de la base de datos
 
-// //diasSemana = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"]
-// function generadorTurnos() {
-//     diasSemana = ["Sabado"]
-//     for (var i = 0; i < diasSemana.length; i++) {
-//         let nuevosTurnos = new Fecha(hoy, diasSemana[i])
-//         nuevosTurnos.generarFormatoFecha()
-//         nuevosTurnos.generarTurno()
-//     }
-// }
+
+function generadorTurnos() { //Solo esta generando para la siguiente semana
+    diasSemana = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"]
+    for (var i = 0; i < diasSemana.length; i++) {
+        let suma = hoy.getTime() + semanaEnMilisegundos * 1;
+        let fechaDentroDeUnaSemana = new Date(suma);
+        let nuevosTurnos = new Fecha(fechaDentroDeUnaSemana, diasSemana[i])
+        nuevosTurnos.generarFormatoFechaBD()
+        nuevosTurnos.generarTurno()
+    }
+}
+//generadorTurnos()

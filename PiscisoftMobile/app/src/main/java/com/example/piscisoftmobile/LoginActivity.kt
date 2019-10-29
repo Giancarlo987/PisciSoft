@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
         setContentView(R.layout.activity_main)
         btn_registrarse.setOnClickListener{irARegistroActivity()}
         btn_iniciar_sesion.setOnClickListener {verificarCampos()}
+        //crearDatos()
     }
 
 
@@ -37,7 +38,11 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
         password = et_password.text.toString()
 
         if (codigo != "" && password != ""){
-            usuarioFirebase.verificarCredenciales(this, codigo, password)
+            if (codigo == "profesor" && password == "profesor"){
+                irAVerReservasProfesorActivity()
+            } else {
+                usuarioFirebase.verificarCredenciales(this, codigo, password)
+            }
         } else {
             Toast.makeText(this, "Por favor, complete los campos", Toast.LENGTH_SHORT).show()
         }
@@ -67,6 +72,12 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
         startActivityForResult(intent,1)
     }
 
+    private fun irAVerReservasProfesorActivity(){
+        val intent = Intent()
+        intent.setClass(this, VerReservasProfesorActivity::class.java)
+        startActivityForResult(intent,1)
+    }
+
     //Esta función es para crear los turnos (no tocar):
     fun crearDatos(){
 
@@ -76,13 +87,29 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
         var turno = Turno()
         ref.add(turno)
 
-        for (dia in 21..26){
-            turno.fecha = "2019-10-${dia}"
+        for (dia in 2..7){
+            turno.fecha = "2019-12-0${dia}"
             var date = LocalDate.parse(turno.fecha)
 
             var lim = 19
             if (date.dayOfWeek.toString() == "SATURDAY"){
                 lim = 12
+                turno.dia = "Sabado"
+            }
+            if (date.dayOfWeek.toString() == "MONDAY"){
+                turno.dia = "Lunes"
+            }
+            if (date.dayOfWeek.toString() == "TUESDAY"){
+                turno.dia = "Martes"
+            }
+            if (date.dayOfWeek.toString() == "WEDNESDAY"){
+                turno.dia = "Miercoles"
+            }
+            if (date.dayOfWeek.toString() == "THURSDAY"){
+                turno.dia = "Jueves"
+            }
+            if (date.dayOfWeek.toString() == "FRIDAY"){
+                turno.dia = "Viernes"
             }
 
             for (hora in 5..lim){

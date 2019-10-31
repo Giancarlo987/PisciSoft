@@ -4,11 +4,11 @@ function TablaUsuario(filtro, palabra) {
     if (filtro == true) {
         texto = palabra;
         fin = texto.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
-
     } else {
         texto = '1';
         fin = '9999999999999999999999999';
     }
+    
     db.collection("usuario").where(firebase.firestore.FieldPath.documentId(), ">=", texto).where(firebase.firestore.FieldPath.documentId(), "<", fin).onSnapshot((querySnapshot) => {
         tabla.innerHTML =''
         tabla.innerHTML = ` <thead>

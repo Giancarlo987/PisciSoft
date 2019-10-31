@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 crossorigin="anonymous">
-        <!-- <script type="text/javascript">
+        <script type="text/javascript">
                 function EatCookie() {
                         document.cookie = "Login=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/";
                         window.location.href = "https://piscisoft.firebaseapp.com";
@@ -29,7 +29,7 @@
                         }
                 }
                 window.onload = Verify;
-        </script> -->
+        </script>
         <title>Modificar horario</title>
 </head>
 
@@ -109,7 +109,8 @@
                                 onclick="generarPop('Jueves','5:30')"></td>
                         <td id="Viernes-5:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Viernes','5:30')"></td>
-                        <td class="horarioCerrado"></td>
+                        <td id="Sabado-5:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Sabado','5:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 06:30 - 07:15 </td>
@@ -218,34 +219,40 @@
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 13:30 - 14:15 </td>
-                        <td class="horarioCerrado"></td>
+                        <td id="Lunes-13:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','13:30')"></td>
                         <td id="Martes-13:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Martes','13:30')"></td>
+                        <td id="Miercoles-13:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','13:30')"></td>
                         <td id="Jueves-13:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Jueves','13:30')"></td>
-                        <td class="horarioCerrado"></td>
                         <td id="Viernes-13:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Viernes','13:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 14:30 - 15:15 </td>
-                        <td class="horarioCerrado"></td>
+                        <td id="Lunes-14:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','14:30')"></td>
                         <td id="Martes-14:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Martes','14:30')"></td>
+                        <td id="Miercoles-14:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','14:30')"></td>
                         <td id="Jueves-14:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Jueves','14:30')"></td>
-                        <td class="horarioCerrado"></td>
                         <td id="Viernes-14:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Viernes','14:30')"></td>
                 </tr>
                 <tr>
                         <td class="primeraColumna"> 15:30 - 16:15 </td>
-                        <td class="horarioCerrado"></td>
+                        <td id="Lunes-15:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Lunes','15:30')"></td>
                         <td id="Martes-15:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Martes','15:30')"></td>
+                        <td id="Miercoles-15:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
+                                onclick="generarPop('Miercoles','15:30')"></td>
                         <td id="Jueves-15:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Jueves','15:30')"></td>
-                        <td class="horarioCerrado"></td>
                         <td id="Viernes-15:30" class="celdaTabla" data-toggle="modal" data-target="#ventanaCambios"
                                 onclick="generarPop('Viernes','15:30')"></td>
                 </tr>
@@ -446,7 +453,7 @@
         <script type="text/javascript" src="./Javascript/Validaciones/validacionNumero.js"></script>
         <script type="text/javascript" src="./Javascript/Formatos/fecha.js"></script>
         <script type="text/javascript" src="./Javascript/Formatos/pintarTabla.js"></script>
-        <script type="text/javascript" src="./Javascript/Modificadores/cambiosModificarHorarios.js"></script>
+        <script type="text/javascript" src="./Javascript/ClasesFirebase/TurnoWeb.js"></script>
         <script type="text/javascript" src="./Javascript/Objetos/popUp.js"></script>
         <script type="text/javascript" src="./Javascript/modificarHorario.js"></script>
 </body>

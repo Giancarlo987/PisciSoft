@@ -17,7 +17,7 @@ function generarPop(dia, hora) {
     let divCapacidad = document.getElementById("divCapacidad")
     let divObservacion = document.getElementById("divObservacion")
     let p = new PopUpModificarUsuario(dia, hora);
-    let g = new GuardarCambios(dia, hora)
+    let t = new TurnoWeb(dia, hora)
     divCapacidad.innerHTML = ``
     divObservacion.innerHTML = ``
     p.mostrarDatosenPopUp()
@@ -26,16 +26,23 @@ function generarPop(dia, hora) {
     boton.onclick = function () {
         let nuevaCapacidad = document.getElementById("capacidad").value
 
-        let observacion = document.getElementById("observacion").value
+        let listaDesplegableProfesor = document.getElementById("profesores");
+        let nuevoProfesor = listaDesplegableProfesor.options[listaDesplegableProfesor.selectedIndex].value;
+
         let listaDesplegableEstado = document.getElementById("estado");
         let nuevoEstado = listaDesplegableEstado.options[listaDesplegableEstado.selectedIndex].value;
+
+
+
+        let observacion = document.getElementById("observacion").value
         if (nuevoEstado == "Cerrado" && observacion == "") {
             boton.setAttribute("data-dismiss", "")
             divObservacion.innerHTML = "Ingrese una observación"
         }
         else if (validarNumero(nuevaCapacidad) == 1) {
             boton.setAttribute("data-dismiss", "modal")
-            g.guardarTodoCambios()
+            
+            t.guardarTodoCambios(nuevaCapacidad, nuevoProfesor, nuevoEstado, observacion)
         } else {
             boton.setAttribute("data-dismiss", "")
             divCapacidad.innerHTML = `Ingrese un valor númerico positivo y menor a 27`

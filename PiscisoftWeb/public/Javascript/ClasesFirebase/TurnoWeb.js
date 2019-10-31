@@ -1,13 +1,10 @@
-GuardarCambios = function (dia, hora) {
+TurnoWeb = function (dia, hora) {
     this.dia = dia
     this.hora = hora
     this.fechaElegida = generarFecha(dia)
-    //console.log(this.fechaElegida.fechaSemana.getDay())
     let etiquetaTituloVal = document.getElementById("tituloVal")
 
-    this.guardarCambioCapacidad = function () {
-        let nuevaCapacidad = document.getElementById("capacidad").value
-
+    this.guardarCambioCapacidad = function (nuevaCapacidad) {
         let etiquetaValidador = document.getElementById("validador")
         db.collection('turno').doc(this.fechaElegida.generarFormatoFechaBD() + "." + hora).update(
             {
@@ -19,9 +16,7 @@ GuardarCambios = function (dia, hora) {
             })
     }
 
-    this.guardarCambioProfesor = function () {
-        let listaDesplegableProfesor = document.getElementById("profesores");
-        let nuevoProfesor = listaDesplegableProfesor.options[listaDesplegableProfesor.selectedIndex].value;
+    this.guardarCambioProfesor = function (nuevoProfesor) {
         let etiquetaValidador = document.getElementById("validador")
         let codigoValorSelec = 10
         db.collection("profesor").where("nombre", "==", nuevoProfesor).get()
@@ -43,9 +38,7 @@ GuardarCambios = function (dia, hora) {
             })
     }
 
-    this.cambiarTurno = function () {
-        let listaDesplegableEstado = document.getElementById("estado");
-        let nuevoEstado = listaDesplegableEstado.options[listaDesplegableEstado.selectedIndex].value;
+    this.cambiarTurno = function (nuevoEstado) {
         let etiquetaValidador = document.getElementById("validador")
         db.collection('turno').doc(this.fechaElegida.generarFormatoFechaBD() + "." + hora).update(
             {
@@ -65,8 +58,8 @@ GuardarCambios = function (dia, hora) {
             })
     }
 
-    this.guardarObservacion = function () {
-        let observacion = document.getElementById("observacion").value
+    this.guardarObservacion = function (observacion) {
+        
         let etiquetaValidador = document.getElementById("validador")
         db.collection('turno').doc(this.fechaElegida.generarFormatoFechaBD() + "." + hora).update(
             {
@@ -80,11 +73,11 @@ GuardarCambios = function (dia, hora) {
 
 
 
-    this.guardarTodoCambios = function () {
-        this.guardarCambioProfesor()
-        this.guardarCambioCapacidad()
-        this.guardarObservacion()
-        this.cambiarTurno()
+    this.guardarTodoCambios = function (nuevaCapacidad,nuevoProfesor,nuevoEstado,observacion) {
+        this.guardarCambioProfesor(nuevoProfesor)
+        this.guardarCambioCapacidad(nuevaCapacidad)
+        this.guardarObservacion(observacion)
+        this.cambiarTurno(nuevoEstado)
         if (true) {
             document.getElementById("ventanaCambios").style.display = "none";
             $(document).ready(function () {

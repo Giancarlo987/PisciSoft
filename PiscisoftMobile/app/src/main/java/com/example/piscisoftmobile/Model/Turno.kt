@@ -11,5 +11,6 @@ data class Turno(
     var estado:String? = null,
     var observaciones: String? = null,
     var profesor:Int? = null,
-    var id:String? = null
+    var id:String? = null,
+    var dia:String? = null
 ): Serializable

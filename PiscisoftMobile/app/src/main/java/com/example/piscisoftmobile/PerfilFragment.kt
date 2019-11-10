@@ -60,14 +60,14 @@ class PerfilFragment : Fragment(), OnDataFinishedListener {
     private fun obtenerUsuarioLogueado():String?{
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("login",Context.MODE_PRIVATE)
         var userID = sharedPreferences.getString("userID","")
-        Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
+        //Toast.makeText( context, userID, Toast.LENGTH_SHORT).show()
         return userID
     }
 
 
     private fun irModificarActivity(){
         val intent = Intent()
-        intent.setClass(mContext, VerReservasProfesorActivity::class.java)
+        intent.setClass(mContext, ModificarActivity::class.java)
         startActivity(intent)
     }
 }

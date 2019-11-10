@@ -28,6 +28,8 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         this.codigoUsuario = codigoUsuario
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view : View = LayoutInflater.from(mContext).inflate(R.layout.item_reserva,parent,false)
         return ViewHolder(view)
@@ -43,6 +45,18 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
             holder.item_estado.text = "Pendiente"
             holder.item_estado.setTextColor(Color.BLUE)
         }
+        else if (reserva.estado == "Inasistida"){
+            holder.item_estado.text = "Inasistida"
+            holder.item_estado.setTextColor(Color.RED)
+        }
+        else if (reserva.estado == "Justificada"){
+            holder.item_estado.text = "Justificada"
+            holder.item_estado.setTextColor(Color.BLUE)
+        }
+        else if (reserva.estado == "Cancelada"){
+            holder.item_estado.text = "Cancelada"
+            holder.item_estado.setTextColor(Color.BLUE)
+        }
         turnoFirebase.obtenerTurnoByCodigo(this, reserva.codTurno!!, holder, position, reserva)
     }
 
@@ -53,9 +67,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         holder.item_fecha.text = fechaF
         holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
         colocarProfesor(holder,position,turno.profesor.toString())
-
         holder.item_holder.setOnClickListener{irDetalleReservaActivity(reserva,holder.item_profesor.text.toString(),turno)}
-
     }
 
     fun irDetalleReservaActivity(reserva:Reserva,profesor:String,turno:Turno){

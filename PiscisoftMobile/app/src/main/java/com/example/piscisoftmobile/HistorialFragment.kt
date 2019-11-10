@@ -46,7 +46,6 @@ class HistorialFragment : Fragment() , OnDataFinishedListener {
         }
     }
 
-
     fun setRecyclerAdapter(listaReservas:List<Reserva>){
         val recyclerView: RecyclerView = reservas_recycler_view
         recyclerView.layoutManager = LinearLayoutManager(mContext)

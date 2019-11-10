@@ -1,0 +1,13 @@
+#table-scroll {
+    height:160px;
+    overflow:auto;  
+    margin-top:1px;
+    width: 90%;
+  }
+
+
+  .tableFixHead          { overflow-y: auto; height: 160px; }
+  .tableFixHead thead th { position: sticky; top: 0; }
+  table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:  #689ACA; }

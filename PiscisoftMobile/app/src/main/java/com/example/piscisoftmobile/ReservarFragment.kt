@@ -23,6 +23,8 @@ import java.time.LocalDateTime
 import java.time.Month
 import java.time.Year
 import java.time.format.DateTimeFormatter
+import java.time.temporal.WeekFields
+import java.util.*
 
 class ReservarFragment : Fragment() , OnDataFinishedListener {
 
@@ -49,7 +51,7 @@ class ReservarFragment : Fragment() , OnDataFinishedListener {
             if (validarFechaVigente(year, month, dayOfMonth)){
                 turnoFirebase.existenTurnosRegistrados(this,fecha)
             } else {
-                Toast.makeText( context, "Esa fecha ya pasó", Toast.LENGTH_SHORT).show()
+                Toast.makeText( context, "Escoja otra fecha por favor", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -58,6 +60,7 @@ class ReservarFragment : Fragment() , OnDataFinishedListener {
     }
 
     fun validarFechaVigente(year:Int, month:Int, dayOfMonth:Int) : Boolean{
+
         var dia = ""
         var mes = ""
 
@@ -75,10 +78,18 @@ class ReservarFragment : Fragment() , OnDataFinishedListener {
         fecha = "${year}-${mes}-${dia}"
 
         this.hoy = LocalDate.now()
+        //this.hoy = LocalDate.of(2019,11,1) // Simular que es viernes
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         this.fechaEscogida = LocalDate.parse(fecha, formatter)
 
-        if (fechaEscogida.isBefore(hoy)){
+        val woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear()
+        val weekHoy = hoy.get(woy)
+        val weekEscogida = fechaEscogida.get(woy)
+
+        if (fechaEscogida.isBefore(hoy) || weekHoy!=weekEscogida){
+            if ((hoy.dayOfWeek.toString() == "FRIDAY" || hoy.dayOfWeek.toString() == "SATURDAY") && (weekHoy==(weekEscogida-1))) {
+                return true
+            }
             return false
         }
         return true

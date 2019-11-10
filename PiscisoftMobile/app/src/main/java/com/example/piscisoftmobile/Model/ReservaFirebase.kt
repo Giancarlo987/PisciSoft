@@ -17,7 +17,7 @@ class ReservaFirebase {
 
     fun existeReservaEsteDia(listener:OnDataFinishedListener, codUsuario: String, codTurno: String){ //Verificar si existe reserva este día
         var fechaANoRepetir = codTurno.substring(0, 10)
-        val query = ref.whereEqualTo("codUsuario",codUsuario)
+        val query = ref.whereEqualTo("codUsuario",codUsuario).whereEqualTo("estado","Pendiente")
         query.get()
             .addOnSuccessListener { documents ->
                 var existe = false
@@ -58,7 +58,7 @@ class ReservaFirebase {
             }
     }
 
-    fun actualizarReservas(listener: OnDataFinishedListener, codigo:String){
+    fun actualizarReservas(codigo:String){
         val query = ref.whereEqualTo("codUsuario",codigo)
         query.get()
             .addOnSuccessListener { documents ->
@@ -70,7 +70,7 @@ class ReservaFirebase {
                         reservasAEvaluar.add(reserva)
                     }
                 }
-                verificarReservaInasistida(listener,reservasAEvaluar)
+                verificarReservaInasistida(reservasAEvaluar)
 
             }
             .addOnFailureListener { exception ->
@@ -78,7 +78,7 @@ class ReservaFirebase {
             }
     }
 
-    fun verificarReservaInasistida(listener: OnDataFinishedListener, reservasAEvaluar:MutableList<Reserva>){
+    fun verificarReservaInasistida(reservasAEvaluar:MutableList<Reserva>){
         for (reserva in reservasAEvaluar){
             val query = db.collection("turno").document(reserva.codTurno!!)
             query.get()
@@ -92,7 +92,6 @@ class ReservaFirebase {
                     Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
                 }
         }
-        listener.OnActualizacionFinished()
     }
 
     fun reservaInasistida(horaInicio:String,fechaTurno:String):Boolean{
@@ -143,9 +142,10 @@ class ReservaFirebase {
                 Log.d("ERROR EN FIREBASE", "get failed with ", exception)
             }
     }
-    fun eliminarReserva(reserva:Reserva){
+
+    fun cancelarReserva(reserva:Reserva){
         turnoFirebase.actualizarCapacidad(reserva.codTurno!!, "Aumentar")
-        ref.document(reserva.codReserva!!).delete()
+        ref.document(reserva.codReserva!!).update("estado","Cancelada")
     }
 
 }

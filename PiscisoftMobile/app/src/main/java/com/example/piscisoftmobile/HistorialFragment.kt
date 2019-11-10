@@ -32,14 +32,11 @@ class HistorialFragment : Fragment() , OnDataFinishedListener {
 
         val root = inflater.inflate(R.layout.fragment_historial, container, false)
         codigoUsuario = retornarUserID()
-        reservaFirebase.actualizarReservas(this, codigoUsuario)
+        reservaFirebase.obtenerReservasByUsuario(this, codigoUsuario)
         mContext = root.context
         return root
     }
 
-    override fun OnActualizacionFinished() {
-        reservaFirebase.obtenerReservasByUsuario(this, codigoUsuario)
-    }
 
     override fun OnListaReservasDataFinished(listaReservas : List<Reserva>) {
         if (listaReservas.isEmpty()){

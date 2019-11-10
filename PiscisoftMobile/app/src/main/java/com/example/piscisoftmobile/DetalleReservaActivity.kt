@@ -1,5 +1,6 @@
 package com.example.piscisoftmobile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -11,6 +12,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 import kotlinx.android.synthetic.main.activity_detalle_reserva.*
 import java.lang.Exception
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class DetalleReservaActivity : AppCompatActivity() , OnDataFinishedListener {
 
@@ -66,7 +68,27 @@ class DetalleReservaActivity : AppCompatActivity() , OnDataFinishedListener {
 
     fun cancelarReserva(reserva: Reserva){
         // Si no es hoy se elimina
-        reservaFirebase.eliminarReserva(reserva)
-        Toast.makeText(this, "Cancelar la reserva", Toast.LENGTH_SHORT).show()
+        val hoy = LocalDate.now()
+        val formato = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val fechaTurno = LocalDate.parse(turno.fecha, formato)
+
+        irAJustificarActivity()
+        /**
+        if (fechaTurno.isEqual(hoy)){
+            irAJustificarActivity()
+        }
+
+        else {
+            reservaFirebase.cancelarReserva(reserva)
+            Toast.makeText(this, "¡Reserva cancelada!", Toast.LENGTH_SHORT).show()
+        }**/
+    }
+
+    fun irAJustificarActivity(){
+        val intent = Intent()
+        intent.setClass(this, JustificarActivity::class.java)
+        intent.putExtra("reserva",reserva)
+        intent.putExtra("turno",turno)
+        startActivityForResult(intent,1)
     }
 }

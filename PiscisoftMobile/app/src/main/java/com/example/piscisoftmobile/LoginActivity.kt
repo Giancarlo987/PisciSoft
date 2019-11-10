@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
                 Context.MODE_PRIVATE).edit()
             editor.putString("userID",codigo)
             editor.apply()
+            reservaFirebase.actualizarReservas(codigo)
             irAPerfilActivity()
         } else {
             Toast.makeText(this, "Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show()
@@ -80,7 +81,6 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
 
     //Esta función es para crear los turnos (no tocar):
     fun crearDatos(){
-
         val db = FirebaseFirestore.getInstance()
         val ref = db.collection("turno")
 
@@ -129,7 +129,6 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
                 }
                 turno.id = turno.fecha +"."+ turno.horaInicio
                 ref.document(turno.fecha +"."+ turno.horaInicio).set(turno)
-
             }
         }
 

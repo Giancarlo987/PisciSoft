@@ -25,6 +25,7 @@ class VerReservasProfesorActivity : AppCompatActivity() , OnDataFinishedListener
     val turnoFirebase = TurnoFirebase()
     val reservaFirebase = ReservaFirebase()
     var horarios = mutableListOf<String>()
+    //var hoy = LocalDate.of(2019,10,29).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
     var hoy = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +44,7 @@ class VerReservasProfesorActivity : AppCompatActivity() , OnDataFinishedListener
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                Toast.makeText(this@VerReservasProfesorActivity, horarios[position].substring(0, horarios[position]?.indexOf(" ")!!)!!, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@VerReservasProfesorActivity, horarios[position].substring(0, horarios[position]?.indexOf(" ")!!)!!, Toast.LENGTH_SHORT).show()
                 var codTurno = hoy + "." + horarios[position].substring(0, horarios[position]?.indexOf(" ")!!)!!
                 reservaFirebase.obtenerReservasEnTurno(this@VerReservasProfesorActivity, codTurno)
             }
@@ -52,12 +53,8 @@ class VerReservasProfesorActivity : AppCompatActivity() , OnDataFinishedListener
     }
 
     fun setSpinner(horarios:List<String>){
-        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, horarios)
+        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, horarios)
         spinner.adapter = arrayAdapter
-
-        //RICARDO Agregar más espacio entre los horarios que aparecen en el spinner:
-        // https://android--code.blogspot.com/2015/08/android-spinner-text-padding.html
-
     }
 
     override fun OnListaReservasDataFinished(listaReservas : List<Reserva>) {

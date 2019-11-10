@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Reserva pendiente"
+                android:text="Detalle de la reserva"
                 android:textAlignment="gravity"
                 android:textSize="25dp" />
 
@@ -46,10 +46,10 @@
             android:background="@android:color/darker_gray"/>
 
         <LinearLayout
-            android:layout_width="303dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="70dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="40dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Nombre:" />
+                android:text="Nombre: " />
 
             <TextView
                 android:id="@+id/codigo"
@@ -103,28 +103,31 @@
                 android:layout_marginBottom="50px"
                 android:text="Modalidad: " />
 
+            <TextView
+                android:id="@+id/tv_justificacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <ImageView
                 android:id="@+id/imageView_QR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="177dp"
+                android:layout_height="176dp"
                 android:layout_marginTop="50px"
                 app:layout_constraintTop_toTopOf="@+id/horario"
                 tools:srcCompat="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="187dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/boton_naranja"
+                android:text="Cancelar Reserva"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white" />
 
 
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnCancelar"
-        android:layout_width="187dp"
-        android:layout_height="38dp"
-        android:layout_marginRight="200px"
-        android:layout_marginBottom="100px"
-        android:background="@drawable/boton_naranja"
-        android:text="Cancelar Reserva"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

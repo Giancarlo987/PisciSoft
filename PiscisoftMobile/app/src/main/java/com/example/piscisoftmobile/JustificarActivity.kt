@@ -19,9 +19,11 @@ import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Handler
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
+import com.example.piscisoftmobile.Model.ReservaFirebase
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
@@ -42,6 +44,7 @@ class JustificarActivity : AppCompatActivity() {
     lateinit var justificacion : Justificacion
     var PICK_IMAGE_REQUEST = 71
     lateinit var bitmap : Bitmap
+    val reservaFirebase = ReservaFirebase()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,6 +103,7 @@ class JustificarActivity : AppCompatActivity() {
             justificacion.fechaEnvio = LocalDate.now().format(formato)
             justificacion.motivo = et_motivo.text.toString()
             justificacion.estado = "Enviada"
+            justificacion.codUsuario = reserva.codUsuario
             subirEvidencia()
 
 
@@ -115,7 +119,7 @@ class JustificarActivity : AppCompatActivity() {
         storageRef = FirebaseStorage.getInstance().reference.child("evidence").child(reserva.codReserva + "_" + timeStamp)
 
         val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 150, baos)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
 
         var uploadTask = storageRef.putBytes(data)
@@ -130,8 +134,25 @@ class JustificarActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 justificacion.fotoDocumento = task.result.toString()
                 FirebaseFirestore.getInstance().collection("justificacion").add(justificacion)
+                reservaFirebase.cancelarReserva(true,reserva)
+                Toast.makeText(this, "¡Justificación enviada!", Toast.LENGTH_SHORT).show()
+
+                Handler().postDelayed(
+                    {
+                        irAPerfil()
+                    },
+                    1000 // value in milliseconds
+                )
             }
         }
     }
+
+    fun irAPerfil() {
+        val intent = Intent()
+        intent.setClass(this, SesionActivity::class.java)
+        startActivityForResult(intent,1)
+    }
+
+
 
 }

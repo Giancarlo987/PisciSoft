@@ -143,9 +143,13 @@ class ReservaFirebase {
             }
     }
 
-    fun cancelarReserva(reserva:Reserva){
+    fun cancelarReserva(justificada:Boolean,reserva:Reserva){
+        if (justificada){
+            ref.document(reserva.codReserva!!).update("estado","Justificada")
+        } else {
+            ref.document(reserva.codReserva!!).update("estado","Cancelada")
+        }
         turnoFirebase.actualizarCapacidad(reserva.codTurno!!, "Aumentar")
-        ref.document(reserva.codReserva!!).update("estado","Cancelada")
     }
 
 }

@@ -1,0 +1,39 @@
+.pag_btn {
+    border: solid 1px;
+    border-color: rgb(0, 0, 255);
+    color: rgb(0, 0, 255);
+    background-color: rgb(255, 255, 255);
+}
+
+.pag_num {
+    margin: 15px;
+    padding: 15px;
+    
+}
+
+.pag_selec {
+    margin: 15px;
+    padding: 15px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(74, 85, 250);
+    
+}
+
+.primeraFila{
+    color:	#FFFFFF;
+    text-align:center; 
+    background-color:	#689ACA; 
+    vertical-align:middle;
+}
+
+.celdaInicial{
+    vertical-align:middle; 
+    color:	#FFFFFF;
+}
+
+.botonInicial{
+    color:	#FFFFFF !important; 
+}
+.imagenIncial{
+    vertical-align:middle;
+}

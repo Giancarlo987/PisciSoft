@@ -28,6 +28,8 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         this.codigoUsuario = codigoUsuario
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view : View = LayoutInflater.from(mContext).inflate(R.layout.item_reserva,parent,false)
         return ViewHolder(view)
@@ -42,6 +44,10 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         if (reserva.estado == "Pendiente"){
             holder.item_estado.text = "Pendiente"
             holder.item_estado.setTextColor(Color.BLUE)
+        }
+        else if (reserva.estado == "Inasistida"){
+            holder.item_estado.text = "Inasistida"
+            holder.item_estado.setTextColor(Color.RED)
         }
         turnoFirebase.obtenerTurnoByCodigo(this, reserva.codTurno!!, holder, position, reserva)
     }

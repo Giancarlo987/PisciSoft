@@ -32,11 +32,14 @@ class HistorialFragment : Fragment() , OnDataFinishedListener {
 
         val root = inflater.inflate(R.layout.fragment_historial, container, false)
         codigoUsuario = retornarUserID()
-        reservaFirebase.obtenerReservasByUsuario(this, codigoUsuario)
+        reservaFirebase.actualizarReservas(this, codigoUsuario)
         mContext = root.context
         return root
     }
 
+    override fun OnActualizacionFinished() {
+        reservaFirebase.obtenerReservasByUsuario(this, codigoUsuario)
+    }
 
     override fun OnListaReservasDataFinished(listaReservas : List<Reserva>) {
         if (listaReservas.isEmpty()){
@@ -45,7 +48,6 @@ class HistorialFragment : Fragment() , OnDataFinishedListener {
             setRecyclerAdapter(listaReservas)
         }
     }
-
 
     fun setRecyclerAdapter(listaReservas:List<Reserva>){
         val recyclerView: RecyclerView = reservas_recycler_view

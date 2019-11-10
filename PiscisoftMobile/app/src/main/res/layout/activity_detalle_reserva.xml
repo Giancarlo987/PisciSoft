@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Reserva pendiente"
+                android:text="Detalle de la reserva"
                 android:textAlignment="gravity"
                 android:textSize="25dp" />
 

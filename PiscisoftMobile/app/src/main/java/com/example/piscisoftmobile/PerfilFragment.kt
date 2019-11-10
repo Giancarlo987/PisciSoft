@@ -67,7 +67,7 @@ class PerfilFragment : Fragment(), OnDataFinishedListener {
 
     private fun irModificarActivity(){
         val intent = Intent()
-        intent.setClass(mContext, VerReservasProfesorActivity::class.java)
+        intent.setClass(mContext, ModificarActivity::class.java)
         startActivity(intent)
     }
 }

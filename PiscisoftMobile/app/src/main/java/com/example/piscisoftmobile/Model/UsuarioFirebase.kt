@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.piscisoftmobile.*
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_modificar.*
 
 class UsuarioFirebase  {
     val db = FirebaseFirestore.getInstance()
@@ -87,4 +88,17 @@ class UsuarioFirebase  {
             }
     }
 
+    fun obtenerUsuarioById(listener: ModificarActivity, userID: String) {
+        val query = ref.whereEqualTo("codigo",userID)
+        query.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val usuario = document.toObject(Usuario::class.java)
+                    listener.OnUserDataFinished(usuario)
+                }
+            }
+            .addOnFailureListener{ exception ->
+                Log.d("ERROR EN FIREBASE", "get failed with ", exception)
+            }
+    }
 }

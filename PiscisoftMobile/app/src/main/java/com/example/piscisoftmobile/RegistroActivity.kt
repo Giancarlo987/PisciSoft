@@ -105,7 +105,7 @@ class RegistroActivity : AppCompatActivity() {
         return false
     }
 
-    // FUNCION PARA AVIISAR DE UN ERROR DE REGISTRO POR FALTA DE DATOS
+    // FUNCION PARA AVISAR DE UN ERROR DE REGISTRO POR FALTA DE DATOS
     private fun avisar(razon : String) {
         Toast.makeText(this, "Por favor, ingrese ${razon}", Toast.LENGTH_SHORT).show()
     }

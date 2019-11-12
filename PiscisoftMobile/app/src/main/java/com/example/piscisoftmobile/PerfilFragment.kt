@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detalle_reserva.*
 import kotlinx.android.synthetic.main.fragment_perfil.*
+import kotlinx.android.synthetic.main.fragment_ver_reserva_detalle.*
 import java.net.URL
 
 
@@ -34,11 +35,13 @@ class PerfilFragment : Fragment(), OnDataFinishedListener {
 
         val root = inflater.inflate(R.layout.fragment_perfil, container, false)
         val btn_modificar: Button = root.findViewById(R.id.btn_modificar)
-        btn_modificar.setOnClickListener { irModificarActivity() }
+
 
         val userID = obtenerUsuarioLogueado()
         val usuarioFirebase = UsuarioFirebase()
         usuarioFirebase.obtenerUsuarioById(this,userID!!)
+
+        btn_modificar.setOnClickListener { irModificarActivity( userID) }
 
         mContext = root.context
         return root
@@ -65,8 +68,9 @@ class PerfilFragment : Fragment(), OnDataFinishedListener {
     }
 
 
-    private fun irModificarActivity(){
+    private fun irModificarActivity(userID : String){
         val intent = Intent()
+        intent.putExtra("userID",userID)
         intent.setClass(mContext, ModificarActivity::class.java)
         startActivity(intent)
     }

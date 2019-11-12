@@ -2,24 +2,24 @@ package com.example.piscisoftmobile
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.piscisoftmobile.Model.Horario
-import com.example.piscisoftmobile.Model.Profesor
-import com.example.piscisoftmobile.Model.Reserva
-import com.example.piscisoftmobile.Model.Turno
+import com.example.piscisoftmobile.Model.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.item_reserva.view.*
+import java.time.LocalDate
 
-class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.ViewHolder> {
-    private lateinit var mContext: Context
-    private lateinit var listaReservas : List<Reserva>
-    private lateinit var codigoUsuario: String
+class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.ViewHolder> , OnDataFinishedListener {
+    private var mContext: Context
+    private var listaReservas : List<Reserva>
+    private var codigoUsuario: String
     val intent = Intent()
 
+    val turnoFirebase = TurnoFirebase()
     val db = FirebaseFirestore.getInstance()
 
     constructor(mContext: Context, listaReservas: List<Reserva>, codigoUsuario: String) : super() {
@@ -27,6 +27,8 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         this.listaReservas = listaReservas
         this.codigoUsuario = codigoUsuario
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view : View = LayoutInflater.from(mContext).inflate(R.layout.item_reserva,parent,false)
@@ -37,45 +39,42 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         return listaReservas.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int){
         val reserva: Reserva = listaReservas.get(position)
-
         if (reserva.estado == "Pendiente"){
             holder.item_estado.text = "Pendiente"
-        }else{
-            holder.item_estado.text = "Asistió"
+            holder.item_estado.setTextColor(Color.BLUE)
         }
-
-        db.collection("turno").document(reserva.codTurno.toString())
-            .get().addOnSuccessListener { document ->
-                val turno = document.toObject(Turno::class.java)
-                holder.item_fecha.text = turno!!.fecha.toString()
-                db.collection("horario").document(turno.codHorario.toString())
-                    .get().addOnSuccessListener { document ->
-                        val horario = document.toObject(Horario::class.java)
-                        holder.item_hora.text = horario!!.horaInicio + " - " + horario!!.horaFin
-                        colocarProfesor(holder,position,horario.codProfesor.toString())
-                    }
-            }
-
-        //Ver reserva
-        holder.item_holder.setOnClickListener {
-            irDetalleReserva(holder.item_fecha.text.toString(),
-                holder.item_hora.text.toString(),
-                holder.item_profesor.text.toString(),
-                reserva.modalidad.toString(),
-                reserva.estado.toString()) }
-
+        else if (reserva.estado == "Inasistida"){
+            holder.item_estado.text = "Inasistida"
+            holder.item_estado.setTextColor(Color.RED)
+        }
+        else if (reserva.estado == "Justificada"){
+            holder.item_estado.text = "Justificada"
+            holder.item_estado.setTextColor(Color.BLUE)
+        }
+        else if (reserva.estado == "Cancelada"){
+            holder.item_estado.text = "Cancelada"
+            holder.item_estado.setTextColor(Color.BLUE)
+        }
+        turnoFirebase.obtenerTurnoByCodigo(this, reserva.codTurno!!, holder, position, reserva)
     }
 
-    fun irDetalleReserva(fecha: String, hora: String, profesor: String, modalidad: String, estado: String) {
+    override fun OnTurnoDataFinished(turno:Turno, holder: ViewHolder, position: Int, reserva:Reserva) {
+
+        var date = LocalDate.parse(turno!!.fecha.toString())
+        var fechaF = "Fecha: ${date.dayOfMonth}/${date.monthValue}/${date.year}"
+        holder.item_fecha.text = fechaF
+        holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+        colocarProfesor(holder,position,turno.profesor.toString())
+        holder.item_holder.setOnClickListener{irDetalleReservaActivity(reserva,holder.item_profesor.text.toString(),turno)}
+    }
+
+    fun irDetalleReservaActivity(reserva:Reserva,profesor:String,turno:Turno){
         val intent = Intent()
-        intent.putExtra("fecha",fecha)
-        intent.putExtra("hora",hora)
+        intent.putExtra("reserva",reserva)
         intent.putExtra("profesor",profesor)
-        intent.putExtra("modalidad",modalidad)
-        intent.putExtra("estado", estado)
-        intent.putExtra("codigo",this.codigoUsuario)
+        intent.putExtra("turno",turno)
         intent.setClass(mContext, DetalleReservaActivity::class.java)
         mContext.startActivity(intent)
     }
@@ -84,7 +83,7 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         db.collection("profesor").document(codProfesor)
             .get().addOnSuccessListener { document ->
                 val profesor = document.toObject(Profesor::class.java)
-                holder.item_profesor.text = profesor!!.nombre
+                holder.item_profesor.text = "Profesor(a): "+profesor!!.nombre
             }
     }
 

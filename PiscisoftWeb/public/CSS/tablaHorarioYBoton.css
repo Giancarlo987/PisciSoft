@@ -1,0 +1,41 @@
+.primeraColumna{
+    color:	#FFFFFF; 
+    text-align:center; 
+    background-color: #999999;
+    vertical-align:middle !important;
+
+}
+.primeraFila{
+    color:	#FFFFFF;
+    text-align:center; 
+    width:14.28% !important;
+    background-color:	#689ACA; 
+    vertical-align:middle;
+}
+
+.horarioCerrado{
+    color:	#FFFFFF;
+    text-align:center; 
+    background-color:	#000000; 
+    vertical-align:middle !important;
+}
+
+.celdaInicial{
+    vertical-align:middle; 
+    color:	#FFFFFF;
+}
+
+.botonNaranja{
+    background: #FC663D !important;
+}
+
+.botonDentroDeCelda {
+    width:100% !important;
+    height:400% !important; 
+    color:#FFFFFF !important;
+}
+
+
+.celdaTabla{
+    cursor: pointer
+}

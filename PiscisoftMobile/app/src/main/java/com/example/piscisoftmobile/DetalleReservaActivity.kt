@@ -1,79 +1,131 @@
 package com.example.piscisoftmobile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import com.example.piscisoftmobile.Model.Usuario
+import com.example.piscisoftmobile.Model.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import kotlinx.android.synthetic.main.activity_detalle_reserva.*
 import java.lang.Exception
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-class DetalleReservaActivity : AppCompatActivity() {
+class DetalleReservaActivity : AppCompatActivity() , OnDataFinishedListener {
 
-    val db = FirebaseFirestore.getInstance()
-    val ref = db.collection("usuario")
+    val usuarioFirebase = UsuarioFirebase()
+    val reservaFirebase = ReservaFirebase()
+    lateinit var reserva : Reserva
+    lateinit var turno : Turno
+    lateinit var profesor : String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_reserva)
 
-        var botonCancelar = findViewById<Button>(R.id.cancelar_reserva)
+        reserva = intent.getSerializableExtra("reserva") as Reserva
+        turno = intent.getSerializableExtra("turno") as  Turno
+        profesor = intent.getStringExtra("profesor")
+        usuarioFirebase.obtenerNombreUsuarioById(this,reserva.codUsuario!!)
 
-        val codigoUsuario = intent.getStringExtra("codigo")
-        val query = ref.whereEqualTo("codigo",codigoUsuario)
-        query.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val usuario = document.toObject(Usuario::class.java)
-                    nombre.setText(nombre.text.toString()+usuario.nombre.toString())
-                }
-            }
-            .addOnFailureListener{ exception ->
-                Log.d("ERROR EN FIREBASE", "get failed with ", exception)
-            }
+    }
 
-        var fecha = findViewById<TextView>(R.id.fecha)
-        var hora = findViewById<TextView>(R.id.hora)
-        var profesor = findViewById<TextView>(R.id.profesor)
-        var modalidad = findViewById<TextView>(R.id.modalidad)
-        var codigo = findViewById<TextView>(R.id.codigo)
+    override fun OnUserNombreDataFinished(nombreUsuario : String) {
+        nombre.text = nombre.text.toString() + nombreUsuario
+        codigo.text = codigo.text.toString() + reserva.codUsuario
+        horario.text = horario.text.toString() + turno.horaInicio + " - " + turno.horaFin
+        fechaT.text = fechaT.text.toString() + fechaParse(turno.fecha.toString())
+        fechaR.text = fechaR.text.toString() + fechaParse(reserva.fechaReserva.toString())
+        profesorTV.text = profesor
+        modalidad.text = modalidad.text.toString() + reserva.modalidad
 
-        codigo.setText(codigo.text.toString()+codigoUsuario)
-        fecha.setText(fecha.text.toString() + intent.getStringExtra("fecha"))
-        hora.setText(hora.text.toString() + intent.getStringExtra("hora"))
-        profesor.setText(profesor.text.toString() + intent.getStringExtra("profesor"))
-        modalidad.setText(modalidad.text.toString() + intent.getStringExtra("modalidad"))
+        if (reserva.estado == "Pendiente"){
+            generarQR(reserva.codReserva!!)
+            btnCancelar.setOnClickListener { cancelarReserva(reserva) }
 
-        if (intent.getStringExtra("estado").equals("Pendiente")){
-            generarQR(codigoUsuario)
-            botonCancelar.setOnClickListener { cancelarReserva() }
-        }else{
-            botonCancelar.visibility = View.INVISIBLE
         }
-        
+
+        else if (reserva.estado == "Justificada"){
+            btnCancelar.visibility = View.INVISIBLE
+            tv_justificacion.text = "Observaciones de la justificación: Justificación enviada"
+
+        }
+
+        else if (reserva.estado == "Cancelada" || reserva.estado == "Inasistida"){
+
+            btnCancelar.visibility = View.INVISIBLE
+            buscarJustificacion(reserva.codReserva!!)
+        }
+
+    }
+
+    fun buscarJustificacion(codReserva:String) {
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("justificacion").whereEqualTo("codReserva",codReserva)
+        ref.get().addOnSuccessListener {documents ->
+            for (document in documents){
+                val justificacion = document.toObject(Justificacion::class.java)
+                tv_justificacion.text = "Observaciones de la justificación: ${justificacion.observaciones}"
+            }
+        }
+
+    }
+
+    fun fechaParse(string : String) : String{
+        var date = LocalDate.parse(string)
+        return "${date.dayOfMonth}/${date.monthValue}/${date.year}"
     }
 
     fun generarQR(codigo: String){
-        val cod = codigo
-
         try{
             val barcodeEncoder = BarcodeEncoder()
-            val bitMap = barcodeEncoder.encodeBitmap(cod, BarcodeFormat.QR_CODE,400,400)
+            val bitMap = barcodeEncoder.encodeBitmap(codigo, BarcodeFormat.QR_CODE,400,400)
             imageView_QR.setImageBitmap(bitMap)
         }catch (e: Exception){
             e.printStackTrace()
         }
-
     }
 
-    fun cancelarReserva(){
-        Toast.makeText(this, "Cancelar la reserva", Toast.LENGTH_SHORT).show()
+    fun cancelarReserva(reserva: Reserva){
+
+        val hoy = LocalDate.now()
+        val formato = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val fechaTurno = LocalDate.parse(turno.fecha, formato)
+
+
+        if (fechaTurno.isEqual(hoy)){
+            irAJustificarActivity()
+        }
+
+        else {
+            reservaFirebase.cancelarReserva(false,reserva)
+            Toast.makeText(this, "¡Reserva cancelada!", Toast.LENGTH_SHORT).show()
+            Handler().postDelayed(
+                {
+                    irAPerfil()
+                },
+                1000 // value in milliseconds
+            )
+        }
+    }
+    
+    fun irAPerfil() {
+        val intent = Intent()
+        intent.setClass(this, SesionActivity::class.java)
+        startActivityForResult(intent,1)
     }
 
+    fun irAJustificarActivity(){
+        val intent = Intent()
+        intent.setClass(this, JustificarActivity::class.java)
+        intent.putExtra("reserva",reserva)
+        intent.putExtra("turno",turno)
+        startActivityForResult(intent,1)
+    }
 }

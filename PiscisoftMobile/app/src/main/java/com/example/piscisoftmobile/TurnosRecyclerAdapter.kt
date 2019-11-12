@@ -7,20 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.view.menu.MenuView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.piscisoftmobile.Model.Horario
 import com.example.piscisoftmobile.Model.Profesor
 import com.example.piscisoftmobile.Model.Turno
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.item_turno.*
 import kotlinx.android.synthetic.main.item_turno.view.*
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
-class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHolder>{
+class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHolder> , OnDataFinishedListener{
 
     private lateinit var mContext: Context
     private lateinit var listaTurnos : List<Turno>
@@ -48,68 +41,30 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val turno: Turno = listaTurnos.get(position)
 
-        if (turno.abierto == true){
-            holder.item_disponibilidad.text = "Disponible"
-            holder.item_disponibilidad.setTextColor(Color.GREEN)
-            holder.item_image.setImageResource(R.drawable.disponible)
+        holder.item_disponibilidad.text = turno.estado
+        holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
+        colocarProfesor(holder, turno.profesor.toString())
 
-
-        }else{
-            holder.item_disponibilidad.text = "Cerrado"
+        if (turno.estado == "Cerrado") {
             holder.item_disponibilidad.setTextColor(Color.RED)
             holder.item_image.setImageResource(R.drawable.cancelada)
-        }
-
-        db.collection("horario").document(turno.codHorario!!)
-            .get().addOnSuccessListener { document ->
-                val horario = document.toObject(Horario::class.java)
-                holder.item_hora.text = horario!!.horaInicio + " - " + horario!!.horaFin
-                if (turno.abierto == true){
-                    holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${horario.capacidadTotal}"
-                    intent.putExtra("capacidadTotal",horario.capacidadTotal)
-                    colocarProfesor(holder,position,horario.codProfesor.toString())
-
-                    if (aTiempo(horario.horaInicio!!,turno.fecha!!)){
-                            holder.item_holder.setOnClickListener { irConfirmarReserva(turno.codTurno!!,turno.fecha!!,holder.item_hora.text.toString(),holder.item_profesor.text.toString() ) }
-                    } else {
-                        holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno ya pasó", Toast.LENGTH_SHORT).show() }
-                    }
-
-                }else{
-                    holder.item_capacidad.text = "Observaciones: ${turno.observaciones}"
-                    holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno se encuentra cerrado", Toast.LENGTH_SHORT).show() }
-                }
+            holder.item_capacidad.text = "Observaciones: ${turno.observaciones}"
+            holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno se encuentra cerrado", Toast.LENGTH_SHORT).show() }
+        } else {
+            holder.item_capacidad.text = "Capacidad: ${turno.capacidadCubierta}/${turno.capacidadTotal}"
+            if (turno.estado == "Abierto") {
+                holder.item_disponibilidad.setTextColor(Color.GREEN)
+                holder.item_image.setImageResource(R.drawable.disponible)
+                holder.item_holder.setOnClickListener { irConfirmarReserva(turno.id!!,turno.fecha!!,holder.item_hora.text.toString(),holder.item_profesor.text.toString() ) }
+            } else {
+                holder.item_disponibilidad.setTextColor(Color.BLACK)
+                holder.item_image.setImageResource(R.drawable.caducada)
+                holder.item_holder.setOnClickListener { Toast.makeText(mContext, "Este turno ya pasó", Toast.LENGTH_SHORT).show() }
             }
+        }
     }
 
-    //lateinit var horaTurno : String
-    fun aTiempo(hora: String, fechaTurno : String):Boolean{
-
-        val hoy = LocalDate.now()
-        val formato = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val fechaEscogida = LocalDate.parse(fechaTurno, formato)
-
-        if (fechaEscogida.isEqual(hoy)){
-            var horaTurno = hora
-            if (horaTurno.length==4){
-                horaTurno = "0${horaTurno}"
-            }
-
-            val horaActual = LocalTime.now()
-            val formatter = DateTimeFormatter.ofPattern("HH:mm")
-            val horaAEvaluar = LocalTime.parse(horaTurno, formatter)
-
-            if (horaActual.isAfter(horaAEvaluar)) {
-                return false
-            }
-            return true
-        }else{
-            return true
-        }
-
-    }
-
-    fun colocarProfesor (holder: ViewHolder, position: Int, codProfesor:String){
+    fun colocarProfesor (holder: ViewHolder, codProfesor:String) {
         db.collection("profesor").document(codProfesor)
             .get().addOnSuccessListener { document ->
                 val profesor = document.toObject(Profesor::class.java)
@@ -117,7 +72,7 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
                 }
     }
 
-    private fun irConfirmarReserva(codTurno:String,fecha:String,hora:String,nombreProfesor:String ){
+    private fun irConfirmarReserva(codTurno:String, fecha:String, hora:String , nombreProfesor:String ){
         intent.putExtra("codTurno",codTurno)
         intent.putExtra("fecha",fecha)
         intent.putExtra("horario",hora)
@@ -129,12 +84,12 @@ class TurnosRecyclerAdapter : RecyclerView.Adapter<TurnosRecyclerAdapter.ViewHol
 
     class ViewHolder
     constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val item_disponibilidad = itemView.item_disponibilidad
-        val item_capacidad = itemView.item_capacidad
+        val item_disponibilidad = itemView.item_nombre
+        val item_capacidad = itemView.item_codigo
         val item_profesor = itemView.item_profesor
         val item_hora = itemView.item_hora
         val item_holder = itemView.item_holder
-        val item_image = itemView.item_image
+        val item_image = itemView.item_foto
     }
 
 }

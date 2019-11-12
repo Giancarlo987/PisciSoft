@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Reserva pendiente"
+                android:text="Detalle de la reserva"
                 android:textAlignment="gravity"
                 android:textSize="25dp" />
 
@@ -40,16 +40,16 @@
 
         <View
             android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_height="0.5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:background="@android:color/darker_gray"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="70dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="40dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -58,66 +58,76 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Nombre: "/>
+                android:text="Nombre: " />
 
             <TextView
                 android:id="@+id/codigo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Codigo: "/>
+                android:text="Codigo: " />
 
             <TextView
-                android:id="@+id/hora"
+                android:id="@+id/horario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Hora: "/>
+                android:text="Horario: " />
+
 
             <TextView
-                android:id="@+id/fecha"
+                android:id="@+id/fechaT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Fecha: "/>
+                android:text="Fecha del turno: " />
 
             <TextView
-                android:id="@+id/profesor"
+                android:id="@+id/fechaR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Profesor: "
                 android:layout_marginBottom="50px"
-                app:layout_constraintTop_toBottomOf="@+id/hora" />
+                android:text="Fecha de reserva: " />
+
+
+            <TextView
+                android:id="@+id/profesorTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50px" />
 
             <TextView
                 android:id="@+id/modalidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50px"
-                android:text="Modalidad: "/>
+                android:text="Modalidad: " />
+
+            <TextView
+                android:id="@+id/tv_justificacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/imageView_QR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="177dp"
+                android:layout_height="176dp"
                 android:layout_marginTop="50px"
-                app:layout_constraintTop_toTopOf="@+id/hora"
+                app:layout_constraintTop_toTopOf="@+id/horario"
                 tools:srcCompat="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="187dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/boton_naranja"
+                android:text="Cancelar Reserva"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white" />
 
 
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/cancelar_reserva"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancelar Reserva"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/boton_naranja"
-        android:layout_marginBottom="100px"
-        android:layout_marginRight="200px"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>

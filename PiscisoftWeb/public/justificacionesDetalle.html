@@ -1,0 +1,149 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" type="text/css" href="./CSS/tablaScroll.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/footer.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript">
+    function getCookie(name) {
+      var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+      return v ? v[2] : null;
+    }
+
+    function Verify() {
+      var cookiePage = getCookie("Login");
+      if (cookiePage == null) {
+        window.location.href = "https://piscisoft.firebaseapp.com";
+      }
+    }
+    window.onload = Verify;
+  </script>
+    <title> Detalle de Justificación </title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+        <div class="container">
+            <a class="navbar-brand"><img src=".//imagenes//Logotipo_reducido.png" class="w-50" alt="Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./paginaPrincipal.html">Turnos Actuales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./usuarios.html">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./modificarHorario.html">Modificar horario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./justificaciones.html">Justificaciones
+                            <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-danger" onclick=""> Salir </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container center">
+        <h3> Procesar justificación: Ricardo Martin Rodriguez Rodas</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-2">
+            <br>
+            <h5> Información General de solicitud</h5>
+            <br>
+            <p align="left"> <strong> Código </strong> : </p>
+            <p align="left"> <strong> Turno </strong> : </p>
+            <br>
+            <br>
+            <div class="form-group">
+                <p align="left"> <strong> Descripción </strong> : </p>
+                <textarea class="form-control" id="comentario" rows="3"></textarea>
+            </div>
+            <br>
+            <p align="left"> <strong> Archivo </strong> : </p>
+        </div>
+        <div class="col-md-4">
+            <br>
+            <h5> Procesar solicitud</h5>
+            <br>
+            <p align="left"> <strong> Procede </strong> : </p>
+            <form action="/">
+            <div class="form-check">
+                <label class="form-check-label" for="radio1">
+                    <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Si
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label" for="radio2">
+                    <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">No
+                </label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary float-right btn-lg" style="background: #FC663D; margin: 15px">Enviar</button>
+            <button type="submit" class="btn btn-primary float-right btn-lg" style="background: #B4B4B4; margin: 15px">Regresar</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="container center">
+        <footer class="footer-bs">
+            <div class="row">
+                <div class="col-md-6 footer-brand animated fadeInLeft">
+                    <br>
+                    <p>Av. Las Palmas 179 Urb. Mayorazgo</p>
+                    <p>Distrito de Ate</p>
+                    <p>Lima,Perú</p>
+                    <p>© 2019 PisciSoft. Todos los derechos reservados</p>
+                </div>
+                <div class="col-md-6 footer-social animated fadeInRight ">
+                    <ul>
+                        <div class="card-header mx-auto ">
+                            <span> <img src=".//imagenes//Logo%20en%20blanco.png" class="w-75" alt="Logo"
+                                    style="float:right">
+                            </span><br />
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
+    <script type="text/javascript" src="./Javascript/ConexionFirebase/conexion.js"></script>
+    <script type="text/javascript" src="./Javascript/usuariosDetalle.js"></script>
+</body>
+
+</html>

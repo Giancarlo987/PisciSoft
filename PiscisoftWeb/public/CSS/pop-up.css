@@ -1,0 +1,26 @@
+.formulario-modificar {
+    display: none;
+    position: fixed;
+    bottom: 150px;
+    left: 40%;
+    margin: 0 auto;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+   
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+   
+  .form-container input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  .mensajeError{
+    color: red;
+    text-align: right;
+    font-size: 10px !important; 
+  }

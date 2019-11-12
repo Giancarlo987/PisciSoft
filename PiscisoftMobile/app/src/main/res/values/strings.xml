@@ -6,6 +6,7 @@
     <string name="title_historial">Historial</string>
     <string name="title_activity_modificar">ModificarActivity</string>
 
+
     <string-array name="tipos">
         <item>Alumno</item>
         <item>Trabajador</item>
@@ -17,4 +18,6 @@
         <item>Intermedio</item>
         <item>Avanzado</item>
     </string-array>
+
+
 </resources>

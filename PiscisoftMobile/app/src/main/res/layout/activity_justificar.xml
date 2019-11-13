@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50px"
             android:layout_marginRight="50px"
-            android:text="Ingrese su motivo."
+            android:text="Justifique sus inasistencias llenando el formulario."
             android:textSize="14sp"
             android:textStyle="italic" />
 
@@ -70,7 +70,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:height="130dp"
-            android:gravity="center_horizontal"
             android:textSize="14sp"
             android:inputType="textMultiLine"
             android:padding="10dp" />

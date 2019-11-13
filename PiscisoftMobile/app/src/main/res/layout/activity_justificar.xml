@@ -6,28 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".JustificarActivity">
 
-
     <LinearLayout
+        android:id="@+id/primero"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="355dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-53dp">
 
-        <TextView
-            android:id="@+id/textView6"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ingrese su motivo:" />
+            android:layout_gravity="top">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/logotipo" />
+
+            <TextView
+                android:id="@+id/header_perfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Justificación"
+                android:textAlignment="gravity"
+                android:textSize="25dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tv_instruccion_reserva"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:text="Ingrese su motivo."
+            android:textSize="14sp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+
+        android:layout_marginHorizontal="50dp">
 
         <EditText
             android:id="@+id/et_motivo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:height="100dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:height="130dp"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:inputType="textMultiLine"
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/textView7"
@@ -52,15 +98,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/boton_gris"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:text="Buscar" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_enviar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enviar justificación" />
+
+            <Button
+                android:id="@+id/btn_enviar"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/boton_naranja"
+                android:paddingHorizontal="50dp"
+                android:text="Enviar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

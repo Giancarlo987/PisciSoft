@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,53 +7,63 @@
     tools:context=".ModificarActivity">
 
     <LinearLayout
+        android:id="@+id/primero"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top">
-
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/logotipo" />
-
-        <TextView
-            android:id="@+id/header_modificar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Modificar Perfil"
-            android:textAlignment="gravity"
-            android:textSize="25dp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:background="@android:color/darker_gray"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-53dp">
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/logotipo" />
+
+            <TextView
+                android:id="@+id/header_perfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Modificar Perfil"
+                android:textAlignment="gravity"
+                android:textSize="25dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/darker_gray" />
+
+        <ScrollView android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="70dp"
-            android:layout_marginTop="50dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/padreView">
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="50dp">
 
             <ImageView
                 android:id="@+id/foto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 tools:srcCompat="@tools:sample/avatars[3]" />
 
@@ -61,10 +71,11 @@
                 android:id="@+id/btn_cambiar_foto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/boton_naranja"
-                android:text="Elegir foto"
+                android:paddingHorizontal="50dp"
+                android:text="Subir Foto"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/white" />
 
@@ -146,35 +157,39 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_guardar_modificacion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/boton_naranja"
+                    android:background="@drawable/boton_azul"
                     android:text="Modificar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/btn_cancelar_modificar"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/boton_naranja"
+                    android:background="@drawable/boton_gris"
                     android:text="Cancelar"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/white" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </LinearLayout>
 
+
+
         </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

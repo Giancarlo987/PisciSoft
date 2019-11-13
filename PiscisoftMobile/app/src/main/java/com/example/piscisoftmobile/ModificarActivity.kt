@@ -114,7 +114,10 @@ class ModificarActivity : AppCompatActivity() {
         var celular_usuaio = celular
         var observaciones_usuario = observaciones
 
-        if (!vacio(celular_usuaio)||celular_usuaio.length()!=9){
+        if (vacio(celular_usuaio)|| celular_usuaio.length()!=9){
+            Toast.makeText(this, "Por favor, llenar todos los campos", Toast.LENGTH_SHORT).show()
+            return
+        }else{
             usuario.celular = celular_usuaio.text.toString()
         }
 

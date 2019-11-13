@@ -75,7 +75,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/boton_naranja"
                 android:paddingHorizontal="50dp"
-                android:text="Subir Foto"
+                android:text="Cambiar Foto"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/white" />
 

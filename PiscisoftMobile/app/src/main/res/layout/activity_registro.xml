@@ -56,7 +56,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:orientation="vertical"
-
                 android:layout_marginHorizontal="50dp">
 
 
@@ -113,7 +112,6 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     app:srcCompat="@drawable/ic_person_black_24dp" />
-
 
                 <Button
                     android:id="@+id/butUploadFoto"

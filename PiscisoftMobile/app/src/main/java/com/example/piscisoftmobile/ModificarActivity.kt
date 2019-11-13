@@ -121,8 +121,6 @@ class ModificarActivity : AppCompatActivity() {
             usuario.celular = celular_usuaio.text.toString()
         }
 
-
-
         usuario.tipo = tipo_usuairo.selectedItem.toString()
         usuario.nivel = nivel_usuario.selectedItem.toString()
 

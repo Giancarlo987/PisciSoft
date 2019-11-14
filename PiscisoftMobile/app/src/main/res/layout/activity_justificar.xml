@@ -52,7 +52,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50px"
             android:layout_marginRight="50px"
-            android:text="Justifique sus inasistencias llenando el formulario."
             android:textSize="14sp"
             android:textStyle="italic" />
 
@@ -65,14 +64,23 @@
 
         android:layout_marginHorizontal="50dp">
 
-        <EditText
-            android:id="@+id/et_motivo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:height="130dp"
-            android:textSize="14sp"
-            android:inputType="textMultiLine"
-            android:padding="10dp" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Motivo:" />
+
+            <EditText
+                android:id="@+id/et_motivo"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginBottom="30dp"
+                android:height="130dp"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:singleLine="false"
+                android:textAlignment="viewStart"
+                android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textView7"
@@ -80,35 +88,37 @@
             android:layout_height="wrap_content"
             android:text="Adjunte su evidencia:" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_nombreEvidencia"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="evidencia.jpg" />
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_buscar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/boton_gris"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Buscar" />
+                <TextView
+                    android:id="@+id/tv_nombreEvidencia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="evidencia.jpg" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btn_buscar"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_gris"
+                    android:text="Buscar"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            </LinearLayout>
 
 
             <Button
                 android:id="@+id/btn_enviar"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/boton_naranja"
                 android:paddingHorizontal="50dp"

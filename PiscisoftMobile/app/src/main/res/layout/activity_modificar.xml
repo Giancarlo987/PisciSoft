@@ -107,9 +107,8 @@
                 android:id="@+id/celular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Celular"
-                android:textSize="14dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="17dp" />
 
 
             <TextView
@@ -144,14 +143,21 @@
                 android:entries="@array/niveles"
                 android:text="TextView" />
 
+            <TextView
+                android:id="@+id/label_celular2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="0dp"
+                android:text="Observaciones:" />
+
             <EditText
                 android:id="@+id/observaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Observaciones"
-                android:textSize="14dp"
-                android:text="" />
+                android:layout_marginTop="0dp"
+                android:text=""
+                android:textSize="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,8 +170,8 @@
                     android:id="@+id/btn_guardar_modificacion"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="30dp"
                     android:layout_gravity="center"
+                    android:layout_margin="10dp"
                     android:background="@drawable/boton_azul"
                     android:text="Modificar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"

@@ -64,14 +64,18 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         turnoFirebase.obtenerTurnoByCodigo(this, reserva.codTurno!!, holder, position, reserva)
     }
 
-    override fun OnTurnoDataFinished(turno:Turno, holder: ViewHolder, position: Int, reserva:Reserva) {
 
+    override fun OnTurnoDataFinished(turno:Turno, holder: ViewHolder, position: Int, reserva:Reserva) {
         var date = LocalDate.parse(turno!!.fecha.toString())
         var fechaF = "Fecha: ${date.dayOfMonth}/${date.monthValue}/${date.year}"
         holder.item_fecha.text = fechaF
         holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
         colocarProfesor(holder,position,turno.profesor.toString())
-        holder.item_holder.setOnClickListener{irDetalleReservaActivity(reserva,holder.item_profesor.text.toString(),turno)}
+        if (reserva.estado == "Pendiente"){
+            holder.item_holder.setOnClickListener{irDetalleReservaActivity(reserva,holder.item_profesor.text.toString(),turno)}
+        } else {
+            holder.item_holder.setOnClickListener{irDetalleReservaJActivity(reserva,holder.item_profesor.text.toString(),turno)}
+        }
     }
 
     fun irDetalleReservaActivity(reserva:Reserva,profesor:String,turno:Turno){
@@ -80,6 +84,15 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         intent.putExtra("profesor",profesor)
         intent.putExtra("turno",turno)
         intent.setClass(mContext, DetalleReservaActivity::class.java)
+        mContext.startActivity(intent)
+    }
+
+    fun irDetalleReservaJActivity(reserva:Reserva,profesor:String,turno:Turno){
+        val intent = Intent()
+        intent.putExtra("reserva",reserva)
+        intent.putExtra("profesor",profesor)
+        intent.putExtra("turno",turno)
+        intent.setClass(mContext, DetalleReservaJActivity::class.java)
         mContext.startActivity(intent)
     }
 

@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
 
         if (codigo != "" && password != ""){
             if (codigo == "profesor" && password == "profesor"){
-                irAVerReservasProfesorActivity()
+                irProfesorActivity()
             } else {
                 usuarioFirebase.verificarCredenciales(this, codigo, password)
             }
@@ -73,9 +73,9 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
         startActivityForResult(intent,1)
     }
 
-    private fun irAVerReservasProfesorActivity(){
+    private fun irProfesorActivity(){
         val intent = Intent()
-        intent.setClass(this, VerReservasProfesorActivity::class.java)
+        intent.setClass(this, PerfilProfesorActivity::class.java)
         startActivityForResult(intent,1)
     }
 

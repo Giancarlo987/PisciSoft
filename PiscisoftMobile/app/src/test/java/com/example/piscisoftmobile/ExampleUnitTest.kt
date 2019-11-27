@@ -9,9 +9,16 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class ExampleUnitTest: OnDataFinishedListener {
+
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun addition_isCorrect2() {
+        assertEquals(6, 2 + 4)
+    }
+
 }

@@ -8,11 +8,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_modificar.*
 
 class UsuarioFirebase  {
-    val db = FirebaseFirestore.getInstance()
-    val ref = db.collection("usuario")
+
 
 
     fun obtenerUsuarioById(listener: OnDataFinishedListener, userID:String){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("usuario")
         val query = ref.whereEqualTo("codigo",userID)
         query.get()
             .addOnSuccessListener { documents ->
@@ -27,6 +28,8 @@ class UsuarioFirebase  {
     }
 
     fun verificarCredenciales(listener: OnDataFinishedListener,codigo:String,password:String)  {
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("usuario")
         val query = ref.whereEqualTo("codigo",codigo).whereEqualTo("password",password)
         query.get()
             .addOnSuccessListener { documents ->
@@ -61,6 +64,8 @@ class UsuarioFirebase  {
     }
 
     fun obtenerNombreUsuarioById(listener: OnDataFinishedListener, userID:String){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("usuario")
         val query = ref.whereEqualTo("codigo",userID)
         query.get()
             .addOnSuccessListener { documents ->
@@ -75,6 +80,8 @@ class UsuarioFirebase  {
     }
 
     fun obtenerUsuarioById(listener: OnDataFinishedListener, codUsuario: String, holder: ReservasProfesorRecyclerAdapter.ViewHolder, position: Int, reserva:Reserva){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("usuario")
         val query = ref.whereEqualTo("codigo",codUsuario)
         query.get()
             .addOnSuccessListener { documents ->
@@ -89,6 +96,8 @@ class UsuarioFirebase  {
     }
 
     fun obtenerUsuarioById(listener: ModificarActivity, userID: String) {
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("usuario")
         val query = ref.whereEqualTo("codigo",userID)
         query.get()
             .addOnSuccessListener { documents ->

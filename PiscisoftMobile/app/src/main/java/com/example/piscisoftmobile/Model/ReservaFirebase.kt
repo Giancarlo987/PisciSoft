@@ -12,11 +12,12 @@ import java.time.format.DateTimeFormatter
 
 class ReservaFirebase {
 
-    val db = FirebaseFirestore.getInstance()
-    val ref = db.collection("reserva")
-    val turnoFirebase = TurnoFirebase()
+
 
     fun existeReservaEsteDia(listener:OnDataFinishedListener, codUsuario: String, codTurno: String){ //Verificar si existe reserva este día
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("reserva")
+        val turnoFirebase = TurnoFirebase()
         var fechaANoRepetir = codTurno.substring(0, 10)
         val query = ref.whereEqualTo("codUsuario",codUsuario).whereEqualTo("estado","Pendiente")
         query.get()
@@ -34,6 +35,8 @@ class ReservaFirebase {
     }
 
     fun registrarReserva(listener: OnDataFinishedListener, reserva: Reserva){
+
+        val turnoFirebase = TurnoFirebase()
         val db = FirebaseFirestore.getInstance()
         db.collection("reserva").add(reserva)
         turnoFirebase.actualizarCapacidad(reserva.codTurno!!, "Disminuir")
@@ -42,6 +45,9 @@ class ReservaFirebase {
     
 
     fun obtenerReservasByUsuario(listener: OnDataFinishedListener, codigo:String){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("reserva")
+        val turnoFirebase = TurnoFirebase()
         val query = ref.whereEqualTo("codUsuario",codigo)
         query.get()
             .addOnSuccessListener { documents ->
@@ -59,24 +65,11 @@ class ReservaFirebase {
             }
     }
 
-    /*fun obtenerReservaoByCodigoAndFecha(listener: OnDataFinishedListener, fecha: String, codigo:String){
-        val query = ref.whereEqualTo("codReserva",codigo)
-        query.get()
-            .addOnSuccessListener { documents ->
-                if (documents == null){
-                    listener.OnListaReservaDataFinished(reserva)
-                }
-                for (document in documents) {
-                    val reserva = document.toObject(Reserva::class.java)
-                    listener.OnListaReservaDataFinished(reserva)
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
-            }
-    }*/
 
     fun actualizarReservas(codigo:String){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("reserva")
+        val turnoFirebase = TurnoFirebase()
         val query = ref.whereEqualTo("codUsuario",codigo)
         query.get()
             .addOnSuccessListener { documents ->
@@ -97,6 +90,9 @@ class ReservaFirebase {
     }
 
     fun verificarReservaInasistida(reservasAEvaluar:MutableList<Reserva>){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("reserva")
+        val turnoFirebase = TurnoFirebase()
         for (reserva in reservasAEvaluar){
             val query = db.collection("turno").document(reserva.codTurno!!)
             query.get()
@@ -145,6 +141,7 @@ class ReservaFirebase {
 
 
     fun obtenerReservasEnTurno(listener:OnDataFinishedListener, codTurno:String){
+
         val db = FirebaseFirestore.getInstance()
         db.collection("reserva").whereEqualTo("codTurno",codTurno)
             .get()
@@ -162,6 +159,9 @@ class ReservaFirebase {
     }
 
     fun cancelarReserva(justificada:Boolean,reserva:Reserva){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("reserva")
+        val turnoFirebase = TurnoFirebase()
         if (justificada){
             ref.document(reserva.codReserva!!).update("estado","Justificada")
         } else {

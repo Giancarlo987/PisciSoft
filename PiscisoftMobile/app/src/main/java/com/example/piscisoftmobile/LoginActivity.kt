@@ -11,8 +11,11 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.piscisoftmobile.Model.Horario
 import com.example.piscisoftmobile.Model.Turno
+import com.example.piscisoftmobile.Model.Usuario
 import com.example.piscisoftmobile.Model.UsuarioFirebase
+import com.google.firebase.firestore.FirebaseFirestoreException
 import kotlinx.android.synthetic.main.activity_detalle_reserva.*
+import kotlinx.coroutines.tasks.await
 import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -28,23 +31,25 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btn_registrarse.setOnClickListener{irARegistroActivity()}
-        btn_iniciar_sesion.setOnClickListener {verificarCampos()}
+        btn_iniciar_sesion.setOnClickListener {verificarCampos(et_codigo.text.toString(), et_password.text.toString() )}
         //crearDatos()
+
     }
 
 
-    private fun verificarCampos(){
-        codigo = et_codigo.text.toString()
-        password = et_password.text.toString()
+    fun verificarCampos(codigo:String, password:String){
 
         if (codigo != "" && password != ""){
             if (codigo == "profesor" && password == "profesor"){
                 irProfesorActivity()
+
             } else {
                 usuarioFirebase.verificarCredenciales(this, codigo, password)
+
             }
         } else {
             Toast.makeText(this, "Por favor, complete los campos", Toast.LENGTH_SHORT).show()
+
         }
     }
 
@@ -78,6 +83,8 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
         intent.setClass(this, VerReservasProfesorActivity::class.java)
         startActivityForResult(intent,1)
     }
+
+
 
     //Esta función es para crear los turnos (no tocar):
     fun crearDatos(){

@@ -15,4 +15,5 @@ interface OnDataFinishedListener {
     fun OnTurnoDataFinished(turno:Turno, holder: ReservasRecyclerAdapter.ViewHolder, position: Int, reserva:Reserva) {}
     fun OnUserNombreDataFinished(nombreUsuario : String) {}
     fun OnUserDataFinished(usuario:Usuario, holder: ReservasProfesorRecyclerAdapter.ViewHolder, position: Int, reserva:Reserva) {}
+    fun OnListaReservaDataFinished(reserva: Reserva) {}
 }

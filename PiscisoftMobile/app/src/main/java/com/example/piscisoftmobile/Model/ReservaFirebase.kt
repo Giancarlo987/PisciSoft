@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.piscisoftmobile.HistorialFragment
 import com.example.piscisoftmobile.OnDataFinishedListener
+import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
 import java.time.LocalTime
@@ -57,6 +58,23 @@ class ReservaFirebase {
                 Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
             }
     }
+
+    /*fun obtenerReservaoByCodigoAndFecha(listener: OnDataFinishedListener, fecha: String, codigo:String){
+        val query = ref.whereEqualTo("codReserva",codigo)
+        query.get()
+            .addOnSuccessListener { documents ->
+                if (documents == null){
+                    listener.OnListaReservaDataFinished(reserva)
+                }
+                for (document in documents) {
+                    val reserva = document.toObject(Reserva::class.java)
+                    listener.OnListaReservaDataFinished(reserva)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
+            }
+    }*/
 
     fun actualizarReservas(codigo:String){
         val query = ref.whereEqualTo("codUsuario",codigo)

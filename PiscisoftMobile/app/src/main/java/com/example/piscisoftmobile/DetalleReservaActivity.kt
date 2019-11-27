@@ -48,7 +48,6 @@ class DetalleReservaActivity : AppCompatActivity() , OnDataFinishedListener {
         if (reserva.estado == "Pendiente"){
             generarQR(reserva.codReserva!!)
             btnCancelar.setOnClickListener { cancelarReserva(reserva) }
-
         }
 
         else if (reserva.estado == "Justificada"){

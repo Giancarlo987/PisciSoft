@@ -13,10 +13,11 @@ import java.time.format.DateTimeFormatter
 
 class TurnoFirebase {
 
-    val db = FirebaseFirestore.getInstance()
-    val ref = db.collection("turno")
+
 
     fun existenTurnosRegistrados(listener: OnDataFinishedListener, fecha:String){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("turno")
         val query = ref.whereEqualTo("fecha",fecha)
         query.get()
             .addOnSuccessListener { documents ->
@@ -32,6 +33,8 @@ class TurnoFirebase {
     }
 
     fun obtenerTurnosByFecha(listener: OnDataFinishedListener, fecha:String){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("turno")
         val query = ref.whereEqualTo("fecha",fecha)
         query.get()
             .addOnSuccessListener { documents ->
@@ -50,6 +53,8 @@ class TurnoFirebase {
     }
 
     fun actualizarTurnos(listener: OnDataFinishedListener, fecha:String){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("turno")
         val query = ref.whereEqualTo("fecha",fecha)
         query.get()
             .addOnSuccessListener { documents ->
@@ -97,11 +102,16 @@ class TurnoFirebase {
             }
             return false
         }
-        return false
+        if (fechaEscogida.isAfter(hoy)) {
+            return false
+        }
+        return true
 
     }
 
     fun obtenerTurnoByCodigo(listener: OnDataFinishedListener, codTurno:String, holder: ReservasRecyclerAdapter.ViewHolder, position: Int, reserva:Reserva){
+        val db = FirebaseFirestore.getInstance()
+        val ref = db.collection("turno")
         val query = ref.document(codTurno)
         query.get()
             .addOnSuccessListener { document ->

@@ -65,22 +65,6 @@ class ReservaFirebase {
             }
     }
 
-    /*fun obtenerReservaoByCodigoAndFecha(listener: OnDataFinishedListener, fecha: String, codigo:String){
-        val query = ref.whereEqualTo("codReserva",codigo)
-        query.get()
-            .addOnSuccessListener { documents ->
-                if (documents == null){
-                    listener.OnListaReservaDataFinished(reserva)
-                }
-                for (document in documents) {
-                    val reserva = document.toObject(Reserva::class.java)
-                    listener.OnListaReservaDataFinished(reserva)
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("ERROR FIREBASE", "Error getting documents: ", exception)
-            }
-    }*/
 
     fun actualizarReservas(codigo:String){
         val db = FirebaseFirestore.getInstance()

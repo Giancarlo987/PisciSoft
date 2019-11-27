@@ -1,4 +1,4 @@
-before_script: cd PiscisoftMobile
+before_install: cd PiscisoftMobile
 language: android
 android:
   components:

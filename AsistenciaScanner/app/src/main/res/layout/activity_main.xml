@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ModificarActivity">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/primero"
@@ -60,18 +60,6 @@
                 android:layout_marginHorizontal="50dp">
 
                 <Button
-                    android:id="@+id/btn_ver_reservas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="20dp"
-                    android:background="@drawable/boton_naranja"
-                    android:paddingHorizontal="50dp"
-                    android:text="Reservas"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/white" />
-
-                <Button
                     android:id="@+id/btn_colocar_asistencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,6 +74,5 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

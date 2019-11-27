@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
 
     private fun irProfesorActivity(){
         val intent = Intent()
-        intent.setClass(this, PerfilProfesorActivity::class.java)
+        intent.setClass(this, VerReservasProfesorActivity::class.java)
         startActivityForResult(intent,1)
     }
 

@@ -31,14 +31,16 @@ class MainActivity : AppCompatActivity(), OnDataFinishedListener  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btn_registrarse.setOnClickListener{irARegistroActivity()}
-        btn_iniciar_sesion.setOnClickListener {verificarCampos(et_codigo.text.toString(), et_password.text.toString() )}
+        btn_iniciar_sesion.setOnClickListener {verificarCampos()}
         //crearDatos()
 
     }
 
 
-    fun verificarCampos(codigo:String, password:String){
+    fun verificarCampos(){
 
+        codigo = et_codigo.text.toString()
+        password = et_password.text.toString()
         if (codigo != "" && password != ""){
             if (codigo == "profesor" && password == "profesor"){
                 irProfesorActivity()

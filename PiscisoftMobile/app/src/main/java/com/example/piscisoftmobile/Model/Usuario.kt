@@ -2,7 +2,7 @@ package com.example.piscisoftmobile.Model
 
 import java.io.Serializable
 
-
+//4
 data class Usuario(
     var codigo: String? = null,
     var estado: String? = null,

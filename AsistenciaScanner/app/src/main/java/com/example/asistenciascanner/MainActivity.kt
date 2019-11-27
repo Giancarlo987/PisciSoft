@@ -1,4 +1,4 @@
-package com.example.piscisoftmobile
+package com.example.asistenciascanner
 
 import android.app.Activity
 import android.content.Intent
@@ -7,46 +7,38 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import com.example.piscisoftmobile.Model.Reserva
-import com.example.piscisoftmobile.Model.ReservaFirebase
 import com.example.piscisoftmobile.Model.Turno
-import com.example.piscisoftmobile.Model.TurnoFirebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.integration.android.IntentIntegrator
-import com.google.zxing.integration.android.IntentResult
+import java.text.Format
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.*
 
-class PerfilProfesorActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     val db = FirebaseFirestore.getInstance()
     val refReserva = db.collection("reserva")
     val refTurno= db.collection("turno")
-    val reservaFirebase = ReservaFirebase()
     var hoy = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+    var calendar = Calendar.getInstance()
+    var format = SimpleDateFormat("HH:mm")
+    var hora = format.format(calendar.time).toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_perfil_profesor)
-
-        var but_reservas = findViewById<Button>(R.id.btn_ver_reservas)
-        but_reservas.setOnClickListener { irAVerReservasProfesorActivity() }
+        setContentView(R.layout.activity_main)
 
         var but_aisitencias = findViewById<Button>(R.id.btn_colocar_asistencia)
         but_aisitencias.setOnClickListener { IniciarScanner() }
-
     }
 
-    private fun irAVerReservasProfesorActivity(){
-        val intent = Intent()
-        intent.setClass(this, VerReservasProfesorActivity::class.java)
-        startActivityForResult(intent,1)
-    }
 
     private fun IniciarScanner(){
         val scanner = IntentIntegrator(this)
+        scanner.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        scanner.setBeepEnabled(false)
         scanner.initiateScan()
     }
 
@@ -78,12 +70,51 @@ class PerfilProfesorActivity : AppCompatActivity() {
                     Toast.makeText(this,"Turno: " +turno.fecha, Toast.LENGTH_LONG).show()
 
                     if (turno.fecha == hoy){
-                        reserva.estado = "Asistido"
-                        val db = FirebaseFirestore.getInstance()
-                        db.collection("reserva").document(codigo).set(reserva)
-                        Toast.makeText(this, "Asistencia registrada", Toast.LENGTH_SHORT).show()
+
+                        var horaInicio= turno.horaInicio?.split(":")?.get(0)?.toInt()
+                        var minutoInicio = turno.horaInicio?.split(":")?.get(1)?.toInt()
+                        var horaFin = turno.horaFin?.split(":")?.get(0)?.toInt()
+                        var minutoFin = turno.horaFin?.split(":")?.get(1)?.toInt()
+
+                        Toast.makeText(this, horaInicio.toString() + horaFin.toString(), Toast.LENGTH_SHORT).show()
+
+                        if( hora.split(":")[0].toInt() == horaInicio!!){
+
+                            if( hora.split(":")[1].toInt() >= minutoInicio!!){
+
+                                if (hora.split(":")[0].toInt() <= minutoInicio!! + 15!!){
+                                    reserva.estado = "Asistido"
+                                }else{
+                                    reserva.estado = "Tardanza"
+                                }
+                                val db = FirebaseFirestore.getInstance()
+                                db.collection("reserva").document(codigo).set(reserva)
+                                Toast.makeText(this, "Asistencia registrada", Toast.LENGTH_SHORT).show()
+
+                            } else {
+                                Toast.makeText(this, "Aun no empieza el turno", Toast.LENGTH_SHORT).show()
+                            }
+
+
+                        } else if (hora.split(":")[0].toInt() == horaFin!!){
+
+                            if( hora.split(":")[1].toInt() <= minutoFin!!){
+
+                                reserva.estado = "Tardanza"
+
+                                val db = FirebaseFirestore.getInstance()
+                                db.collection("reserva").document(codigo).set(reserva)
+                                Toast.makeText(this, "Asistencia registrada", Toast.LENGTH_SHORT).show()
+
+                            } else {
+                                Toast.makeText(this, "El turno ya finalizó", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Toast.makeText(this, "Fuera de turno", Toast.LENGTH_SHORT).show()
+                        }
+
                     }else{
-                        Toast.makeText(this,"La reserva no es correcta", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,"La reserva no es hoy", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -108,17 +139,4 @@ class PerfilProfesorActivity : AppCompatActivity() {
                 Toast.makeText(this,"No reserva", Toast.LENGTH_LONG).show()
             }
     }
-
-    /*override fun OnListaReservaDataFinished(reserva: Reserva){
-        if (reserva.fechaReserva == hoy){
-            reserva.estado == "Asistido"
-            val db = FirebaseFirestore.getInstance()
-            db.collection("reserva").document(reserva.codReserva!!).set(reserva)
-            Toast.makeText(this, "Asistencia registrada", Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(this,"La reserva ya caducó", Toast.LENGTH_LONG).show()
-        }
-    }*/
-
-
 }

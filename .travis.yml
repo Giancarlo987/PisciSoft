@@ -1,4 +1,4 @@
-before_install: cd PiscisoftMobile
+
 language: android
 android:
   components:
@@ -12,4 +12,5 @@ env:
 
 # Run assemble and unit tests
 script:
+  - cd PiscisoftMobile
   - gradlew tasks

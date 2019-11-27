@@ -43,31 +43,39 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         val reserva: Reserva = listaReservas.get(position)
         if (reserva.estado == "Pendiente"){
             holder.item_estado.text = "Pendiente"
+            holder.item_image.setImageResource(R.drawable.pendiente)
             holder.item_estado.setTextColor(Color.BLUE)
         }
         else if (reserva.estado == "Inasistida"){
             holder.item_estado.text = "Inasistida"
-            holder.item_estado.setTextColor(Color.RED)
+            holder.item_image.setImageResource(R.drawable.inasistida)
+            holder.item_estado.setTextColor(Color.GRAY)
         }
         else if (reserva.estado == "Justificada"){
             holder.item_estado.text = "Justificada"
-            holder.item_estado.setTextColor(Color.BLUE)
+            holder.item_image.setImageResource(R.drawable.justificada)
+            holder.item_estado.setTextColor(Color.MAGENTA)
         }
         else if (reserva.estado == "Cancelada"){
             holder.item_estado.text = "Cancelada"
-            holder.item_estado.setTextColor(Color.BLUE)
+            holder.item_image.setImageResource(R.drawable.reservacancelada)
+            holder.item_estado.setTextColor(Color.BLACK)
         }
         turnoFirebase.obtenerTurnoByCodigo(this, reserva.codTurno!!, holder, position, reserva)
     }
 
-    override fun OnTurnoDataFinished(turno:Turno, holder: ViewHolder, position: Int, reserva:Reserva) {
 
+    override fun OnTurnoDataFinished(turno:Turno, holder: ViewHolder, position: Int, reserva:Reserva) {
         var date = LocalDate.parse(turno!!.fecha.toString())
         var fechaF = "Fecha: ${date.dayOfMonth}/${date.monthValue}/${date.year}"
         holder.item_fecha.text = fechaF
         holder.item_hora.text = turno!!.horaInicio + " - " + turno!!.horaFin
         colocarProfesor(holder,position,turno.profesor.toString())
-        holder.item_holder.setOnClickListener{irDetalleReservaActivity(reserva,holder.item_profesor.text.toString(),turno)}
+        if (reserva.estado == "Pendiente"){
+            holder.item_holder.setOnClickListener{irDetalleReservaActivity(reserva,holder.item_profesor.text.toString(),turno)}
+        } else {
+            holder.item_holder.setOnClickListener{irDetalleReservaJActivity(reserva,holder.item_profesor.text.toString(),turno)}
+        }
     }
 
     fun irDetalleReservaActivity(reserva:Reserva,profesor:String,turno:Turno){
@@ -76,6 +84,15 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         intent.putExtra("profesor",profesor)
         intent.putExtra("turno",turno)
         intent.setClass(mContext, DetalleReservaActivity::class.java)
+        mContext.startActivity(intent)
+    }
+
+    fun irDetalleReservaJActivity(reserva:Reserva,profesor:String,turno:Turno){
+        val intent = Intent()
+        intent.putExtra("reserva",reserva)
+        intent.putExtra("profesor",profesor)
+        intent.putExtra("turno",turno)
+        intent.setClass(mContext, DetalleReservaJActivity::class.java)
         mContext.startActivity(intent)
     }
 
@@ -94,5 +111,6 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
         val item_profesor = itemView.profesor_asignado
         val item_hora = itemView.item_hora_reserva
         val item_holder = itemView.item_holder_historial
+        val item_image = itemView.item_foto
     }
 }

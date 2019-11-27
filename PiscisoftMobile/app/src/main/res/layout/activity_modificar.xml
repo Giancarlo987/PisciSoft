@@ -75,7 +75,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/boton_naranja"
                 android:paddingHorizontal="50dp"
-                android:text="Subir Foto"
+                android:text="Cambiar Foto"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/white" />
 
@@ -83,7 +83,7 @@
                 android:id="@+id/nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Nombre"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -93,33 +93,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Codigo"
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/label_celular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="Celular:"
-                android:textSize="18dp" />
+                android:text="Celular:" />
 
             <EditText
                 android:id="@+id/celular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Celular"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="17dp" />
 
 
             <TextView
                 android:id="@+id/label_tipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="Tipo:"
-                android:textSize="18dp" />
+                android:text="Tipo:"/>
 
             <Spinner
                 android:id="@+id/tipo"
@@ -135,8 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:text="Nivel:"
-                android:textSize="18dp" />
+                android:text="Nivel:"/>
 
             <Spinner
                 android:id="@+id/nivel"
@@ -146,28 +143,34 @@
                 android:entries="@array/niveles"
                 android:text="TextView" />
 
+            <TextView
+                android:id="@+id/label_celular2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="0dp"
+                android:text="Observaciones:" />
+
             <EditText
                 android:id="@+id/observaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:hint="Observaciones"
-                android:text="" />
+                android:layout_marginTop="0dp"
+                android:text=""
+                android:textSize="17dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="50dp"
+                android:layout_margin="20dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_guardar_modificacion"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:background="@drawable/boton_azul"
                     android:text="Modificar"
@@ -176,18 +179,14 @@
 
                 <Button
                     android:id="@+id/btn_cancelar_modificar"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/boton_gris"
                     android:text="Cancelar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </LinearLayout>
-
-
-
         </LinearLayout>
         </ScrollView>
     </LinearLayout>

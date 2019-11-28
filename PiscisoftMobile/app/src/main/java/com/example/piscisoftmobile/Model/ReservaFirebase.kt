@@ -126,7 +126,9 @@ class ReservaFirebase {
             val horaAEvaluar = LocalTime.parse(horaTurno, formatter)
 
             if (horaActual.isAfter(horaAEvaluar)) {
-                return true
+                if (horaActual.minute - horaAEvaluar.minute >= 15){
+                    return true
+                }
             }
             return false
         }

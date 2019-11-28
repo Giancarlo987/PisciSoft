@@ -46,6 +46,11 @@ class ReservasRecyclerAdapter: RecyclerView.Adapter<ReservasRecyclerAdapter.View
             holder.item_image.setImageResource(R.drawable.pendiente)
             holder.item_estado.setTextColor(Color.BLUE)
         }
+        else if (reserva.estado == "Asistido"){
+            holder.item_estado.text = "Asistida"
+            holder.item_image.setImageResource(R.drawable.asistida)
+            holder.item_estado.setTextColor(Color.rgb(255,165,0))
+        }
         else if (reserva.estado == "Inasistida"){
             holder.item_estado.text = "Inasistida"
             holder.item_image.setImageResource(R.drawable.inasistida)

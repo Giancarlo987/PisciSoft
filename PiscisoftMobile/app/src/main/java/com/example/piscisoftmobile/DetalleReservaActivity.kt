@@ -57,7 +57,6 @@ class DetalleReservaActivity : AppCompatActivity() , OnDataFinishedListener {
         }
 
         else if (reserva.estado == "Cancelada" || reserva.estado == "Inasistida"){
-
             btnCancelar.visibility = View.INVISIBLE
             buscarJustificacion(reserva.codReserva!!)
         }

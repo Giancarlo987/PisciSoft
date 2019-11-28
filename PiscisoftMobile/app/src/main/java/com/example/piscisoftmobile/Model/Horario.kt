@@ -2,7 +2,7 @@ package com.example.piscisoftmobile.Model
 
 import java.io.Serializable
 
-
+//2
 data class Horario(
     var diaSemana : String? = null,
     var horaInicio: String? = null,

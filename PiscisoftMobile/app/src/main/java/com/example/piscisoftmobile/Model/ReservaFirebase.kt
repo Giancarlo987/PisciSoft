@@ -19,15 +19,17 @@ class ReservaFirebase {
         val ref = db.collection("reserva")
         val turnoFirebase = TurnoFirebase()
         var fechaANoRepetir = codTurno.substring(0, 10)
-        val query = ref.whereEqualTo("codUsuario",codUsuario).whereEqualTo("estado","Pendiente")
+        val query = ref.whereEqualTo("codUsuario",codUsuario)
         query.get()
             .addOnSuccessListener { documents ->
                 var existe = false
                 for (document in documents) {
                     val reserva = document.toObject(Reserva::class.java)
                     if (reserva.codTurno!!.contains(fechaANoRepetir,false)){
-                        existe = true
-                        break
+                        if (reserva.estado=="Pendiente"|| reserva.estado=="Asistido"){
+                            existe = true
+                            break
+                        }
                     }
                 }
                 listener.OnVerificacionFinished(existe)

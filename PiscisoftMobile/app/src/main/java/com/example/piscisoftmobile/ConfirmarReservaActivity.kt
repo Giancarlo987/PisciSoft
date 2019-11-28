@@ -95,6 +95,4 @@ class ConfirmarReservaActivity : AppCompatActivity(), OnDataFinishedListener {
         startActivityForResult(intent,1)
     }
 
-
-
 }

@@ -12,4 +12,5 @@ env:
 
 # Run assemble and unit tests
 script:
+  - chmod +x ./gradlew
   - ./gradlew

@@ -69,8 +69,8 @@ class ModificarActivity : AppCompatActivity() {
         Regresar()
     }
 
-    private fun vacio(et: EditText) : Boolean{
-        if (et.text.toString().contentEquals("")) {
+    fun vacio(et: String) : Boolean{
+        if (et.contentEquals("")) {
             return true
         }
         return false
@@ -114,7 +114,7 @@ class ModificarActivity : AppCompatActivity() {
         var celular_usuaio = celular
         var observaciones_usuario = observaciones
 
-        if (vacio(celular_usuaio)|| celular_usuaio.length()!=9){
+        if (vacio(celular_usuaio.text.toString())|| celular_usuaio.length()!=9){
             Toast.makeText(this, "Por favor, llenar todos los campos", Toast.LENGTH_SHORT).show()
             return
         }else{
@@ -124,7 +124,7 @@ class ModificarActivity : AppCompatActivity() {
         usuario.tipo = tipo_usuairo.selectedItem.toString()
         usuario.nivel = nivel_usuario.selectedItem.toString()
 
-        if (vacio(observaciones_usuario)){
+        if (vacio(observaciones_usuario.text.toString())){
             usuario.observaciones = "Ninguna"
         }else{
             usuario.observaciones = observaciones_usuario.text.toString()

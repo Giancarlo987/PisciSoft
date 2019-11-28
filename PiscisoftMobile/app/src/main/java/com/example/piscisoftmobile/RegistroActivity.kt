@@ -98,8 +98,8 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     // FUNCION PARA VERIFICAR QUE LOS CAMPOS NO SE ENCUENTREN VACIOS
-    private fun vacio(et: EditText) : Boolean{
-        if (et.text.toString().contentEquals("")) {
+    fun vacio(et: String) : Boolean{
+        if (et.contentEquals("")) {
             return true
         }
         return false
@@ -116,28 +116,28 @@ class RegistroActivity : AppCompatActivity() {
         //Creo un objeto Usuario
         var usuario = Usuario()
 
-        if (vacio(etCodigo)||etCodigo.length()!=8){
+        if (vacio(etCodigo.text.toString())||etCodigo.length()!=8){
             avisar("código")
             return
         }else{
             usuario.codigo = etCodigo.text.toString()
         }
 
-        if (vacio(etPassword)){
+        if (vacio(etPassword.text.toString())){
             avisar("contraseña")
             return
         }else{
             password = etPassword.text.toString()
         }
 
-        if (vacio(et_nombre)){
+        if (vacio(et_nombre.text.toString())){
             avisar("nombre")
             return
         }else{
             usuario.nombre = et_nombre.text.toString()
         }
 
-        if (vacio(et_celular)||et_celular.length()!=9){
+        if (vacio(et_celular.text.toString())||et_celular.length()!=9){
             avisar("celular")
             return
         }else{
@@ -147,7 +147,7 @@ class RegistroActivity : AppCompatActivity() {
         usuario.tipo = s_tipo.selectedItem.toString()
         usuario.nivel = s_nivel.selectedItem.toString()
 
-        if (vacio(et_observaciones)){
+        if (vacio(et_observaciones.text.toString())){
             usuario.observaciones = "Ninguna"
         }else{
             usuario.observaciones = et_observaciones.text.toString()

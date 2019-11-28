@@ -174,7 +174,7 @@ class ModificarActivity : AppCompatActivity() {
 
     }
 
-    // FUNCION PARA MOSTRAR LA FOTO EN LA PANTALLA
+    // FUNCION PARA MOSTRAR LA FOTO EN LA PANTALLA :)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

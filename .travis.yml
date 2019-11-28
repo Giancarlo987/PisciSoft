@@ -14,4 +14,4 @@ env:
 script:
   - chmod +x ./gradlew
   - ./gradlew
-  - ./gradlew tests
+  - ./gradlew test

@@ -12,5 +12,4 @@ env:
 
 # Run assemble and unit tests
 script:
-  - cd PiscisoftMobile
   - gradlew tasks
